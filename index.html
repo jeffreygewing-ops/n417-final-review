@@ -61,19 +61,157 @@
       .btn-tap:active {
         transform: scale(0.98);
       }
+      .markdown-body h3 { font-weight: bold; margin-top: 1rem; margin-bottom: 0.5rem; color: #1f2937; }
+      .markdown-body p { margin-bottom: 0.75rem; color: #4b5563; }
+      .markdown-body strong { color: #111827; font-weight: 700; }
+      .markdown-body ul { list-style-type: disc; padding-left: 1.5rem; margin-bottom: 1rem; color: #4b5563; }
+      .markdown-body li { margin-bottom: 0.25rem; }
     </style>
   </head>
   <body>
     <div id="root"></div>
 
     <script type="text/babel">
+      
       // ==========================================
-      // STEP 1: PASTE YOUR DATA BELOW
+      // DATA SECTION: STUDY GUIDE
       // ==========================================
 
-      // IMPORTANT: Paste your text inside the backticks of String.raw``
-      // This prevents the code from confusing '\text' with a 'Tab' character.
+      const STUDY_GUIDE_DATA = [
+        {
+          title: "Obstetrical Nursing (OB) Priorities",
+          content: [
+            {
+              subtitle: "Labor and Delivery (L&D)",
+              text: `**Fetal Monitoring (EFM):** Focuses on hemodynamic/oxygen status.
+              * **Baseline FHR:** 120–160 beats/min.
+              * **Tachycardia (>160):** Maternal fever or early hypoxia.
+              * **Bradycardia (<120):** Late fetal hypoxemia (worse than tachycardia).
+              * **Variability:** Moderate (6–25 bpm) is desirable (intact CNS). Minimal/Absent (<5 bpm) signals hypoxia/acidosis.
+              
+              **Periodic Changes:**
+              * **Accelerations:** Reassuring (intact CNS).
+              * **Early Decels:** Head compression (Reassuring).
+              * **Variable Decels:** Cord compression (Move mother).
+              * **Late Decels:** Uteroplacental Insufficiency (UPI) - Non-reassuring.
+              
+              **Stages of Labor:** * **Latent:** 0-3 cm
+              * **Active:** 4-7 cm
+              * **Transitional:** 8-10 cm`
+            },
+            {
+              subtitle: "The Compromised Newborn",
+              text: `**Respiratory:** Distress > 60 breaths/min, nasal flaring, grunting, retractions. RDS common in preterms (lack of surfactant).
+              
+              **Thermoregulation:** Preterms vulnerable to **Cold Stress** (low brown fat). Cold stress increases metabolic rate and O2 consumption -> Acidosis. Maintain Neutral Thermal Environment (NTE).
+              
+              **Complications:** * **NEC:** Inflammatory GI disease (oxygen compromise).
+              * **IVH:** Intraventricular hemorrhage from cerebral blood flow changes.`
+            },
+            {
+              subtitle: "Maternal High-Risk Conditions",
+              text: `**Gestational Hypertension (GH):** BP ≥ 140/90 after 20 weeks.
+              **Preeclampsia:** HTN + Proteinuria.
+              **HELLP:** Hemolysis, Elevated Liver enzymes, Low Platelets.
+              
+              **Magnesium Sulfate:** Prevents seizures (depresses CNS). Therapeutic level 4-7 mg/dL. **Antidote: Calcium Gluconate**.
+              
+              **Maternal Cardiac:** Stress peaks at 28-32 weeks. Signs of decompensation: Fatigue, palpitations, crackles, HR > 100.
+              
+              **Bleeding:** * **Placenta Previa:** Painless bleeding.
+              * **Abruption:** Painful, rigid abdomen.
+              * **PPH:** >1000mL blood loss. Cause: Uterine Atony. Tx: Massage fundus.
+              
+              **GDM:** Placenta produces insulin antagonists (hPL) -> Insulin resistance. After delivery, insulin needs drop dramatically.`
+            }
+          ]
+        },
+        {
+          title: "Med-Surg Priorities",
+          content: [
+            {
+              subtitle: "Neurological Disorders",
+              text: `**Assessment:** GCS and Mental Status Exam.
+              **Stroke (CVA):** Ischemic (clot) vs Hemorrhagic (bleed).
+              * **tPA:** Give within 3 hours of onset for Ischemic (CT must be negative for bleed).
+              * **Permissive Hypertension:** Allowed in acute phase to maintain perfusion.
+              
+              **Disorders:**
+              * **Meningitis:** Severe headache, nuchal rigidity. Droplet isolation.
+              * **Parkinson's:** Dopamine deficiency. Triad: Tremor, Rigidity, Bradykinesia.
+              * **ALS:** Motor neuron death. Sensory/Intellect remain intact. Respiratory failure causes death.
+              * **Myasthenia Gravis:** Acetylcholine receptors destroyed. Muscle weakness. Respiratory risk.`
+            },
+            {
+              subtitle: "Cardiovascular Disorders",
+              text: `**Heart Failure:**
+              * **Right-sided:** Systemic backup (JVD, Edema, Hepatomegaly).
+              * **Left-sided:** Lung backup (Pulmonary edema, Crackles).
+              
+              **Meds:**
+              * **Diuretics:** Decrease preload.
+              * **ACE Inhibitors:** Decrease preload & afterload. (Cough is side effect).
+              * **Digoxin:** Increases contractility. Watch for toxicity (visual halos, N/V). Hypokalemia increases toxicity risk.`
+            },
+            {
+              subtitle: "Fluid & Electrolytes",
+              text: `**Hyperkalemia (>5.0):** Arrhythmias. Tx: Calcium Gluconate (stabilize heart), Kayexalate, Insulin/D50.
+              **Hyponatremia (<135):** Cerebral edema risk. Tx: Fluid restriction, Hypertonic saline (3%).
+              **Hypermagnesemia (>2.6):** Respiratory depression, loss of DTRs. Tx: Calcium Gluconate.
+              
+              **ABGs:**
+              * **Resp Acidosis:** Hypoventilation (CO2 retention).
+              * **Metabolic Acidosis:** Acid excess (DKA) or Base loss (Diarrhea).`
+            },
+            {
+              subtitle: "Respiratory",
+              text: `**COPD:** CO2 retainers. Pursed-lip breathing. Taper corticosteroids slowly.
+              **TB:** Airborne (N95). Positive Sputum Culture confirms. RIPE meds (Rifampin turns fluids orange).`
+            }
+          ]
+        },
+        {
+          title: "Pediatrics Priorities",
+          content: [
+            {
+              subtitle: "Assessment & Cardiac",
+              text: `**Assessment:** Least traumatic first. Urine 1cc/kg/hr. Apical pulse 1 full min. Hold feeds if RR > 60.
+              
+              **Cardiac:**
+              * **HF in infants:** Tachycardia, scalp sweating. High calorie formula (24-30 kcal/oz).
+              * **Coarctation:** High BP in arms, Low BP in legs.
+              * **Tetralogy of Fallot:** "Tet Spell" -> Knee-to-chest position.`
+            },
+            {
+              subtitle: "Neurologic & GI",
+              text: `**Neuro:**
+              * **Hydrocephalus:** VP Shunt (Infection risk).
+              * **Seizures:** Safety first (side lying, nothing in mouth).
+              * **Spina Bifida:** Latex allergy risk.
+              
+              **GI:**
+              * **Dehydration:** Hypertonic is most dangerous. No Potassium in IV until voiding.
+              * **Pyloric Stenosis:** Projectile non-bilious vomiting, olive mass.
+              * **Hirschsprung's:** No meconium in 48hrs.
+              * **Appendicitis:** Sudden relief of pain = Rupture.`
+            },
+            {
+              subtitle: "Hematology/Oncology",
+              text: `**Leukemia (ALL):** Nadir (low counts) around day 14. Fever + Neutropenia = Medical Emergency.
+              **Sickle Cell:** Crisis triggers: Hypoxia, Acidosis, Dehydration. Tx: Hydration + Pain control.
+              **HIV:** No live vaccines.`
+            }
+          ]
+        }
+      ];
 
+      // ==========================================
+      // STEP 1: PASTE YOUR QUESTION DATA BELOW
+      // ==========================================
+
+      // Paste the content of 'Final-exam-test-question-bank.txt' between the backticks below.
+      // Use String.raw to safely handle backslashes.
+      
       const RAW_TEXT_DATA = String.raw`### Group 1: Gestational Hypertension, Preeclampsia, and HELLP Syndrome (ADPIE, ABC, Safety)
 
 **1. A pregnant client at 34 weeks gestation presents to the clinic with a BP of 145/95 mm Hg and 2+ proteinuria. The nurse recognizes these findings as the classic diagnostic dyad for which condition? (Assessment/Analysis)**
@@ -1824,21 +1962,15 @@ A. When it is completely full to ensure maximum capacity.
 B. When it is one-third to one-half full,.
 C. Only when the client feels discomfort or cramping.
 D. Every 24 hours regardless of output volume.
-**Correct Answer: B.** The colostomy bag should be emptied when it is about one-third to one-half full, rinsed, and secured to prevent leakage and maceration,.`;
+**Correct Answer: B.** The colostomy bag should be emptied when it is about one-third to one-half full, rinsed, and secured to prevent leakage and maceration,.`; 
 
       // ==========================================
-      // ICONS DATA (Embedded to prevent loading errors)
+      // ICONS DATA 
       // ==========================================
 
       const ICONS = {
         FileText: (
-          <g
-            stroke="currentColor"
-            strokeWidth="2"
-            fill="none"
-            strokeLinecap="round"
-            strokeLinejoin="round"
-          >
+          <g stroke="currentColor" strokeWidth="2" fill="none" strokeLinecap="round" strokeLinejoin="round">
             <path d="M14.5 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7.5L14.5 2z" />
             <polyline points="14 2 14 8 20 8" />
             <line x1="16" y1="13" x2="8" y2="13" />
@@ -1847,68 +1979,53 @@ D. Every 24 hours regardless of output volume.
           </g>
         ),
         Stethoscope: (
-          <g
-            stroke="currentColor"
-            strokeWidth="2"
-            fill="none"
-            strokeLinecap="round"
-            strokeLinejoin="round"
-          >
+          <g stroke="currentColor" strokeWidth="2" fill="none" strokeLinecap="round" strokeLinejoin="round">
             <path d="M4.8 2.3A.3.3 0 1 0 5 2H4a2 2 0 0 0-2 2v5a6 6 0 0 0 6 6v0a6 6 0 0 0 6-6V4a2 2 0 0 0-2-2h-1a.2.2 0 1 0 .3.3" />
             <path d="M8 15v1a6 6 0 0 0 6 6v0a6 6 0 0 0 6-6v-4" />
             <circle cx="20" cy="10" r="2" />
           </g>
         ),
         X: (
-          <g
-            stroke="currentColor"
-            strokeWidth="2"
-            fill="none"
-            strokeLinecap="round"
-            strokeLinejoin="round"
-          >
+          <g stroke="currentColor" strokeWidth="2" fill="none" strokeLinecap="round" strokeLinejoin="round">
             <path d="M18 6 6 18" />
             <path d="m6 6 12 12" />
           </g>
         ),
         CheckCircle: (
-          <g
-            stroke="currentColor"
-            strokeWidth="2"
-            fill="none"
-            strokeLinecap="round"
-            strokeLinejoin="round"
-          >
+          <g stroke="currentColor" strokeWidth="2" fill="none" strokeLinecap="round" strokeLinejoin="round">
             <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14" />
             <polyline points="22 4 12 14.01 9 11.01" />
           </g>
         ),
         ArrowRight: (
-          <g
-            stroke="currentColor"
-            strokeWidth="2"
-            fill="none"
-            strokeLinecap="round"
-            strokeLinejoin="round"
-          >
+          <g stroke="currentColor" strokeWidth="2" fill="none" strokeLinecap="round" strokeLinejoin="round">
             <line x1="5" y1="12" x2="19" y2="12" />
             <polyline points="12 5 19 12 12 19" />
           </g>
         ),
+        BookOpen: (
+          <g stroke="currentColor" strokeWidth="2" fill="none" strokeLinecap="round" strokeLinejoin="round">
+            <path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z" />
+            <path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z" />
+          </g>
+        ),
+        ChevronDown: (
+           <g stroke="currentColor" strokeWidth="2" fill="none" strokeLinecap="round" strokeLinejoin="round">
+            <polyline points="6 9 12 15 18 9" />
+          </g>
+        )
       };
 
       // ==========================================
       // APP LOGIC
       // ==========================================
 
-      const { useState, useEffect, useMemo } = React;
+      const { useState, useEffect } = React;
 
-      // Helper to clean LaTeX-like formatting for better readability
+      // Helper to clean formatting
       const cleanText = (text) => {
         if (!text) return "";
         let cleaned = text;
-
-        // 1. Handle explicit symbol replacements first
         cleaned = cleaned
           .replace(/\\geq/g, "≥")
           .replace(/\\leq/g, "≤")
@@ -1920,51 +2037,24 @@ D. Every 24 hours regardless of output volume.
           .replace(/\\pm/g, "±")
           .replace(/\\times/g, "×")
           .replace(/\\approx/g, "≈")
-          .replace(/\\neq/g, "≠");
-
-        // 2. Remove \text{...} wrappers.
-        // We do this loop to catch nested braces if simple regex fails,
-        // though your text bank seems simple: \text{Content}
-        cleaned = cleaned.replace(/\\text\s*\{([^}]+)\}/g, "$1");
-
-        // 3. Remove dollar signs used for math mode
-        cleaned = cleaned.replace(/\$([^$]+)\$/g, "$1");
-
-        // 4. Cleanup remaining artifacts
-        cleaned = cleaned
-          // Remove subscripts/superscripts indicators
+          .replace(/\\neq/g, "≠")
+          .replace(/\\text\s*\{([^}]+)\}/g, "$1")
+          .replace(/\$([^$]+)\$/g, "$1")
           .replace(/[_^]/g, "")
-          // Remove lingering curly braces
           .replace(/[{}]/g, "")
-          // Remove any leftover backslashes
           .replace(/\\/g, "")
-          // Normalize spaces
           .replace(/\s+/g, " ")
           .trim();
-
         return cleaned;
       };
 
       const QuestionParser = (raw) => {
         if (!raw || raw.length < 100) return [];
-
         const sections = [
           { id: "OB", name: "OB/L&D", start: 0, end: raw.length },
-          {
-            id: "PEDS",
-            name: "Pediatrics",
-            start: raw.length,
-            end: raw.length,
-          },
-          {
-            id: "MEDSURG",
-            name: "Med/Surg",
-            start: raw.length,
-            end: raw.length,
-          },
+          { id: "PEDS", name: "Pediatrics", start: raw.length, end: raw.length },
+          { id: "MEDSURG", name: "Med/Surg", start: raw.length, end: raw.length },
         ];
-
-        // Find delimiters
         const pedsIndex = raw.indexOf("//Pediatrics begin");
         const medSurgIndex = raw.indexOf("//MedSurg Begin");
 
@@ -1976,88 +2066,105 @@ D. Every 24 hours regardless of output volume.
             sections[2].start = medSurgIndex;
           }
         } else if (medSurgIndex !== -1) {
-          // If peds missing for some reason
           sections[0].end = medSurgIndex;
           sections[2].start = medSurgIndex;
         }
 
         let allQuestions = [];
-
         sections.forEach((section) => {
           const sectionText = raw.substring(section.start, section.end);
           const lines = sectionText.split("\n");
           let currentQ = null;
-
           lines.forEach((line) => {
             line = line.trim();
             if (!line) return;
-
-            // Detect Start of Question: "**1. " or "** 1. "
             const qStartMatch = line.match(/^\*\*(\d+)\.\s+(.*)/);
             if (qStartMatch) {
-              // Save previous if exists
               if (currentQ) allQuestions.push(currentQ);
-
-              // Start new
               currentQ = {
                 id: parseInt(qStartMatch[1]),
                 category: section.id,
-                text: cleanText(qStartMatch[2].replace(/\*\*$/, "")), // Remove trailing ** if present
+                text: cleanText(qStartMatch[2].replace(/\*\*$/, "")),
                 options: {},
                 answer: null,
                 rationale: "",
               };
               return;
             }
-
             if (!currentQ) return;
-
-            // Detect Options: "A. ", "B. ", etc.
             const optMatch = line.match(/^([A-D])\.\s+(.*)/);
             if (optMatch) {
               currentQ.options[optMatch[1]] = cleanText(optMatch[2]);
               return;
             }
-
-            // Detect Answer: "**Correct Answer: C.**"
-            const ansMatch = line.match(
-              /\*\*Correct Answer:\s*([A-D])\.?\*\*(.*)/
-            );
+            const ansMatch = line.match(/\*\*Correct Answer:\s*([A-D])\.?\*\*(.*)/);
             if (ansMatch) {
               currentQ.answer = ansMatch[1];
               currentQ.rationale = cleanText(ansMatch[2]);
               return;
             }
-
-            // If it's a continuation of rationale
-            if (
-              currentQ.answer &&
-              !line.startsWith("***") &&
-              !line.startsWith("###")
-            ) {
+            if (currentQ.answer && !line.startsWith("***") && !line.startsWith("###")) {
               currentQ.rationale += " " + cleanText(line);
-            }
-            // If it's a continuation of question text (before options)
-            else if (
-              !Object.keys(currentQ.options).length &&
-              !line.startsWith("***") &&
-              !line.startsWith("###")
-            ) {
+            } else if (!Object.keys(currentQ.options).length && !line.startsWith("***") && !line.startsWith("###")) {
               currentQ.text += " " + cleanText(line);
             }
           });
-          // Push last question
           if (currentQ) allQuestions.push(currentQ);
         });
+        return allQuestions.filter((q) => q.answer && Object.keys(q.options).length >= 2);
+      };
 
-        return allQuestions.filter(
-          (q) => q.answer && Object.keys(q.options).length >= 2
+      const StudyGuideView = ({ onBack }) => {
+        const [activeSection, setActiveSection] = useState(null);
+
+        const toggleSection = (idx) => {
+          setActiveSection(activeSection === idx ? null : idx);
+        };
+
+        return (
+          <div className="min-h-screen bg-white pb-12">
+            <div className="sticky top-0 bg-white border-b z-10 px-4 py-4 flex items-center shadow-sm">
+              <button onClick={onBack} className="mr-4 text-gray-500 hover:text-gray-800">
+                <Icon name="ArrowRight" className="transform rotate-180" size={24} />
+              </button>
+              <h2 className="text-xl font-bold text-gray-800">Study Guide</h2>
+            </div>
+            
+            <div className="max-w-3xl mx-auto p-4 space-y-4">
+              {STUDY_GUIDE_DATA.map((section, idx) => (
+                <div key={idx} className="border rounded-xl overflow-hidden shadow-sm">
+                  <button 
+                    onClick={() => toggleSection(idx)}
+                    className="w-full bg-gray-50 p-4 flex justify-between items-center text-left hover:bg-gray-100 transition-colors"
+                  >
+                    <span className="font-bold text-lg text-gray-800">{section.title}</span>
+                    <div className={`transform transition-transform duration-200 ${activeSection === idx ? 'rotate-180' : ''}`}>
+                      <Icon name="ChevronDown" size={20} />
+                    </div>
+                  </button>
+                  
+                  {activeSection === idx && (
+                    <div className="p-4 bg-white animate-in slide-in-from-top-2 duration-200">
+                      {section.content.map((item, i) => (
+                        <div key={i} className="mb-6 last:mb-0">
+                          <h3 className="text-indigo-600 font-bold text-lg mb-2">{item.subtitle}</h3>
+                          <div className="markdown-body text-gray-600 leading-relaxed text-sm whitespace-pre-wrap">
+                            {item.text}
+                          </div>
+                        </div>
+                      ))}
+                    </div>
+                  )}
+                </div>
+              ))}
+            </div>
+          </div>
         );
       };
 
       const App = () => {
         const [questions, setQuestions] = useState([]);
-        const [mode, setMode] = useState("START"); // START, QUIZ, RESULTS
+        const [mode, setMode] = useState("START"); // START, QUIZ, RESULTS, GUIDE
         const [currentCategory, setCurrentCategory] = useState("ALL");
         const [quizQuestions, setQuizQuestions] = useState([]);
         const [currentIndex, setCurrentIndex] = useState(0);
@@ -2067,7 +2174,6 @@ D. Every 24 hours regardless of output volume.
         const [hasLoadedData, setHasLoadedData] = useState(false);
 
         useEffect(() => {
-          // Try to load from hardcoded variable first
           if (RAW_TEXT_DATA && RAW_TEXT_DATA.length > 100) {
             const parsed = QuestionParser(RAW_TEXT_DATA);
             setQuestions(parsed);
@@ -2078,7 +2184,6 @@ D. Every 24 hours regardless of output volume.
         const handleFileUpload = (e) => {
           const file = e.target.files[0];
           if (!file) return;
-
           const reader = new FileReader();
           reader.onload = (event) => {
             const parsed = QuestionParser(event.target.result);
@@ -2096,10 +2201,7 @@ D. Every 24 hours regardless of output volume.
           } else {
             filtered = questions.filter((q) => q.category === category);
           }
-
-          // Shuffle questions
           filtered.sort(() => Math.random() - 0.5);
-
           setQuizQuestions(filtered);
           setCurrentIndex(0);
           setScore(0);
@@ -2109,10 +2211,9 @@ D. Every 24 hours regardless of output volume.
         };
 
         const handleAnswer = (optionKey) => {
-          if (selectedOption) return; // Prevent changing answer
+          if (selectedOption) return;
           setSelectedOption(optionKey);
           setShowRationale(true);
-
           if (optionKey === quizQuestions[currentIndex].answer) {
             setScore((s) => s + 1);
           }
@@ -2137,21 +2238,12 @@ D. Every 24 hours regardless of output volume.
         const Icon = ({ name, size = 24, className }) => {
           const iconSvg = ICONS[name];
           if (!iconSvg) return null;
-
           return (
-            <svg
-              width={size}
-              height={size}
-              viewBox="0 0 24 24"
-              className={className}
-              xmlns="http://www.w3.org/2000/svg"
-            >
+            <svg width={size} height={size} viewBox="0 0 24 24" className={className} xmlns="http://www.w3.org/2000/svg">
               {iconSvg}
             </svg>
           );
         };
-
-        // ---- RENDERERS ----
 
         if (!hasLoadedData) {
           return (
@@ -2160,37 +2252,22 @@ D. Every 24 hours regardless of output volume.
                 <div className="text-blue-600 mb-4 flex justify-center">
                   <Icon name="FileText" size={48} />
                 </div>
-                <h1 className="text-2xl font-bold text-gray-800 mb-2">
-                  Load Question Bank
-                </h1>
+                <h1 className="text-2xl font-bold text-gray-800 mb-2">Load Question Bank</h1>
                 <p className="text-gray-600 mb-6">
-                  The applet needs the question data to start. Please upload the{" "}
-                  <b>Final-exam-test-question-bank.txt</b> file.
+                  The applet needs the question data to start. Please upload the <b>Final-exam-test-question-bank.txt</b> file.
                 </p>
-
                 <label className="block w-full">
                   <span className="sr-only">Choose file</span>
-                  <input
-                    type="file"
-                    onChange={handleFileUpload}
-                    accept=".txt"
-                    className="block w-full text-sm text-gray-500
-                                    file:mr-4 file:py-3 file:px-6
-                                    file:rounded-full file:border-0
-                                    file:text-sm file:font-semibold
-                                    file:bg-blue-50 file:text-blue-700
-                                    hover:file:bg-blue-100
-                                    cursor-pointer border border-gray-200 rounded-lg
-                                "
-                  />
+                  <input type="file" onChange={handleFileUpload} accept=".txt" className="block w-full text-sm text-gray-500 file:mr-4 file:py-3 file:px-6 file:rounded-full file:border-0 file:text-sm file:font-semibold file:bg-blue-50 file:text-blue-700 hover:file:bg-blue-100 cursor-pointer border border-gray-200 rounded-lg" />
                 </label>
-
-                <div className="mt-6 text-xs text-gray-400">
-                  Tip: Paste the text into the code to skip this step next time.
-                </div>
+                <div className="mt-6 text-xs text-gray-400">Tip: Paste the text into the code to skip this step next time.</div>
               </div>
             </div>
           );
+        }
+
+        if (mode === "GUIDE") {
+          return <StudyGuideView onBack={restart} />;
         }
 
         if (mode === "START") {
@@ -2200,53 +2277,37 @@ D. Every 24 hours regardless of output volume.
                 <div className="flex justify-center mb-6 text-indigo-600">
                   <Icon name="Stethoscope" size={64} />
                 </div>
-                <h1 className="text-3xl font-extrabold text-gray-900 mb-2">
-                  Nursing Finals Review
-                </h1>
-                <p className="text-gray-500 mb-8">
-                  Select a category to begin your practice session.
-                </p>
+                <h1 className="text-3xl font-extrabold text-gray-900 mb-2">Nursing Finals Review</h1>
+                <p className="text-gray-500 mb-8">Select a mode to begin.</p>
 
                 <div className="grid gap-4">
-                  <button
-                    onClick={() => startQuiz("OB")}
-                    className="btn-tap bg-pink-100 hover:bg-pink-200 text-pink-700 py-4 px-6 rounded-xl font-bold text-lg flex items-center justify-between transition-colors"
-                  >
-                    <span>OB / L&D</span>
-                    <span className="bg-white/50 px-2 py-1 rounded text-sm">
-                      {questions.filter((q) => q.category === "OB").length} Qs
-                    </span>
+                  <button onClick={() => startQuiz("ALL")} className="btn-tap bg-gray-800 hover:bg-gray-900 text-white py-4 px-6 rounded-xl font-bold text-lg flex items-center justify-center shadow-lg transition-colors">
+                    Start Comprehensive Quiz
                   </button>
-                  <button
-                    onClick={() => startQuiz("PEDS")}
-                    className="btn-tap bg-orange-100 hover:bg-orange-200 text-orange-700 py-4 px-6 rounded-xl font-bold text-lg flex items-center justify-between transition-colors"
-                  >
-                    <span>Pediatrics</span>
-                    <span className="bg-white/50 px-2 py-1 rounded text-sm">
-                      {questions.filter((q) => q.category === "PEDS").length} Qs
-                    </span>
-                  </button>
-                  <button
-                    onClick={() => startQuiz("MEDSURG")}
-                    className="btn-tap bg-blue-100 hover:bg-blue-200 text-blue-700 py-4 px-6 rounded-xl font-bold text-lg flex items-center justify-between transition-colors"
-                  >
-                    <span>Med / Surg</span>
-                    <span className="bg-white/50 px-2 py-1 rounded text-sm">
-                      {questions.filter((q) => q.category === "MEDSURG").length}{" "}
-                      Qs
-                    </span>
-                  </button>
-                  <button
-                    onClick={() => startQuiz("ALL")}
-                    className="btn-tap bg-gray-800 hover:bg-gray-900 text-white py-4 px-6 rounded-xl font-bold text-lg flex items-center justify-center shadow-lg transition-colors mt-2"
-                  >
-                    Comprehensive Review (All)
+                  
+                  <div className="grid grid-cols-3 gap-2">
+                     <button onClick={() => startQuiz("OB")} className="btn-tap bg-pink-100 hover:bg-pink-200 text-pink-700 py-3 px-2 rounded-xl font-bold text-sm flex flex-col items-center justify-center transition-colors">
+                        <span>OB</span>
+                        <span className="text-xs opacity-60">{questions.filter((q) => q.category === "OB").length} Qs</span>
+                      </button>
+                      <button onClick={() => startQuiz("PEDS")} className="btn-tap bg-orange-100 hover:bg-orange-200 text-orange-700 py-3 px-2 rounded-xl font-bold text-sm flex flex-col items-center justify-center transition-colors">
+                        <span>PEDS</span>
+                        <span className="text-xs opacity-60">{questions.filter((q) => q.category === "PEDS").length} Qs</span>
+                      </button>
+                      <button onClick={() => startQuiz("MEDSURG")} className="btn-tap bg-blue-100 hover:bg-blue-200 text-blue-700 py-3 px-2 rounded-xl font-bold text-sm flex flex-col items-center justify-center transition-colors">
+                        <span>M/S</span>
+                        <span className="text-xs opacity-60">{questions.filter((q) => q.category === "MEDSURG").length} Qs</span>
+                      </button>
+                  </div>
+
+                  <div className="border-t border-gray-100 my-2"></div>
+
+                  <button onClick={() => setMode("GUIDE")} className="btn-tap bg-indigo-50 hover:bg-indigo-100 text-indigo-700 py-4 px-6 rounded-xl font-bold text-lg flex items-center justify-center border-2 border-indigo-100 transition-colors">
+                    <span className="mr-2"><Icon name="BookOpen" size={20} /></span>
+                    <span>Review Study Guide</span>
                   </button>
                 </div>
-
-                <p className="mt-8 text-xs text-gray-400">
-                  Total Questions Loaded: {questions.length}
-                </p>
+                <p className="mt-8 text-xs text-gray-400">Total Questions Loaded: {questions.length}</p>
               </div>
             </div>
           );
@@ -2262,32 +2323,15 @@ D. Every 24 hours regardless of output volume.
           return (
             <div className="min-h-screen bg-indigo-50 flex items-center justify-center p-4">
               <div className="bg-white p-8 rounded-3xl shadow-xl w-full max-w-md text-center">
-                <h2 className="text-2xl font-bold text-gray-800 mb-4">
-                  Session Complete
-                </h2>
-
+                <h2 className="text-2xl font-bold text-gray-800 mb-4">Session Complete</h2>
                 <div className="relative w-40 h-40 mx-auto mb-6 flex items-center justify-center">
                   <div className="absolute inset-0 rounded-full border-8 border-gray-100"></div>
-                  <div
-                    className="absolute inset-0 rounded-full border-8 border-indigo-500"
-                    style={{
-                      clipPath: `inset(${100 - percentage}% 0 0 0)`,
-                    }}
-                  ></div>
-                  <div className="text-4xl font-bold text-indigo-600">
-                    {percentage}%
-                  </div>
+                  <div className="absolute inset-0 rounded-full border-8 border-indigo-500" style={{ clipPath: `inset(${100 - percentage}% 0 0 0)` }}></div>
+                  <div className="text-4xl font-bold text-indigo-600">{percentage}%</div>
                 </div>
-
                 <p className="text-gray-600 text-lg mb-2">{message}</p>
-                <p className="text-gray-400 mb-8">
-                  {score} correct out of {quizQuestions.length}
-                </p>
-
-                <button
-                  onClick={restart}
-                  className="w-full bg-indigo-600 text-white py-3 rounded-xl font-semibold hover:bg-indigo-700 transition-colors"
-                >
+                <p className="text-gray-400 mb-8">{score} correct out of {quizQuestions.length}</p>
+                <button onClick={restart} className="w-full bg-indigo-600 text-white py-3 rounded-xl font-semibold hover:bg-indigo-700 transition-colors">
                   Return to Menu
                 </button>
               </div>
@@ -2295,19 +2339,14 @@ D. Every 24 hours regardless of output volume.
           );
         }
 
-        // QUIZ MODE
         const currentQ = quizQuestions[currentIndex];
         const progress = (currentIndex / quizQuestions.length) * 100;
 
         return (
           <div className="min-h-screen bg-gray-50 flex flex-col md:items-center p-4 md:pt-10">
             <div className="w-full max-w-2xl">
-              {/* Header */}
               <div className="flex justify-between items-center mb-4 px-2">
-                <button
-                  onClick={restart}
-                  className="text-gray-400 hover:text-gray-600"
-                >
+                <button onClick={restart} className="text-gray-400 hover:text-gray-600">
                   <Icon name="X" size={24} />
                 </button>
                 <div className="text-sm font-semibold text-gray-500">
@@ -2317,102 +2356,52 @@ D. Every 24 hours regardless of output volume.
                   {currentIndex + 1} / {quizQuestions.length}
                 </div>
               </div>
-
-              {/* Progress Bar */}
               <div className="w-full bg-gray-200 h-2 rounded-full mb-6 overflow-hidden">
-                <div
-                  className="bg-indigo-500 h-full transition-all duration-300"
-                  style={{ width: `${progress}%` }}
-                ></div>
+                <div className="bg-indigo-500 h-full transition-all duration-300" style={{ width: `${progress}%` }}></div>
               </div>
-
-              {/* Question Card */}
               <div className="bg-white rounded-2xl shadow-sm border border-gray-100 p-6 mb-6">
-                <h3 className="text-lg md:text-xl font-medium text-gray-800 leading-relaxed">
-                  {currentQ.text}
-                </h3>
+                <h3 className="text-lg md:text-xl font-medium text-gray-800 leading-relaxed">{currentQ.text}</h3>
               </div>
-
-              {/* Options */}
               <div className="space-y-3 mb-20">
                 {["A", "B", "C", "D"].map((opt) => {
                   const isSelected = selectedOption === opt;
                   const isCorrect = currentQ.answer === opt;
                   const showCorrectness = showRationale;
-
-                  let btnClass =
-                    "w-full p-4 rounded-xl text-left border-2 transition-all relative ";
-
+                  let btnClass = "w-full p-4 rounded-xl text-left border-2 transition-all relative ";
                   if (showCorrectness) {
-                    if (isCorrect) {
-                      btnClass += "bg-green-50 border-green-500 text-green-800";
-                    } else if (isSelected && !isCorrect) {
-                      btnClass += "bg-red-50 border-red-500 text-red-800";
-                    } else {
-                      btnClass +=
-                        "bg-gray-50 border-transparent text-gray-400 opacity-70";
-                    }
+                    if (isCorrect) btnClass += "bg-green-50 border-green-500 text-green-800";
+                    else if (isSelected && !isCorrect) btnClass += "bg-red-50 border-red-500 text-red-800";
+                    else btnClass += "bg-gray-50 border-transparent text-gray-400 opacity-70";
                   } else {
-                    if (isSelected) {
-                      btnClass +=
-                        "bg-indigo-50 border-indigo-500 text-indigo-900";
-                    } else {
-                      btnClass +=
-                        "bg-white border-transparent shadow-sm hover:bg-gray-50 text-gray-700";
-                    }
+                    if (isSelected) btnClass += "bg-indigo-50 border-indigo-500 text-indigo-900";
+                    else btnClass += "bg-white border-transparent shadow-sm hover:bg-gray-50 text-gray-700";
                   }
-
                   return (
-                    <button
-                      key={opt}
-                      onClick={() => handleAnswer(opt)}
-                      disabled={showRationale}
-                      className={btnClass}
-                    >
+                    <button key={opt} onClick={() => handleAnswer(opt)} disabled={showRationale} className={btnClass}>
                       <div className="flex items-start">
-                        <span
-                          className={`flex-shrink-0 w-8 h-8 rounded-full flex items-center justify-center text-sm font-bold mr-3 ${
-                            showCorrectness && isCorrect
-                              ? "bg-green-200 text-green-700"
-                              : showCorrectness && isSelected
-                              ? "bg-red-200 text-red-700"
-                              : "bg-gray-100 text-gray-500"
-                          }`}
-                        >
+                        <span className={`flex-shrink-0 w-8 h-8 rounded-full flex items-center justify-center text-sm font-bold mr-3 ${showCorrectness && isCorrect ? "bg-green-200 text-green-700" : showCorrectness && isSelected ? "bg-red-200 text-red-700" : "bg-gray-100 text-gray-500"}`}>
                           {opt}
                         </span>
                         <span className="mt-1">{currentQ.options[opt]}</span>
-
                         {showCorrectness && isCorrect && (
-                          <div className="absolute right-4 top-4 text-green-600">
-                            <Icon name="CheckCircle" size={24} />
-                          </div>
+                          <div className="absolute right-4 top-4 text-green-600"><Icon name="CheckCircle" size={24} /></div>
                         )}
                       </div>
                     </button>
                   );
                 })}
               </div>
-
-              {/* Rationale / Next Button Area */}
               {showRationale && (
                 <div className="fixed bottom-0 left-0 right-0 bg-white border-t shadow-[0_-4px_6px_-1px_rgba(0,0,0,0.1)] p-4 z-50 animate-in slide-in-from-bottom duration-300">
                   <div className="max-w-2xl mx-auto">
                     <div className="mb-4 max-h-40 overflow-y-auto custom-scroll pr-2">
-                      <h4 className="text-sm font-bold text-gray-500 uppercase tracking-wider mb-1">
-                        Rationale
-                      </h4>
+                      <h4 className="text-sm font-bold text-gray-500 uppercase tracking-wider mb-1">Rationale</h4>
                       <p className="text-gray-800 leading-relaxed">
-                        <span className="font-bold mr-2">
-                          {currentQ.answer} is correct.
-                        </span>
+                        <span className="font-bold mr-2">{currentQ.answer} is correct.</span>
                         {currentQ.rationale}
                       </p>
                     </div>
-                    <button
-                      onClick={nextQuestion}
-                      className="w-full bg-indigo-600 text-white py-3.5 rounded-xl font-bold text-lg hover:bg-indigo-700 active:scale-[0.99] transition-all shadow-md flex items-center justify-center gap-2"
-                    >
+                    <button onClick={nextQuestion} className="w-full bg-indigo-600 text-white py-3.5 rounded-xl font-bold text-lg hover:bg-indigo-700 active:scale-[0.99] transition-all shadow-md flex items-center justify-center gap-2">
                       <span>Next Question</span>
                       <Icon name="ArrowRight" size={20} />
                     </button>
@@ -2430,4 +2419,3 @@ D. Every 24 hours regardless of output volume.
     <script src="https://cdn.counter.dev/script.js" data-id="522f691d-7d55-46c5-b114-518017ffa2f7" data-utcoffset="-8"></script>
   </body>
 </html>
-
