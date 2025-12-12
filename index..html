@@ -1,0 +1,2431 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"
+    />
+    <title>Nursing Final Review</title>
+
+    <!-- React and ReactDOM -->
+    <script
+      crossorigin
+      src="https://unpkg.com/react@18/umd/react.production.min.js"
+    ></script>
+    <script
+      crossorigin
+      src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"
+    ></script>
+
+    <!-- Babel for JSX -->
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <style>
+      body {
+        background-color: #f3f4f6;
+        font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+          Helvetica, Arial, sans-serif;
+        -webkit-tap-highlight-color: transparent;
+      }
+      .rationale-box {
+        animation: fadeIn 0.3s ease-in;
+      }
+      @keyframes fadeIn {
+        from {
+          opacity: 0;
+          transform: translateY(10px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+      /* Custom scrollbar for rationale if it gets long */
+      .custom-scroll::-webkit-scrollbar {
+        width: 6px;
+      }
+      .custom-scroll::-webkit-scrollbar-track {
+        background: #f1f1f1;
+      }
+      .custom-scroll::-webkit-scrollbar-thumb {
+        background: #cbd5e1;
+        border-radius: 3px;
+      }
+      .btn-tap {
+        transition: transform 0.1s;
+      }
+      .btn-tap:active {
+        transform: scale(0.98);
+      }
+    </style>
+  </head>
+  <body>
+    <div id="root"></div>
+
+    <script type="text/babel">
+      // ==========================================
+      // STEP 1: PASTE YOUR DATA BELOW
+      // ==========================================
+
+      // IMPORTANT: Paste your text inside the backticks of String.raw``
+      // This prevents the code from confusing '\text' with a 'Tab' character.
+
+      const RAW_TEXT_DATA = String.raw`### Group 1: Gestational Hypertension, Preeclampsia, and HELLP Syndrome (ADPIE, ABC, Safety)
+
+**1. A pregnant client at 34 weeks gestation presents to the clinic with a BP of 145/95 mm Hg and 2+ proteinuria. The nurse recognizes these findings as the classic diagnostic dyad for which condition? (Assessment/Analysis)**
+A. Eclampsia
+B. Gestational Hypertension (GH)
+C. Pre-eclampsia
+D. Chronic Hypertension
+**Correct Answer: C.** Pre-eclampsia is characterized by hypertension (BP $\geq$ 140/90 after 20 wks gest) and proteinuria (1+ / 2+). GH is hypertension without proteinuria.
+
+**2. A client diagnosed with severe preeclampsia reports epigastric pain in the right upper quadrant (RUQ). The nurse understands that this symptom is primarily related to which underlying pathophysiological mechanism? (Assessment/Analysis/Safety)**
+A. Cerebral edema leading to capillary rupture
+B. Arteriolar vasospasm causing visual disturbances
+C. Intra-hepatic pressure from fibrin deposits
+D. Pulmonary edema resulting in crackles
+**Correct Answer: C.** RUQ epigastric pain is a clinical sign resulting from intra-hepatic pressure caused by congestion from fibrin deposits in the liver.
+
+**3. A client with severe preeclampsia is admitted to the antepartum unit. Which nursing assessment finding indicates the most immediate threat to the client’s neurological status and requires immediate reporting? (Assessment/Safety/ABC)**
+A. Deep Tendon Reflexes (DTRs) rated 3+
+B. Oliguria (urine output $< 30 \text{ mL}/\text{hr}$)
+C. Complaints of a headache (HA) and visual disturbances
+D. Thrombocytopenia (platelets $< 100,000/\text{mm}^3$)
+**Correct Answer: C.** Headache and visual disturbances are clinical signs of cerebral vasospasms and cerebral edema, indicating high risk for capillary rupture and Cerebral Hemorrhage (CVA) or Eclampsia (seizures).
+
+**4. The nurse is caring for a preeclamptic client receiving IV fluids and monitoring hourly urine output (U.O.). The nurse understands that decreased U.O. (oliguria) is a clinical sign reflecting impaired perfusion to which maternal organ system? (Assessment/Analysis/ABC)**
+A. Central Nervous System (CNS)
+B. Uteroplacental unit
+C. Renal system
+D. Hepatic system
+**Correct Answer: C.** Oliguria is listed as a clinical sign related to renal system impairment, specifically decreased renal perfusion and a lowered Glomerular Filtration Rate (GFR) due to tissue damage from arteriolar vasospasms.
+
+**5. The nurse notes that a client with preeclampsia is exhibiting clonus along with DTRs measured at 3+. The primary concern for the nurse should be anticipating the onset of which complication? (Assessment/Safety)**
+A. Disseminated Intravascular Coagulopathy (DIC)
+B. HELLP syndrome
+C. Placental abruption
+D. Eclampsia
+**Correct Answer: D.** Hyperreflexia (DTRs = 3+ / +clonus) are severe clinical symptoms associated with CNS irritability and precede Eclampsia (seizures).
+
+**6. When reviewing the labs for a client with HELLP syndrome, the nurse expects to see evidence of which hematologic finding? (Assessment/Analysis)**
+A. Increased Hgb and Hct
+B. Microangiopathic Hemolytic Anemia (MAHA)
+C. Increased consumption of clotting factors
+D. Elevated Fibrin Split Products (FSP)
+**Correct Answer: B.** HELLP includes Hemolytic anemia and Microangiopathic Hemolytic Anemia (MAHA), characterized by the damage of RBCs (schistocytes) through constricted blood vessels. (C and D are associated with DIC, which can result from HELLP).
+
+**7. A nurse is planning care for a client admitted with a diastolic blood pressure of 102 mm Hg and preeclampsia. Based on this finding, the priority nursing intervention should be: (Planning/Implementation/Safety)**
+A. Preparing the client for discharge with instructions for home blood pressure monitoring.
+B. Initiating strict bed rest (BR) and seizure precautions.
+C. Administering Hydralazine immediately via IV bolus.
+D. Checking for anxiety and sleep deprivation.
+**Correct Answer: B.** A diastolic BP $\geq$ 100 mm Hg indicates hospitalization and initiation of bed rest (BR). Seizure precautions are also essential.
+
+**8. For a client with severe preeclampsia, the nurse identifies that the greatest risk to the fetus is: (Analysis/Safety)**
+A. Intrauterine growth restriction (IUGR).
+B. Hyperflexia.
+C. Fetal death due to placental abruption.
+D. Oliguria.
+**Correct Answer: C.** Severe preeclampsia can progress to placental abruption, a condition that threatens fetal viability and is associated with fetal death. Fetal hypoxia and IUGR are significant risks, but fetal death is the gravest outcome.
+
+**9. The nurse recognizes that the fundamental pathophysiology that leads to Gestational Hypertension (GH) is: (Analysis)**
+A. Prostaglandin imbalance causing systemic vasodilation.
+B. Tissue ischemia leading to maternal organ damage.
+C. Arteriolar vasospasm leading to constriction of blood vessels.
+D. Colloids leaking through damaged capillary walls.
+**Correct Answer: C.** The process starts with a possible prostaglandin imbalance leading to arteriolar vasospasm, which causes constriction of blood vessels and resultant hypertension (BP $\geq$ 140/90 p 20 wks gest).
+
+**10. A pregnant client has experienced generalized edema, proteinuria, and hypertension. The nurse knows that the deposition of fibrin and platelets at the site of endothelial injury will ultimately lead to which two immediate consequences? (Analysis)**
+A. Hypovolemia and shock
+B. Tissue ischemia and hypoxia
+C. Hemoconcentration and oliguria
+D. Cerebral edema and intravascular clotting
+**Correct Answer: B.** After colloids leak and fibrin/platelets deposit, the sequence of events is tissue ischemia and hypoxia, followed by maternal organ damage and impaired fetal development.
+
+**11. The nurse understands that which is a hallmark finding associated with the hematologic consequences of preeclampsia? (Assessment/Analysis)**
+A. Increased circulating blood volume
+B. Increased fetal heart rate (FHR)
+C. Damage to RBCs resulting in schistocytes
+D. Premature aging of the placenta
+**Correct Answer: C.** Damage to RBCs passing through constricted blood vessels results in abnormally shaped Burr cells and damaged RBCs (schistocytes), leading to MAHA, a component of HELLP syndrome.
+
+**12. When evaluating a preeclamptic client’s risk for developing Disseminated Intravascular Coagulopathy (DIC), the nurse would prioritize monitoring which laboratory value? (Assessment/Safety)**
+A. Serum creatinine levels
+B. Liver Function Tests (LFTs)
+C. Fibrin Split Products (FSP)
+D. Hemoglobin and Hematocrit (Hgb/Hct)
+**Correct Answer: C.** Increased Fibrin Split Products (FSP) or FDP (fibrin degradation products) indicate the breakdown of fibrin, which is a key marker for the over-activation of the clotting cascade seen in DIC.
+
+**13. The nurse understands that the definitive cure for Pregnancy-Induced Hypertension (PIH) is: (Planning/Analysis)**
+A. Strict bed rest (BR).
+B. Delivery of the fetus and placenta.
+C. Administration of Magnesium Sulfate.
+D. Hydralazine therapy to reduce BP.
+**Correct Answer: B.** The only cure listed for PIH is the delivery of the fetus and placenta.
+
+**14. A nurse is conducting a detailed medical history (Hx) for a newly admitted primigravida client. Which finding places her at the highest risk for developing Gestational Hypertension (GH)? (Assessment/Analysis)**
+A. Gestational age of 28 weeks
+B. Obesity prior to pregnancy
+C. History of pre-existing asthma
+D. Maternal age of 25 years old
+**Correct Answer: B.** Obesity is listed as a predisposing factor for GH, along with primigravida status.
+
+**15. A client with preeclampsia is experiencing severe hyperflexia and has DTRs of 3+ with clonus. Which immediate safety measure should the nurse implement? (Implementation/Safety)**
+A. Place the client in a left side-lying position.
+B. Administer a sedative such as phenobarbital.
+C. Institute seizure precautions.
+D. Prepare for a STAT C-section.
+**Correct Answer: C.** Seizure precautions (including padding side rails (SR’s) and removing breakable items) are primary nursing care interventions for managing CNS irritability and preventing injury in a client at high risk for Eclampsia.
+
+***
+
+### Group 2: Magnesium Sulfate and Tocolytics (Safety, Implementation, ABC)
+
+**16. The nurse prepares to administer a loading dose of Magnesium Sulfate (MgSO4) to a preeclamptic client. The rationale for this medication is primarily to: (Implementation/Analysis/Safety)**
+A. Decrease peripheral vascular resistance to lower BP.
+B. Prevent seizures by decreasing CNS irritability.
+C. Block muscle excitability to induce therapeutic rest.
+D. Increase circulating blood volume to improve renal perfusion.
+**Correct Answer: B.** MgSO4 is the drug of choice (DOC) used for pre-eclamptic patients to prevent seizures by depressing the CNS and decreasing CNS irritability.
+
+**17. A client is receiving a continuous intravenous infusion of MgSO4 at $2 \text{ gm}/\text{hr}$. Which nursing assessment finding indicates that the client is experiencing a common side effect of the medication? (Assessment/Analysis)**
+A. Flaccid paralysis
+B. Respiratory rate (RR) of 10 breaths/min
+C. Dizziness and flushing
+D. Urine output of $20 \text{ mL}/\text{hr}$
+**Correct Answer: C.** Common side effects of MgSO4 include dizziness, flush, nausea, and drowsiness. Respiratory depression (RR $< 12$ or $\downarrow\text{ RR}$ is a serious side effect).
+
+**18. The therapeutic serum magnesium level range that the nurse should monitor for in a client receiving MgSO4 is: (Assessment)**
+A. $1.5 \text{ to } 2.5 \text{ mg/dl}$.
+B. $4 \text{ to } 7 \text{ mg/dl}$.
+C. $8 \text{ to } 10 \text{ mg/dl}$.
+D. $12 \text{ to } 15 \text{ mg/dl}$.
+**Correct Answer: B.** The therapeutic range for Mg levels is $4\text{ to }7 \text{ mg}/\text{dl}$.
+
+**19. A client receiving IV MgSO4 begins to show signs of serious toxicity, including diminished DTRs and a respiratory rate of $10 \text{ breaths}/\text{min}$. The priority nursing intervention should be to: (Implementation/Safety/ABC)**
+A. Slow the continuous IV infusion rate to $1 \text{ gm}/\text{hr}$.
+B. Administer Calcium Gluconate intravenously.
+C. Increase the IV fluid rate to maintain blood pressure.
+D. Notify the provider and prepare for intubation.
+**Correct Answer: B.** Respiratory distress/depression and decreased DTRs are serious side effects of MgSO4. The specific antidote for MgSO4 toxicity (high $\text{Mg}^{++}$ and low $\text{Ca}^{++}$) is Calcium Gluconate.
+
+**20. The nurse is administering Hydralazine (Apresoline) to a preeclamptic client to decrease blood pressure. The nurse understands that dropping the BP too rapidly could lead to which critical complication? (Safety/ABC)**
+A. Increased maternal heart rate ($\text{P}$) and headache (HA)
+B. Fetal hypoxia due to impaired uteroplacental function
+C. Thrombocytopenia in the neonate
+D. Severe maternal cerebral hemorrhage (CVA)
+**Correct Answer: B.** The nurse must lower the BP gradually because dropping it too fast can impair uteroplacental function, leading to fetal hypoxia.
+
+**21. The nurse is preparing to administer Terbutaline ($0.25 \text{ mg}$ SQ) to a client in preterm labor (PTL). Which maternal assessment finding requires the nurse to hold the medication and notify the provider? (Implementation/Assessment/Safety)**
+A. Shortness of breath (SOB)
+B. Tachycardia with an apical pulse (AP) of 115 beats/min
+C. Complaints of chest pain (CP)
+D. Decreased levels of potassium ($\text{K}^+$)
+**Correct Answer: B.** Terbutaline should be held if the apical pulse (AP) is $\geq 110$. Tachycardia ($\text{AP} \geq 110$) is a common side effect, but the threshold to hold is explicitly stated. (SOB, CP, and decreased $\text{K}^+$ are serious side effects that must be reported, but the holding parameter is the priority check before administration).
+
+**22. Terbutaline (a $\beta$-sympathomimetic) is administered to a client in preterm labor (PTL). The nurse monitors for side effects consistent with the drug’s action, which mimics the effects of which nervous system? (Assessment/Analysis)**
+A. Parasympathetic Nervous System (PNS)
+B. Central Nervous System (CNS)
+C. Somatic Nervous System
+D. Sympathetic Nervous System (SNS)
+**Correct Answer: D.** Terbutaline is a $\beta$-sympathomimetic agent, meaning it mimics the effects of the Sympathetic Nervous System (SNS). Side effects include tachycardia ($\uparrow \text{P}$), restlessness (jitters), and hyperglycemia.
+
+**23. The nurse is preparing to administer Indomethacin to a client with preterm labor (PTL). The nurse understands that this drug works primarily by performing which action? (Implementation/Analysis)**
+A. Blocking calcium channels to relax the uterus
+B. Inhibiting prostaglandin synthesis
+C. Depressing CNS irritability
+D. Increasing serum glucose levels
+**Correct Answer: B.** Indomethacin (Indocin) is listed as a medication for PTL that works by inhibiting prostaglandin.
+
+**24. The nurse knows that the main therapeutic benefit of giving Betamethasone (a corticosteroid) to a client in preterm labor at 32 weeks gestation is to: (Planning/Safety)**
+A. Decrease uterine contractions (ucs).
+B. Promote maternal glucose control.
+C. Increase fetal surfactant production.
+D. Improve the uteroplacental perfusion.
+**Correct Answer: C.** Betamethasone is given when the fetus is $< 34$ weeks to increase fetal surfactant production, which is critical for lung development.
+
+**25. A client is receiving MgSO4 for PTL. The nurse understands that the mechanism of action that makes this medication effective as a tocolytic is its ability to: (Analysis)**
+A. Increase calcium uptake at the myoneural junction.
+B. Act as an insulin antagonist to prevent hyperglycemia.
+C. Decrease muscle excitability and relax smooth muscle.
+D. Stimulate the autonomic nervous system.
+**Correct Answer: C.** MgSO4 blocks acetylcholine at the myoneural junction and decreases muscle excitability. When used as a tocolytic (contraction inhibitor), it relaxes smooth muscle.
+
+***
+
+### Group 3: Fetal Monitoring and Uteroplacental Issues (ABC, Assessment, Implementation)
+
+**26. The nurse observes a fetal heart rate (FHR) strip showing a baseline rate of $170 \text{ beats}/\text{min}$ with minimal variability. The most common maternal cause for this FHR pattern is: (Assessment/Analysis/Safety)**
+A. Maternal hypotension
+B. Maternal fever
+C. Umbilical cord compression
+D. Fetal cardiac dysrhythmias
+**Correct Answer: B.** The FHR baseline of $170 \text{ beats}/\text{min}$ indicates fetal tachycardia ($\text{FHR} > 160 \text{ beats}/\text{min}$). Maternal fever or intraamniotic infection is the most common maternal cause of fetal tachycardia.
+
+**27. A client’s FHR strip shows early decelerations during uterine contractions. The nurse understands this is a reassuring pattern caused by: (Assessment/Analysis)**
+A. Uteroplacental insufficiency (UPI).
+B. Umbilical cord compression (CC).
+C. Fetal head compression (HC).
+D. Maternal supine hypotension.
+**Correct Answer: C.** Early decelerations are a reassuring pattern resulting from fetal head compression (HC), causing a vagal response.
+
+**28. The nurse notes repetitive Variable Decelerations on the FHR monitor. Which intervention should the nurse perform first to improve fetal oxygenation and relieve the cause? (Implementation/ABC/Safety)**
+A. Administer oxygen via non-rebreather mask at $10 \text{ L}/\text{min}$.
+B. Initiate an amnioinfusion.
+C. Change the maternal position.
+D. Discontinue the Pitocin infusion.
+**Correct Answer: C.** Variable decelerations are caused by umbilical cord compression (CC). Changing the maternal position (often to a lateral position) is the initial, priority intervention to relieve cord compression.
+
+**29. The nurse observes Late Decelerations on the FHR strip during every contraction. The nurse immediately recognizes this non-reassuring pattern as a sign of: (Assessment/Analysis/ABC)**
+A. Uteroplacental insufficiency (UPI).
+B. Normal physiological response to contraction.
+C. Intact central nervous system (CNS).
+D. Fetal sleep cycle.
+**Correct Answer: A.** Late decelerations are a non-reassuring pattern primarily caused by uteroplacental insufficiency (UPI).
+
+**30. The nurse needs to assess the fetal viability and growth rate for a client with Gestational Diabetes Mellitus (GDM). Which non-invasive procedure is routinely used for this assessment? (Assessment/Planning)**
+A. Chorionic Villus Sampling (CVS)
+B. Amniocentesis
+C. Contraction Stress Test (CST)
+D. Ultrasound (U/S) and Biophysical Profile (BPP)
+**Correct Answer: D.** U/S and BPP are used routinely in fetal surveillance for high-risk pregnancies like GDM to check fetal movement, volume, and growth.
+
+**31. The nurse is reviewing an FHR strip and notes a baseline FHR of $130 \text{ bpm}$ with FHR accelerating to $145 \text{ bpm}$ for $20 \text{ seconds}$ with fetal movement. This pattern is interpreted as: (Assessment/Analysis)**
+A. Non-reassuring due to lack of uterine activity.
+B. Reactive, indicating fetal well-being.
+C. Bradycardia with marked variability.
+D. Minimal variability, requiring further investigation.
+**Correct Answer: B.** A reactive Non-stress Test (NST) requires two or more accelerations of $15 \text{ beats}/\text{min}$ or more for $15 \text{ seconds}$ or more over a $20 \text{ minute}$ period, indicating fetal well-being and an intact CNS.
+
+**32. A pregnant client is undergoing a Contraction Stress Test (CST). The nurse reports a positive CST to the provider if the monitor displays: (Assessment/Analysis)**
+A. Repetitive Variable Decelerations.
+B. Late Decelerations.
+C. Early Decelerations.
+D. FHR Accelerations.
+**Correct Answer: B.** A positive CST is defined by the presence of Late Decelerations, which signify that the fetus cannot tolerate the stress of contractions.
+
+**33. Variability is the normal irregularity of the cardiac rhythm, resulting from the push-pull effect of the autonomic nervous system. Moderate variability (6-25 bpm) is considered: (Assessment/Analysis)**
+A. Non-reassuring, associated with CNS depressants.
+B. Reassuring, indicating an intact nerve pathway.
+C. Marked, associated with fetal stimulation.
+D. Absent, indicating fetal acidemia.
+**Correct Answer: B.** Moderate variability (6-25 bpm) is the desired finding, reflecting an intact nerve pathway and reassuring fetal status.
+
+**34. The nurse understands that minimal variability ($< 5 \text{ bpm}$) on an FHR strip, when sustained and not due to a sleep cycle, is concerning because it is associated with: (Assessment/Analysis/Safety)**
+A. Early mild hypoxemia.
+B. Fetal stimulation and activity.
+C. Hypoxia/acidosis.
+D. Maternal hypertension.
+**Correct Answer: C.** Decreased or minimal variability ($< 5 \text{ bpm}$) is a non-reassuring sign often associated with fetal hypoxia or acidosis.
+
+**35. A nurse prepares a client for an amniocentesis procedure. The nurse knows that the earliest gestational age this procedure is typically performed is: (Planning)**
+A. $10 \text{ weeks}$.
+B. $14 \text{ weeks}$.
+C. $20 \text{ weeks}$.
+D. $34 \text{ weeks}$.
+**Correct Answer: B.** Amniocentesis is typically done earliest at $\cong 14 \text{ weeks}$ gestation.
+
+**36. A nurse teaches a pregnant client how to perform Daily Fetal Movement Counts (DFMC). The nurse instructs the client to notify the provider if she feels fewer than how many movements in two hours? (Planning/Safety)**
+A. Less than 1 movement
+B. Less than 2 movements
+C. Less than 5 movements
+D. Less than 10 movements
+**Correct Answer: B.** Normal DFMC is $2\text{ to }10 \text{ movements}$ in $2 \text{ hours}$ (or $< 3 / \text{hr}$), so reporting less than 2 movements would be the safest threshold based on the low end of the expected range.
+
+**37. When assessing a client’s Biophysical Profile (BPP) score, the nurse understands that a score of 8/8 (or 10/10) is interpreted as: (Assessment/Analysis)**
+A. Abnormal fetal status requiring intervention.
+B. Optimal fetal outcome.
+C. Indication for immediate delivery.
+D. Non-reassuring fetal compromise.
+**Correct Answer: B.** A BPP score of 8 out of 8 or 10 out of 10 is considered optimal and indicates a better outcome/presentation of the baby.
+
+**38. The nurse notes the Amniotic Fluid Index (AFI) reading on a client’s ultrasound is $3 \text{ cm}$. The nurse understands this finding classifies the client’s fluid status as: (Assessment/Analysis)**
+A. Polyhydramnios
+B. Normal
+C. Oligohydramnios
+D. Premature rupture of membranes (PROM)
+**Correct Answer: C.** An AFI $< 5 \text{ cm}$ indicates oligohydramnios.
+
+**39. If the FHR strip shows repetitive Late Decelerations (UPI), the nurse’s priority intervention to address maternal circulation should be: (Implementation/ABC/Safety)**
+A. Prepare for an immediate C-section.
+B. Increase the rate of IV fluids (e.g., Lactated Ringer's).
+C. Discontinue the Pitocin.
+D. Administer oxygen $8\text{ to }10 \text{ L}/\text{min}$ via non-rebreather mask.
+**Correct Answer: B.** While all interventions are part of intrauterine resuscitation, increasing IV fluids ($\uparrow\text{ LR}$) addresses the $\text{C}$ (Circulation) component by improving maternal blood pressure and plasma volume, which often precedes oxygen administration and positioning changes when addressing UPI/hypotension.
+
+**40. A client with a prior classic uterine incision is admitted to the labor unit. The nurse anticipates that a trial of labor (TOL) or induction is: (Planning/Safety)**
+A. Contraindicated due to the high risk of uterine rupture.
+B. Recommended to assess the safety of a SVD.
+C. Indicated only if the Bishop score is $\geq 10$.
+D. Allowed if the fetus is vertex and engaged.
+**Correct Answer: A.** A prior classic uterine incision is a contraindication for a trial of labor, VBAC, or induction due to the increased risk of uterine rupture.
+
+***
+
+### Group 4: Bleeding in Pregnancy/Hemorrhage & Shock (ABC, Assessment, Implementation, Safety)
+
+**41. The nurse is caring for a client with Placenta Previa. Which characteristic finding is the nurse most likely to assess? (Assessment)**
+A. Painless, bright red vaginal bleeding.
+B. Rigid, tender abdomen with severe pain.
+C. Dark brown, scant bleeding with passage of hydropic vesicles.
+D. Severe, sharp unilateral abdominal pain.
+**Correct Answer: A.** Placenta previa is characterized by painless uterine bleeding, which is often bright red and may be intermittent.
+
+**42. A client experiences a total delivery room blood loss (EBL) of $1,300 \text{ mL}$ following a spontaneous vaginal delivery (SVD). The nurse recognizes this finding meets the criteria for: (Analysis)**
+A. Normal quantitative blood loss (QBL) for SVD.
+B. Hemorrhagic shock.
+C. Postpartum hemorrhage (PPH).
+D. Disseminated intravascular coagulopathy (DIC).
+**Correct Answer: C.** PPH is defined as postpartum blood loss $> 1000 \text{ mL}$, independent of the mode of birth. Normal EBL for SVD is $< 500 \text{ mL}$.
+
+**43. A client presents to the Emergency Department complaining of severe, sharp abdominal pain and minimal vaginal bleeding. She reports recent cocaine use. The nurse recognizes these symptoms are most consistent with: (Assessment/Analysis/Safety)**
+A. Spontaneous Abortion (SAB)
+B. Hydatidiform Mole
+C. Placenta Previa
+D. Abruptio Placentae
+**Correct Answer: D.** Abruptio placentae is often associated with cocaine use and presents with abdominal pain (uterine hypertonicity/tetany) and may involve concealed hemorrhage (minimal or no vaginal bleeding).
+
+**44. The most common cause of Postpartum Hemorrhage (PPH) is: (Analysis)**
+A. Retained placental fragments.
+B. Uterine lacerations.
+C. Uterine atony.
+D. MgSO4 administration.
+**Correct Answer: C.** Uterine atony (hypotonia of the uterus) is the most common cause of PPH.
+
+**45. Following the delivery of the placenta, the nurse assesses the fundus and finds it to be boggy and displaced to the right. The priority nursing intervention is: (Implementation/Safety/ABC)**
+A. Palpate the suprapubic area for a distended bladder.
+B. Initiate vigorous fundal massage.
+C. Administer Pitocin IV to increase uterine contractions.
+D. Elevate the client's lower extremities.
+**Correct Answer: B.** For uterine atony (boggy uterus), the primary, immediate goal is to increase uterine contractions ($\uparrow \text{ucs}$) and decrease blood loss. This is done first by initiating fundal massage.
+
+**46. A client in the fourth stage of labor who had an epidural has profuse vaginal bleeding, but her fundus is firm and midline. The nurse suspects the bleeding is most likely due to: (Assessment/Analysis)**
+A. Uterine atony.
+B. Distended bladder.
+C. Laceration of the birth canal.
+D. Retained placental fragments.
+**Correct Answer: C.** PPH with a firmly contracted uterus is a classic sign of a laceration of the birth canal.
+
+**47. When a client experiences hemorrhagic (hypovolemic) shock, the initial physiological compensatory response involves the release of catecholamines leading to: (Analysis/ABC)**
+A. Vasodilation and decreased cardiac output.
+B. Vasoconstriction, shunting blood to the brain and heart.
+C. Tissue hypoxia and metabolic alkalosis.
+D. Consumption of clotting factors leading to DIC.
+**Correct Answer: B.** Catecholamine release causes vasoconstriction, which shunts blood away from non-vital organs (like the kidneys) to the brain and heart only to maintain life.
+
+**48. An immediate intervention for hemorrhagic shock is to restore blood volume. Which fluid component should the nurse prioritize to replace lost clotting factors and reverse DIC? (Implementation/ABC)**
+A. Packed Red Blood Cells (PRBCs)
+B. Fresh Frozen Plasma (FFP)
+C. Lactated Ringer's (LR)
+D. Whole Blood
+**Correct Answer: B.** FFP contains clotting factors and is necessary to reverse DIC (a common complication of severe hemorrhage).
+
+**49. A client reports unilateral cramps and tenderness followed by sudden, sharp abdominal pain. The nurse suspects an Ectopic Pregnancy. The primary cause of maternal death in this condition is: (Analysis/Safety)**
+A. Infection (septicemia).
+B. Hyperglycemia.
+C. Hemorrhage.
+D. Pulmonary Embolism (PE).
+**Correct Answer: C.** Ectopic pregnancy is a medical urgency, and $10\%$ of all maternal deaths are primarily due to hemorrhage (especially if the tube ruptures).
+
+**50. The nurse suspects a client is experiencing Disseminated Intravascular Coagulopathy (DIC). Which is a late clinical manifestation of this condition? (Assessment/Analysis)**
+A. Sudden, sharp abdominal pain
+B. Petechiae and bleeding from the gums
+C. Headache and visual disturbances
+D. Fetal tachycardia
+**Correct Answer: B.** DIC is characterized by widespread internal and/or external bleeding, often presenting as unusual bleeding, petechiae, or spontaneous bleeding from the gums and nose due to the consumption of clotting factors and platelets.
+
+**51. A client with an Ectopic Pregnancy experiences internal bleeding. Which sign should alert the nurse to the possibility of internal hemorrhage? (Assessment/Safety/ABC)**
+A. Increased blood pressure (BP) and bounding pulse (P)
+B. Vertigo, shoulder pain, and tachycardia
+C. Elevated white blood cell count (WBC) and low-grade temperature
+D. Absence of vaginal bleeding
+**Correct Answer: B.** Signs of internal bleeding indicative of hypovolemic shock include vertigo, referred shoulder pain (from blood in the peritoneum), and compensatory tachycardia.
+
+**52. The nurse reviews the chart of a client diagnosed with Abruptio Placentae, Grade III. Which finding should the nurse prioritize when anticipating immediate management? (Assessment/Analysis/ABC)**
+A. Vaginal bleeding less than $500 \text{ mL}$
+B. Maternal shock and fetal demise
+C. Uterine tenderness and mild tetany
+D. Fetal distress without maternal shock
+**Correct Answer: B.** Grade III Abruption is characterized by severe findings, including maternal shock (coagulopathy) and fetal death. (C and D represent Grade I/II, and A is unreliable due to possible concealed hemorrhage).
+
+**53. A client is diagnosed with a Complete Hydatidiform Mole. The nurse includes teaching that this condition carries a $20\%$ risk for which malignant condition? (Planning/Analysis/Safety)**
+A. Liver rupture
+B. Cerebrovascular accident (CVA)
+C. Choriocarcinoma
+D. Renal failure
+**Correct Answer: C.** Complete moles carry a $20\%$ risk of developing choriocarcinoma.
+
+**54. A client who is Rh-negative experiences a spontaneous abortion (SAB) at 10 weeks gestation. The nurse plans to administer RhoGAM. The primary rationale for this intervention is to prevent: (Planning/Implementation/Safety)**
+A. Future isoimmunization problems in the next pregnancy.
+B. Excessive maternal hemorrhage during the SAB.
+C. Maternal-fetal blood mixing during the current pregnancy.
+D. The risk of developing disseminated intravascular coagulopathy (DIC).
+**Correct Answer: A.** RhoGAM is given to Rh-negative mothers experiencing any fetal or embryonic loss (like an abortion) to prevent the development of maternal antibodies, which would cause isoimmunization in subsequent pregnancies.
+
+**55. A client who had an SVD 5 days ago calls the clinic complaining of heavy, bright red vaginal bleeding (lochia rubra) that has persisted since birth. The nurse suspects that the primary cause is: (Assessment/Analysis)**
+A. Normal involution process.
+B. Postpartum infection.
+C. Retained placental fragments.
+D. Uterine sub-involution.
+**Correct Answer: C.** Persistent lochia rubra (bright red blood) beyond 3 days postpartum suggests retained placental fragments or bleeding at the placental site.
+
+***
+
+### Group 5: Preterm Labor, PROM, and Incompetent Cervix (Safety, Planning, Implementation)
+
+**56. The nurse is teaching a client to identify the signs of preterm labor (PTL). The nurse should instruct the client to seek medical evaluation if she experiences regular contractions at a frequency of: (Planning/Assessment/Safety)**
+A. Every 10 minutes or more for one hour.
+B. Every 2 to 3 minutes, lasting 60 to 90 seconds.
+C. Fewer than 6 contractions per hour.
+D. Irregular contractions accompanied by backache.
+**Correct Answer: A.** Preterm labor is defined by regular uterine contractions (ucs) every 10 minutes or more for one hour, causing cervical changes.
+
+**57. A client is admitted with premature rupture of membranes (PROM) at 35 weeks gestation. The priority nursing goal is to prevent the most serious complication of this condition, which is: (Planning/Safety)**
+A. Uteroplacental insufficiency (UPI).
+B. Amnionitis (ascending infection).
+C. Cord compression leading to variable decelerations.
+D. Oligohydramnios leading to fetal hypoxia.
+**Correct Answer: B.** PROM poses a high risk for ascending infection (amnionitis or chorioamnionitis), which can lead to neonatal sepsis.
+
+**58. When assessing a client who reports fluid leaking from her vagina, the nurse performs a Nitrazine test. The nurse suspects the fluid is amniotic fluid if the Nitrazine paper turns: (Assessment)**
+A. Red.
+B. Blue.
+C. Yellow.
+D. Green.
+**Correct Answer: B.** A positive Nitrazine test (litmus paper) turns blue, indicating the fluid is alkaline (amniotic fluid is typically alkaline, whereas vaginal secretions are acidic).
+
+**59. A client diagnosed with Incompetent Cervix is scheduled for a cervical cerclage procedure. The nurse should explain that the primary purpose of this procedure is to: (Planning/Implementation/Safety)**
+A. Prevent postpartum hemorrhage (PPH) by manually closing the cervix.
+B. Decrease uterine contractions and prevent preterm labor.
+C. Surgically constrict the internal cervical os to maintain the pregnancy.
+D. Induce labor before the membranes spontaneously rupture (SROM).
+**Correct Answer: C.** A cervical cerclage is a surgical procedure, such as the McDonald cerclage, that involves placing a band/suture around the cervix beneath the mucosa to constrict the internal os.
+
+**60. A client with an Incompetent Cervix who recently had a cerclage placed should be taught to immediately report signs and symptoms of: (Planning/Safety)**
+A. Progressive generalized edema.
+B. Onset of true labor (increasingly regular, strong contractions).
+C. Fetal movement counts less than 10 in 2 hours.
+D. Hyperreflexia and clonus.
+**Correct Answer: B.** If true labor begins, the increasing uterine pressure might rupture the uterus or cause the suture to tear the cervix. The cerclage must be removed if she goes into labor.
+
+**61. When teaching a client who is diagnosed with a Hydatidiform Mole about home care after evacuation, the most critical education point should be: (Planning/Safety)**
+A. Avoid heavy lifting for one week.
+B. Use effective contraception for one year.
+C. Monitor for fever and signs of infection.
+D. Report any bright red bleeding immediately.
+**Correct Answer: B.** Following evacuation of a molar pregnancy, the client must use reliable contraception for one year to monitor for rising HCG levels that could indicate choriocarcinoma.
+
+**62. A client who is at 30 weeks gestation is admitted with preterm labor. The physician orders IV hydration. The rationale for increasing fluid intake in this scenario is to: (Implementation/Analysis)**
+A. Increase maternal glucose levels to meet fetal demands.
+B. Decrease uterine irritability and stop contractions.
+C. Prevent placental abruption.
+D. Reverse hypovolemic shock.
+**Correct Answer: B.** Hydration is a crucial intervention for PTL because dehydration or inadequate plasma volume can cause uterine irritability and lead to contractions.
+
+**63. When caring for a client in PTL who is on strict bed rest (BR), the priority nursing intervention should focus on preventing complications related to: (Implementation/Safety/ABC)**
+A. Hemorrhage and DIC.
+B. Incompetent cervix.
+C. Hazards of immobility.
+D. Substance abuse withdrawal.
+**Correct Answer: C.** Hazards of immobility (e.g., thromboembolism, muscle atrophy) are a key safety concern for clients placed on bed rest for PTL or GH.
+
+**64. A nurse is planning care for a client at 34 weeks gestation diagnosed with Placenta Previa. Which intervention should be avoided? (Planning/Safety)**
+A. Detailed history and focused assessment.
+B. Non-stress test (NST) and Biophysical Profile (BPP).
+C. Routine sterile vaginal examination (SVE).
+D. Preparing for a C-section if active management is needed.
+**Correct Answer: C.** Vaginal examinations should be avoided if placenta previa is suspected or confirmed due to the risk of causing acute hemorrhage.
+
+**65. A client in preterm labor is confirmed positive for Group B $\beta$-Streptococci (GBBS) during her third-trimester prenatal visits. The primary goal of managing this client during labor is to prevent: (Planning/Safety)**
+A. Maternal uterine atony.
+B. Neonatal sepsis and meningitis.
+C. Placenta previa.
+D. Maternal hemorrhagic shock.
+**Correct Answer: B.** GBBS is the most common cause of neonatal sepsis and meningitis, making prophylactic antibiotics (e.g., penicillin/ampicillin) during labor critical to prevent neonatal exposure.
+
+***
+
+### Group 6: Maternal Diabetes (Assessment, Planning, Safety)
+
+**66. The nurse is conducting prenatal teaching for a client with Type 1 Insulin-Dependent Diabetes Mellitus (IDDM). Which statement reflects the greatest risk to the fetus during organogenesis (weeks 2-8)? (Planning/Safety)**
+A. Neonatal metabolic abnormalities (hypoglycemia)
+B. Macrosomia leading to shoulder dystocia
+C. Fetal congenital malformations (CNS/CV/GU/GI)
+D. Pre-eclampsia and hypertension
+**Correct Answer: C.** Uncontrolled maternal hyperglycemia (or acidosis) during the first trimester (weeks 2-8: period of embryonic development and organogenesis) significantly increases the risk of major congenital malformations.
+
+**67. A nurse understands that during the second and third trimesters, a pregnant client with diabetes will experience increased insulin resistance primarily due to the placental production of: (Analysis)**
+A. Progesterone and Estrogen.
+B. Human Placental Lactogen (HPL) and Cortisol.
+C. Human Chorionic Gonadotropin (HCG).
+D. Insulinase (insulin antagonist).
+**Correct Answer: D.** The placenta produces various hormones (HPL, Estrogen, Progesterone, Cortisol) which act as insulin antagonists, decreasing glucose tolerance. Insulinase is the enzyme that specifically decreases the effectiveness of insulin.
+
+**68. When assessing the newborn of a diabetic mother (GDM), the nurse’s priority action should be to monitor for signs of which metabolic abnormality immediately after birth? (Assessment/ABC/Safety)**
+A. Hyperglycemia
+B. Hypoglycemia
+C. Hyperbilirubinemia
+D. Respiratory Distress Syndrome (RDS)
+**Correct Answer: B.** When the cord is cut, the baby loses the maternal glucose supply but continues to hyper-produce its own insulin, leading to a sudden drop in glucose (hypoglycemia).
+
+**69. The nurse recognizes that a fasting maternal blood glucose level should typically fall within which range during pregnancy? (Assessment)**
+A. $60 \text{ to } 90 \text{ mg/dl}$
+B. $70 \text{ to } 110 \text{ mg/dl}$
+C. $110 \text{ to } 130 \text{ mg/dl}$
+D. $140 \text{ to } 160 \text{ mg/dl}$
+**Correct Answer: A.** Fasting blood glucose targets during pregnancy are $60\text{ to }90 \text{ mg}/\text{dl}$, which is lower than the typical non-pregnant adult range.
+
+**70. A client with uncontrolled GDM develops Polyhydramnios (amniotic fluid $> 1500 \text{ mL}$). The nurse understands that this complication places the client at increased risk for which condition? (Analysis/Safety)**
+A. Low birth weight (LBW) infant
+B. Spontaneous abortion (SAB)
+C. Postpartum hemorrhage (PPH)
+D. Intrauterine growth restriction (IUGR)
+**Correct Answer: C.** Polyhydramnios overdistends the uterus, making the uterine muscle less able to contract efficiently, which is a major risk factor for PPH.
+
+**71. The nurse is teaching a diabetic client about the appropriate total weight gain during pregnancy. The recommended range is: (Planning)**
+A. $15 \text{ to } 20 \text{ lbs}$.
+B. $22 \text{ to } 30 \text{ lbs}$.
+C. $35 \text{ to } 40 \text{ lbs}$.
+D. No more than $10 \text{ lbs}$.
+**Correct Answer: B.** The average total weight gain recommended for diabetic clients is $22\text{ to }30 \text{ lbs}$. (Normal non-diabetic range is $25\text{ to }35 \text{ lbs}$).
+
+**72. Following delivery, the nurse notes that the client’s insulin requirements have dramatically decreased. The primary physiological reason for this change is: (Analysis)**
+A. The postpartum period is highly stress-inducing, raising endogenous insulin.
+B. The anti-diabetogenic effects of breastfeeding intensify.
+C. The placenta (the source of insulin antagonists) has been delivered.
+D. The liver automatically begins synthesizing adequate insulin.
+**Correct Answer: C.** Delivery of the placenta removes the source of the insulin antagonists (like HPL and insulinase), rapidly returning the mother's sensitivity to insulin.
+
+***
+
+### Group 7: Obstetrical Emergencies & Labor Patterns (ABC, Implementation, Safety)
+
+**73. A nurse responds to a Shoulder Dystocia in the delivery room. The priority action for the nurse to assist in the birth should be to: (Implementation/ABC/Safety)**
+A. Apply firm fundal pressure to push the baby out.
+B. Place the client in McRobert’s maneuver.
+C. Prepare for an emergency C-section.
+D. Coach the mother to push with sustained Valsalva maneuvers.
+**Correct Answer: B.** McRobert’s maneuver (flexing legs apart with knees on the abdomen) is a primary intervention used to widen the pelvic outlet during shoulder dystocia. Fundal pressure should be avoided.
+
+**74. During a vaginal exam, the nurse palpates the umbilical cord below the fetal presenting part. The immediate priority intervention to maintain fetal oxygenation is to: (Implementation/ABC/Safety)**
+A. Place the client in the knee-chest position.
+B. Administer oxygen $10 \text{ L}/\text{min}$ via non-rebreather mask.
+C. Wrap the exposed cord in a wet sterile dressing.
+D. Hold the presenting part off the cord.
+**Correct Answer: D.** Prompt recognition of a Prolapsed Umbilical Cord is followed by the immediate intervention of using a hand to hold the presenting part off the cord to relieve compression and maintain blood flow.
+
+**75. A client is experiencing a precipitous labor, progressing from $0 \text{ to } 10 \text{ cm}$ dilation in under 3 hours. The nurse understands that this rapid labor pattern puts the fetus at high risk for: (Assessment/Safety)**
+A. Meconium aspiration syndrome (MAS).
+B. Hypoxia and intracranial hemorrhage.
+C. Respiratory distress syndrome (RDS).
+D. Macrosomia.
+**Correct Answer: B.** Precipitous labor involves hypertonic contractions (tetany), leading to rapid, forceful descent. This speed and intensity increase the risk of fetal hypoxia and intracranial hemorrhage.
+
+**76. A client presents in active labor with contractions lasting $90 \text{ seconds}$ and occurring every minute. The nurse recognizes this labor pattern as: (Assessment/Analysis)**
+A. Hypotonic uterine dysfunction.
+B. Precipitous labor.
+C. Hypertonic uterine dysfunction (Tetanic contractions).
+D. Secondary arrest of dilation.
+**Correct Answer: C.** Normal contractions should be $\sim 60\text{ to }90 \text{ seconds}$ long and occur every $2\text{ to }5 \text{ minutes}$. Contractions lasting $90 \text{ seconds}$ and coming every minute are too frequent and long, indicating hypertonic uterine dysfunction, often associated with tetany or precipitous labor.
+
+**77. The nurse is monitoring a newborn who was born with meconium-stained amniotic fluid (MAS). The primary intervention to prevent MAS complications is performed by the provider at the perineum and involves: (Implementation/ABC/Safety)**
+A. Initiating positive pressure ventilation (PPV).
+B. Suctioning the newborn before the first breath.
+C. Administering exogenous surfactant.
+D. Preparing the newborn for extracorporeal membranous oxygenation (ECMO).
+**Correct Answer: B.** For MAS, suctioning the newborn (using a bulb syringe or equivalent) at the perineum *before* the first breath is the critical intervention to prevent aspiration into the lungs.
+
+**78. A client has been pushing effectively for two hours, but the fetal head remains at $0 \text{ station}$. The nurse recognizes that this finding is consistent with which labor pattern? (Assessment/Analysis)**
+A. Prolonged latent phase
+B. Arrest of descent
+C. Precipitous labor
+D. Prolonged active phase
+**Correct Answer: B.** Arrest of descent occurs when the fetal head fails to move down (station 0 is the starting point of descent).
+
+**79. The nurse is caring for a multigravida client in the active phase of labor. The nurse notes that the client’s cervix has not changed dilation in the last 3 hours. This pattern is classified as: (Assessment/Analysis)**
+A. Hypertonic Uterine Dysfunction.
+B. Secondary Arrest of Dilation.
+C. Precipitous Labor.
+D. Inadequate Voluntary Expulsive Forces.
+**Correct Answer: B.** Secondary arrest occurs when there is "no change" (∅$\Delta$) in dilation during the active phase, usually defined as $\geq 2 \text{ hr}$ for nulliparas and multiparas.
+
+**80. A client is admitted to the delivery unit stating she feels like something is "coming out" of her vagina. The nurse assesses the client and confirms that the uterus has inverted. The nurse anticipates the administration of which medication class prior to manually replacing the uterus? (Planning/Implementation/Safety)**
+A. Uterotonics (Pitocin)
+B. Narcotic Antagonists (Narcan)
+C. Tocolytics (to relax the smooth muscle)
+D. Vasopressors (Hydralazine)
+**Correct Answer: C.** In the case of uterine inversion, tocolytics are administered to relax the smooth muscle of the uterus, allowing it to be manually replaced. Uterotonics are given *after* replacement to prevent hemorrhage.
+
+//Pediatrics begin
+
+### Group 1: Immunization and Communicable Disease Safety (ADPIE, ABC, Safety)
+
+**1. A nurse is reviewing the immunization status of a 4-month-old infant. The nurse recognizes that which immunization should NOT be administered if the infant recently received intravenous immunoglobulins (IVIG)? (Planning/Safety)**
+A. Hepatitis B (Hep B)
+B. Rotavirus (RV)
+C. Diphtheria, Tetanus, and Pertussis (DTaP)
+D. Pneumococcal Conjugate (PCV13)
+**Correct Answer: B.** Rotavirus is a live virus vaccine and is contraindicated for patients who have recently acquired passive immunity, such as through IVIG.
+
+**2. A 3-year-old child presents to the clinic with a temperature of $103.5^\circ \text{F}$ and is scheduled for a routine vaccination. Based on general contraindications, what is the priority nursing action? (Implementation/Safety)**
+A. Administer Tylenol prophylactically and proceed with vaccination.
+B. Proceed with the vaccination as scheduled, focusing on distraction techniques.
+C. Hold the vaccine due to severe febrile illness and notify the provider.
+D. Administer the inactivated polio virus (IPV) vaccine, as it is not a live virus.
+**Correct Answer: C.** A severe febrile illness is a general contraindication for receiving a vaccine.
+
+**3. A client is scheduled to receive the influenza vaccine. The nurse identifies which patient history finding as a contraindication for administering this vaccine? (Assessment/Safety)**
+A. History of mild seasonal allergies
+B. History of Guillain-Barré syndrome (GBS)
+C. History of local redness and swelling after the last dose
+D. Current mild upper respiratory infection (URI)
+**Correct Answer: B.** A history of Guillain-Barré syndrome (GBS) is a contraindication for the influenza vaccine and the meningococcal vaccine.
+
+**4. A school-age child is admitted to the pediatric unit with suspected bacterial meningitis. Which nursing isolation precaution is the priority upon admission? (Implementation/Safety/ABC)**
+A. Contact precautions only
+B. Standard precautions
+C. Airborne precautions
+D. Droplet isolation
+**Correct Answer: D.** Bacterial meningitis is transmitted by droplet, requiring droplet isolation.
+
+**5. A child is diagnosed with Varicella (chickenpox). The nurse educates the parents that the child remains contagious until which clinical manifestation has resolved? (Planning/Safety)**
+A. The fever subsides
+B. The rash begins to fade
+C. All vesicular lesions have crusted over
+D. The patient completes the acyclovir treatment
+**Correct Answer: C.** A child with Varicella is contagious until all the lesions have crusted over.
+
+**6. The nurse is caring for an infant diagnosed with Diphtheria. Which potential complication is the priority for the nurse to monitor for, as it directly affects the circulatory system? (Assessment/Safety/C)**
+A. Deafness
+B. Myocarditis
+C. Septic shock
+D. Encephalitis
+**Correct Answer: C.** Complications of Diphtheria include cardiomyopathy and septic shock.
+
+**7. A mother reports that her infant experienced "unusual crying" (high-pitched cry) after receiving the last DTaP injection. The nurse understands this reaction may indicate a potential problem with which system? (Analysis/Safety)**
+A. Respiratory system
+B. Gastrointestinal system
+C. Neurological system
+D. Hematologic system
+**Correct Answer: C.** Unusual crying, described as a high-pitched cry, following a DTaP dose may be a sign of something neurological.
+
+**8. A nurse is teaching parents how to prevent Reye Syndrome in their children recovering from a viral illness like the flu. What teaching instruction is the most important to ensure patient safety? (Planning/Safety)**
+A. Ensure the child receives adequate fluids and rest.
+B. Do not give the child any medication containing salicylates (aspirin).
+C. Monitor for fever and treat with non-steroidal anti-inflammatory drugs (NSAIDs).
+D. Avoid contact sports until fully recovered.
+**Correct Answer: B.** Aspirin (salicylates) has been linked to Reye syndrome, and parents should be taught never to give it to children or teenagers, especially if they are recovering from viral illnesses like chickenpox or the flu.
+
+**9. A 5-year-old child presents with a fever, cough, and Koplik spots noted on the oral mucosa. The nurse recognizes the need to immediately implement precautions for Rubeola (Measles). Which isolation precaution is required? (Implementation/Safety/A)**
+A. Droplet and Contact
+B. Droplet only
+C. Standard
+D. Airborne
+**Correct Answer: D.** For Rubeola (Measles), the child needs to be placed on airborne precautions.
+
+**10. A nurse is teaching a parent about the Polio vaccine. The nurse states that the oral form of the vaccine is no longer used in the U.S. primarily because of which safety concern? (Planning/Safety)**
+A. It caused severe local injection site reactions
+B. It required too many doses to establish immunity
+C. It increased the risk of vaccine-associated paralysis
+D. It was ineffective against Polio virus type 1
+**Correct Answer: C.** The oral form of the Polio vaccine was shown to increase the risk of vaccine-associated paralysis, so only the inactive virus is given now.
+
+**11. A pregnant woman reports she needs the MMR vaccine. The nurse knows that the Measles, Mumps, and Rubella vaccine is contraindicated during pregnancy because it is classified as which type of agent? (Planning/Safety)**
+A. An oral medication
+B. An inactive virus suspension
+C. A live virus vaccine
+D. A protein conjugate
+**Correct Answer: C.** The Measles part of MMR is a live virus, and it is contraindicated if the recipient is pregnant.
+
+**12. A mother brings her 18-month-old child to the clinic for a check-up and immunizations. The child is due for the fourth dose of the Polio vaccine (IPV). The nurse correctly prepares to administer this vaccine via which route? (Implementation)**
+A. Intramuscular (IM)
+B. Intravenous (IV)
+C. Oral (PO)
+D. Subcutaneous (SQ)
+**Correct Answer: D.** The inactive polio virus (IPV) vaccine is given subcutaneously (SQ).
+
+### Group 2: Oncological Emergencies and Chemotherapy Safety (ADPIE, ABC, Safety)
+
+**13. A child with Acute Lymphoblastic Leukemia (ALL) is receiving chemotherapy that is highly myelosuppressive. The nurse anticipates the child will be at the greatest risk for infection around the nadir, which typically occurs approximately how many days after chemotherapy administration? (Analysis/Safety)**
+A. Day 3
+B. Day 7
+C. Day 14
+D. Day 28
+**Correct Answer: C.** The nadir, or lowest point of white blood cells, can be anywhere from 10 to 28 days after chemotherapy, but frequently occurs around Day 14.
+
+**14. A child receiving chemotherapy develops a fever of $101.5^\circ \text{F}$ and has an Absolute Neutrophil Count (ANC) of 450 cells/$\text{mm}^3$. The nurse recognizes the child is at high risk for sepsis. What is the priority nursing intervention? (Implementation/ABC/Safety)**
+A. Initiate neutropenic precautions and administer prescribed oral Tylenol.
+B. Prepare the child for admission and initiate a septic workup, including IV antibiotics.
+C. Immediately administer white blood cell stimulating factors (e.g., Neupogen).
+D. Encourage high-calorie fluids and monitor temperature every 4 hours.
+**Correct Answer: B.** When neutropenic children develop a fever (fever and neutropenia), they must be admitted for a septic workup, and antibiotics must be started immediately because they are at high risk for sepsis.
+
+**15. A client receiving chemotherapy is diagnosed with thrombocytopenia, with a platelet count below 20,000/$\text{mm}^3$. The nurse understands that this value places the child at high risk for which complication? (Analysis/Safety/C)**
+A. Fever and infection
+B. Spontaneous bleeding
+C. Delayed wound healing
+D. Tumor Lysis Syndrome (TLS)
+**Correct Answer: B.** If platelets are below 20,000/$\text{mm}^3$, the child is at high risk for spontaneous bleeding.
+
+**16. A patient with Acute Lymphoblastic Leukemia (ALL) is receiving maintenance chemotherapy, which includes a corticosteroid. Which side effect requires priority cardiovascular monitoring by the nurse? (Assessment/Analysis/C)**
+A. Hypokalemia
+B. Hyperglycemia
+C. Insomnia and mood swings
+D. Osteoporosis
+**Correct Answer: A.** Corticosteroids can cause cardiac side effects such as hypertension, hypernatremia, and hypokalemia. Hypokalemia can quickly lead to life-threatening arrhythmias.
+
+**17. A nurse is preparing to administer a known vesicant chemotherapy agent through a peripheral intravenous (IV) line. Which nursing action is the MOST critical for patient safety prior to and during administration? (Implementation/Safety)**
+A. Administer Tylenol (acetaminophen) to prevent fever.
+B. Assess venous patency and check for blood return frequently during infusion.
+C. Restrict the IV site to the bony prominences or joints.
+D. Limit the infusion rate to less than $10 \text{ mL}/\text{hour}$.
+**Correct Answer: B.** For vesicants, the nurse must assess venous patency and check for blood return frequently during the infusion to prevent extravasation.
+
+**18. During the administration of a vesicant, the nurse observes signs of extravasation (erythema, pain, edema) at the peripheral IV site. What is the immediate priority nursing intervention? (Implementation/Safety)**
+A. Elevate the extremity immediately to promote drainage.
+B. Stop the infusion immediately and notify the provider.
+C. Apply a cold pack to the site to cause vasoconstriction.
+D. Remove the IV catheter immediately to prevent further infiltration.
+**Correct Answer: B.** If extravasation occurs, the nurse must immediately stop the infusion, notify the provider, and initiate protocols, often leaving the catheter in place for aspiration or antidote administration.
+
+**19. A child is scheduled for chemotherapy initiation. To prevent Hemorrhagic Cystitis, the nurse anticipates the physician will order which priority intervention? (Planning/Implementation/Safety)**
+A. Initiation of allopurinol
+B. Aggressive IV hydration
+C. Administration of methotrexate
+D. Monitoring of liver enzymes
+**Correct Answer: B.** To prevent hemorrhagic cystitis (blood in the urine), which some chemotherapies can cause, patients are often hydrated aggressively, sometimes receiving a liter of fluid before the chemotherapy even starts.
+
+**20. A 7-year-old child diagnosed with a brain tumor is admitted for debulking surgery. Postoperatively, what is the priority nursing intervention related to neurological safety (A/B/C)? (Implementation/Safety)**
+A. Maintain the head of the bed in a flat position to increase cerebral perfusion.
+B. Restrict visitors and maintain a dim, quiet environment.
+C. Encourage deep breathing and coughing every hour.
+D. Administer IV fluids liberally to prevent dehydration.
+**Correct Answer: B.** For a child with cerebral compromise, the nurse should quiet and dim the lights and restrict visitors to decrease stimulation, which helps prevent increases in intracranial pressure (ICP).
+
+**21. A child is diagnosed with a Medulloblastoma, a fast-growing tumor in the cerebellum. The nurse anticipates a priority assessment finding related to increased intracranial pressure (ICP) is: (Assessment/ABC)**
+A. Generalized hyperthermia
+B. Headache upon waking
+C. Decreased deep tendon reflexes (DTRs)
+D. Hypertension that is refractory to medication
+**Correct Answer: B.** Initial symptoms of a Medulloblastoma that indicate increased ICP tend to be a headache, especially when the child wakes up, and vomiting not related to feeding.
+
+**22. A 5-year-old with ALL is starting the maintenance phase of chemotherapy. Which intervention is the most critical to discuss with the parents regarding adherence and long-term prognosis? (Planning/Safety)**
+A. Ensure the child understands the importance of daily physical activity.
+B. Maintain strict adherence to the PO/IV chemotherapy regimen for two to three years.
+C. Monitor for signs of peripheral neuropathy caused by the weekly IV chemo.
+D. Complete nutritional supplementation to prevent growth suppression.
+**Correct Answer: B.** Maintenance therapy can continue for two to three years, and adherence below 95% increases the risk for relapse.
+
+**23. When teaching a parent about managing chemotherapy side effects, which strategy is most effective for preventing dehydration secondary to stomatitis (oral mucositis)? (Planning/Implementation/Safety)**
+A. Use a hard toothbrush three times daily to remove debris.
+B. Administering lidocaine mouthwash (BAX) to numb the mouth prior to meals.
+C. Encourage warm, spicy foods to stimulate appetite.
+D. Administering prophylactic antibiotics to prevent oral fungal infections.
+**Correct Answer: B.** Mucositis/stomatitis can be very painful, leading to dehydration and weight loss because they won't eat or drink. Using a numbing mouth rinse like BAX (Benadryl, Maalox, and Lidocaine) before meals addresses the pain and encourages intake.
+
+**24. A nurse is planning care for a hospitalized child in neutropenic isolation. Which intervention should be avoided to prevent exposure to microbes? (Planning/Safety)**
+A. Ensuring frequent handwashing
+B. Performing daily oral care with normal saline rinses
+C. Avoiding invasive procedures like intramuscular injections
+D. Using soft toothbrushes for oral hygiene
+**Correct Answer: C.** When a patient is neutropenic, the nurse must avoid invasive procedures because they increase the risk of exposure to microbes.
+
+**25. A child is scheduled for a bone marrow aspirate (BMA) and a lumbar puncture (LP) as part of a leukemia workup. The nurse understands that these diagnostic procedures are often performed simultaneously in the operating room (OR) for which reason? (Planning/Analysis)**
+A. To ensure precise measurement of tumor grade and stage.
+B. To monitor the child's response to the initial dose of chemotherapy.
+C. To reduce the trauma and stress associated with multiple invasive procedures.
+D. To immediately initiate TPN and lipids for nutritional support.
+**Correct Answer: C.** The BMA, LP, and Broviac line placement are often done while the child is under anesthesia to get all three done at once, thereby reducing trauma and stress.
+
+**26. Which finding indicates that a child with Acute Poststreptococcal Glomerulonephritis (APSGN) is experiencing the most serious complication of their renal disease? (Assessment/Safety/C)**
+A. Periorbital edema and decreased appetite
+B. Hypertension and signs of encephalopathy/seizures
+C. Dark, tea-colored urine (hematuria)
+D. Proteinuria and Azotemia
+**Correct Answer: B.** Hypertensive encephalopathy and seizures are major complications that occur during the hypertensive phase of APSGN. This represents a direct threat to the central nervous system (CNS).
+
+**27. A client is receiving high-dose radiation therapy to the pelvis for Ewing Sarcoma. The nurse teaches the parent that the most critical skin care instruction related to radiation burn is to: (Planning/Safety)**
+A. Apply over-the-counter hydrocortisone cream if redness occurs.
+B. Wash the affected area daily using only prescribed mild soap.
+C. Use a highly scented lotion to mask the odor of tissue damage.
+D. Expose the area to sunlight for short periods to promote vitamin D absorption.
+**Correct Answer: B.** For radiation therapy, skin care is essential, including daily washing with a mild soap and avoiding scented products or lotions unless prescribed by the oncologist.
+
+**28. A nurse is planning pre-procedural care for a 4-year-old scheduled for a port insertion. Which intervention aligns best with the child's developmental stage (preschooler)? (Planning/Implementation)**
+A. Tell the child about the procedure one day ahead of time to allow processing.
+B. Focus on concrete explanations using simple terms like "we're fixing your machine".
+C. Allow the child to handle equipment and use dolls to show where the bandage will go.
+D. Restrain the child immediately in the treatment room to ensure compliance.
+**Correct Answer: C.** For preschoolers, play (such as using dolls or letting them touch equipment) is therapeutic and helps them cope with procedures, which is preferable to immediate restraint.
+
+**29. The nurse reviews lab results for a child receiving chemotherapy who is experiencing gastrointestinal side effects. Which set of labs would MOST likely prompt the oncology team to postpone the next treatment cycle? (Assessment/Analysis/Safety)**
+A. BUN/Creatinine WNL and Bilirubin elevated
+B. Elevated Liver Enzymes (transaminases) and elevated Bilirubin
+C. Hemoglobin (Hgb) $10 \text{ g}/\text{dL}$ and Platelets $150,000/\text{mm}^3$
+D. $\text{ANC} > 1500 \text{ cells}/\text{mm}^3$ and $\text{WBC}$ high
+**Correct Answer: B.** Elevated liver enzymes (bilirubin and transaminases) may prompt a delay in the chemotherapy schedule to prevent further harm to the liver.
+
+**30. When reviewing the prognosis for pediatric cancers, the nurse understands that a child is considered "cured" when which criteria is met? (Analysis/Evaluation)**
+A. The tumor is fully debulked during surgery.
+B. The child achieves a remission induction phase.
+C. There is no evidence of disease for five years.
+D. The child completes the full two to three years of maintenance therapy.
+**Correct Answer: C.** A child is considered cured of cancer if there is no evidence of disease after five years.
+
+### Group 3: Respiratory Emergencies and Cystic Fibrosis (ADPIE, ABC, Safety)
+
+**31. An infant is admitted with Respiratory Syncytial Virus (RSV) bronchiolitis. The nurse notes the infant’s respiratory rate is 72 breaths/min and uses subcostal retractions. What is the priority intervention concerning nutrition? (Implementation/ABC/Safety)**
+A. Provide frequent small oral feeds to maintain hydration.
+B. Administer high-caloric formula via bottle immediately.
+C. Hold all oral feeds and notify the provider for potential IV/tube feeding.
+D. Monitor input and output (I/O) every 8 hours.
+**Correct Answer: C.** If an infant’s respiratory rate is greater than 60 breaths/min, feeds must be held due to the high risk of aspiration.
+
+**32. The nurse is assessing a child with suspected Acute Epiglottitis. Which clinical manifestation should immediately alert the nurse to potential acute airway obstruction and necessitate calling for assistance without intervening? (Assessment/ABC/Safety)**
+A. Barky, brassy cough that is worse at night
+B. Low-grade fever and inspiratory stridor
+C. Drooling and sitting in a tripod position
+D. Slowly progressive onset of symptoms
+**Correct Answer: C.** Epiglottitis is a medical emergency; drooling and the tripod position are signs of obstruction. **The nurse should avoid assessing the throat**.
+
+**33. A child is having a severe asthma exacerbation. The nurse notes the child was wheezing upon initial assessment, but now breath sounds are diminished and barely audible. The nurse recognizes this change as indicating which immediate danger? (Analysis/ABC/Safety)**
+A. The albuterol treatment is fully effective.
+B. The airway is closing due to severe obstruction/spasm.
+C. The child is successfully compensating for hypoxemia.
+D. The obstruction has moved into the upper airway.
+**Correct Answer: B.** Diminished or absent breath sounds in a child struggling to breathe, especially after wheezing, is a severe, non-reassuring sign indicating the airway is closing and warrants immediate intervention.
+
+**34. The nurse is teaching the parents of a child newly diagnosed with Cystic Fibrosis (CF) about nutritional management. Which dietary instruction is most appropriate for promoting growth? (Planning/Implementation)**
+A. Restrict fat intake to decrease steatorrhea.
+B. Focus on a high protein, high calorie, unrestricted fat diet.
+C. Limit breastfeeding, as formula provides more vitamins.
+D. Use tube feedings exclusively until the lungs improve.
+**Correct Answer: B.** CF treatment includes a diet that is high in protein and high in calories, with unrestricted fat, to combat malabsorption.
+
+**35. A 2-year-old child presents with a distinctive "barky, brassy cough" and inspiratory stridor, with symptoms worsening overnight. The nurse anticipates the diagnosis is Acute Laryngotracheobronchitis (LTB) (Croup). Which treatment should the nurse prepare to administer? (Implementation/ABC)**
+A. A non-humidified oxygen mask
+B. Racemic epinephrine via nebulizer
+C. Oral antipyretics only
+D. Aggressive chest physiotherapy (CPT)
+**Correct Answer: B.** Racemic epinephrine via nebulizer is a common treatment for LTB to help reduce subglottic edema.
+
+**36. A nurse is administering an inhaled corticosteroid to a 6-year-old patient with persistent asthma. To minimize the risk of oral thrush (yeast infection), the nurse emphasizes the importance of which safety measure? (Planning/Safety)**
+A. Administering the medication before bedtime
+B. Rinsing the mouth thoroughly after use
+C. Avoiding the use of a spacer device
+D. Increasing the daily fluid intake
+**Correct Answer: B.** Rinsing the mouth after using an inhaled corticosteroid is essential to decrease the risk of oral thrush.
+
+**37. The nurse is performing discharge teaching for a child with a Group A Beta Hemolytic Strep (GABHS) infection who has been prescribed oral penicillin. The most important teaching point to prevent serious complications like Rheumatic Fever is: (Planning/Safety)**
+A. Isolate the child from siblings for 7 days.
+B. Ensure the child completes the full 10-day course of antibiotics.
+C. Start the child on prophylactic steroids immediately.
+D. Monitor for signs of fluid overload and edema.
+**Correct Answer: B.** Completing the full 10-day course of penicillin is critical to eradicate GABHS and prevent complications like Rheumatic Fever or Glomerulonephritis.
+
+**38. A child with Cystic Fibrosis is receiving pancreatic enzyme replacement therapy (lipase). The nurse instructs the parents to administer this medication at which time relative to meals? (Planning/Implementation)**
+A. Every 8 hours, regardless of food intake
+B. 30 minutes after eating large meals
+C. Right before or with the first bite of meals and snacks
+D. Only if the child exhibits symptoms of steatorrhea
+**Correct Answer: C.** Oral pancreatic enzymes (lipase) should be given in capsules or sprinkled on food right before or with the first bite of meals and snacks.
+
+**39. In infants, which respiratory assessment finding is considered a progression of respiratory distress, indicating increasing exhaustion and requiring prompt intervention? (Assessment/ABC)**
+A. Irregular breathing patterns during sleep
+B. Nasal flaring
+C. Grunting
+D. Head bobbing
+**Correct Answer: D.** Head bobbing occurs when the infant bobs their head forward on inspiration, signifying dyspnea and progressing respiratory distress due to exhaustion.
+
+**40. A child is admitted to the hospital with Otitis Media. The parents smoke cigarettes at home. The nurse recognizes that secondhand smoke increases the risk of this infection due to its effect on which physiological process? (Analysis/Planning)**
+A. Decreased ability to clear mucus (mucociliary clearance)
+B. Causing obstruction of the Eustachian tubes
+C. Increasing the viscosity of middle ear secretions
+D. Promoting fluid retention in the pharynx
+**Correct Answer: B.** Otitis Media is associated with secondhand smoke, which contributes to the obstruction of the Eustachian tubes, leading to fluid accumulation and inflammation in the middle ear.
+
+**41. The nurse is monitoring a 9-year-old with asthma using a peak flow meter. The child measures in the "Red Zone" on the individualized Asthma Action Plan. What is the priority nursing action? (Implementation/ABC/Safety)**
+A. Call the doctor immediately, as the medication is not helping.
+B. Switch to a long-acting controller medication.
+C. Administer an antitussive for the severe coughing.
+D. Document the reading and continue the current controller medicine.
+**Correct Answer: A.** The red zone on the peak flow meter indicates that the medication is not helping, or severe symptoms are present, and the child needs immediate medical attention; the nurse must call the doctor.
+
+**42. A child with Cystic Fibrosis develops hemoptysis (coughing up blood) due to progressive lung damage. The nurse understands this complication is primarily related to which underlying pulmonary issue? (Analysis/ABC)**
+A. Increased oxygen saturation
+B. Rectal prolapse
+C. Pulmonary hypertension
+D. Hyponatremia
+**Correct Answer: C.** Complications related to the thick mucus obstruction in the lungs include compression on the pulmonary vessels, leading to pulmonary hypertension.
+
+**43. A child is undergoing a tonsillectomy. Postoperatively, the priority assessment to monitor for potential bleeding is: (Assessment/ABC/Safety)**
+A. Complaints of severe throat pain
+B. Frequent swallowing
+C. Low-grade fever
+D. Decreased oral intake
+**Correct Answer: B.** Frequent swallowing is a critical sign of potential bleeding (hemorrhage) because blood may be dripping down the back of the throat.
+
+**44. A patient is prescribed albuterol (a Beta-adrenergic) as a rescue medication for acute asthma exacerbations. Which side effect is common and should be included in patient education? (Planning/Analysis)**
+A. Drowsiness and fatigue
+B. Hypotension and bradycardia
+C. Irritability, nervousness, and tremors
+D. Decreased need for fluid intake
+**Correct Answer: C.** Common side effects of the Beta-adrenergic agent albuterol include irritability, nervousness, and tremors (shakiness).
+
+### Group 4: Cardiovascular and Fluid Priority (ADPIE, ABC, Safety)
+
+**45. A 4-month-old infant is admitted with suspected heart failure (HF). Which clinical manifestation is often the earliest and most recognizable sign of impaired myocardial function in an infant? (Assessment/ABC/C)**
+A. Bradycardia
+B. Hepatomegaly
+C. Tachycardia, even at rest
+D. Cool extremities with bounding pulses
+**Correct Answer: C.** **Tachycardia** is recognized as the earliest cardinal sign of impaired myocardial function and heart failure in infants, sometimes observed as a heart rate above 160 even during sleep.
+
+**46. The nurse is caring for an infant receiving Digoxin for improved cardiac contractility. Before administering the dose, the nurse checks the apical pulse and finds it to be 85 beats/minute. What is the priority nursing action? (Implementation/Safety/C)**
+A. Administer the Digoxin as prescribed.
+B. Hold the dose and notify the provider.
+C. Administer half the dose and recheck the pulse.
+D. Check peripheral pulses and capillary refill.
+**Correct Answer: B.** For infants and young children, Digoxin should generally be held if the apical pulse is below 90-110 beats/minute. Since 85 beats/minute is below this standard range, holding the dose is the safest action.
+
+**47. A child with heart failure is prescribed an Angiotensin-Converting Enzyme (ACE) inhibitor (Enalapril). The primary goal of administering this medication is to achieve which hemodynamic effect? (Analysis/Planning/C)**
+A. Increase preload to enhance ventricular filling.
+B. Reduce afterload by promoting systemic vasodilation.
+C. Decrease systemic vascular resistance by promoting water retention.
+D. Increase myocardial contractility.
+**Correct Answer: B.** ACE inhibitors work as vasodilators, which reduce the systemic vascular resistance (SVR) or afterload, thereby decreasing the workload of the heart.
+
+**48. A nurse is caring for a 5-month-old infant with a Congenital Heart Defect (CHD) who is showing signs of pulmonary congestion. The plan of care includes semi-Fowler positioning (head of bed elevated) primarily to address which ABC priority? (Implementation/ABC/B)**
+A. Promote uninterrupted sleep.
+B. Decrease the work of breathing.
+C. Decrease cardiac demands.
+D. Reduce the risk of aspiration during feeding.
+**Correct Answer: B.** Positioning the child in semi-Fowler’s position helps decrease the work of breathing, allowing the chest to expand better, which is a priority for pulmonary congestion.
+
+**49. A 7-year-old patient who underwent open heart surgery is prescribed Lasix (a loop diuretic) and Aldactone (a potassium-sparing diuretic). The nurse knows that combining a potassium-wasting and a potassium-sparing diuretic is intended to help prevent which electrolyte imbalance? (Planning/Safety/C)**
+A. Hypernatremia
+B. Hyperglycemia
+C. Hypokalemia
+D. Hypercalcemia
+**Correct Answer: C.** Loop diuretics like Lasix cause potassium loss, risking hypokalemia. Aldactone spares potassium, helping to balance the potassium lost, thus preventing hypokalemia.
+
+**50. The nurse is assessing a newborn diagnosed with Coarctation of the Aorta (CoA). Which assessment finding is the most critical indicator of the obstructive nature of this defect? (Assessment/ABC/C)**
+A. Heart rate greater than 160 beats/minute
+B. Blood pressure higher in the arms than the legs
+C. Frequent, small volume vomiting
+D. Strong femoral pulses compared to brachial pulses
+**Correct Answer: B.** CoA is an obstructive defect characterized by increased pressure proximal to the defect (upper extremities) and decreased pressure distal to the defect (lower extremities), resulting in hypertension (BP in arms > BP in legs) and decreased femoral pulses.
+
+**51. A child is experiencing a Tet Spell (hypercyanotic episode) associated with Tetralogy of Fallot. What is the immediate priority nursing intervention to increase pulmonary blood flow? (Implementation/ABC/C)**
+A. Administer a large intravenous fluid bolus.
+B. Place the child in a knee-to-chest position.
+C. Encourage the child to push down as if having a bowel movement.
+D. Prepare for immediate cardiac catheterization.
+**Correct Answer: B.** Placing the child in a knee-to-chest position increases systemic vascular resistance, helping to shunt blood from the left side to the right side, forcing more blood to the lungs for oxygenation.
+
+**52. A 10-year-old patient diagnosed with Rheumatic Fever is experiencing pain and fever. The nurse notes the prescription includes a salicylate (aspirin). The nurse understands the primary therapeutic effect of aspirin in this condition is to: (Analysis/Planning)**
+A. Eradicate the Group A Beta Hemolytic Strep (GABHS) infection.
+B. Treat the involuntary movements (Sydenham Chorea).
+C. Decrease fever and control inflammation in the joints.
+D. Prevent permanent mitral valve damage.
+**Correct Answer: C.** Salicylates (Aspirin) are used in Rheumatic Fever to decrease fever and control the inflammatory process in the joints.
+
+**53. The nurse is caring for an infant who must consume 30 $\text{kcal}/\text{oz}$ formula due to high metabolic demand from a CHD. The nurse teaches the parents that the increased caloric density is necessary primarily to: (Planning/Analysis)**
+A. Decrease the risk of pulmonary congestion.
+B. Reduce the frequency of feedings needed throughout the day.
+C. Meet the metabolic demands of growth despite heart impairment.
+D. Decrease the risk of fluid volume overload.
+**Correct Answer: C.** Infants with heart failure have high metabolic demands due to growth and illness. High-caloric density formula (e.g., 24-30 $\text{kcal}/\text{oz}$) is needed to meet nutritional demands and promote growth.
+
+**54. A child is admitted with Kawasaki’s Disease. The nurse recognizes that the most common and serious long-term sequelae affecting the cardiovascular system is: (Assessment/Analysis/C)**
+A. Right-sided heart failure
+B. Pulmonary artery hypertension
+C. Damage to the coronary arteries
+D. Mitral valve regurgitation
+**Correct Answer: C.** Kawasaki's disease is the leading cause of acquired heart disease in children, and damage to the coronary arteries is the most common sequelae.
+
+**55. A child is recovering from a cardiac catheterization performed via the femoral site. What is the priority nursing assessment immediately post-procedure? (Assessment/ABC/Safety)**
+A. Assess blood pressure in all four extremities.
+B. Monitor the groin site for signs of bleeding or hematoma formation.
+C. Check for signs of pulmonary congestion and edema.
+D. Encourage ambulation to prevent deep vein thrombosis.
+**Correct Answer: B.** After a cardiac catheterization, the nurse must watch the site (groin) for bleeding and monitor circulation, sensation, and movement (CSM). Bleeding/hemorrhage is an immediate ABC concern (Circulation).
+
+**56. A patient with Pulmonary Arterial Hypertension (PAH) is experiencing increased resistance in the pulmonary bed. The nurse anticipates that a prolonged Left-to-Right shunt defect (e.g., VSD) can eventually lead to which dangerous circulatory reversal? (Analysis/ABC/C)**
+A. Hypovolemic shock
+B. Hypercyanotic (Tet) spell
+C. Right-to-Left shunting
+D. Severe systemic hypotension
+**Correct Answer: C.** Prolonged Left-to-Right shunting increases pulmonary pressures. When pulmonary pressures become higher than systemic pressures, the shunt will reverse to a Right-to-Left shunt, sending unoxygenated blood to the body.
+
+**57. A child with heart failure is prescribed an ACE inhibitor (Enalapril) and a potassium-sparing diuretic (Aldactone). The nurse identifies that this medication combination puts the child at risk for which primary electrolyte imbalance? (Assessment/Safety/C)**
+A. Hypokalemia
+B. Hypernatremia
+C. Hyperkalemia
+D. Hyponatremia
+**Correct Answer: C.** ACE inhibitors cause potassium retention, and Aldactone spares potassium. This combination increases the risk for hyperkalemia.
+
+**58. A nurse is educating the family of an infant with heart failure about decreasing cardiac demands. Which environmental change should the nurse prioritize to achieve this goal? (Planning/Implementation/C)**
+A. Encourage vigorous activity to strengthen the heart muscle.
+B. Avoid cold stress by maintaining a thermo-neutral environment.
+C. Ensure the infant wears extra layers of blankets.
+D. Stimulate the infant frequently to prevent lethargy.
+**Correct Answer: B.** Avoiding cold stress is essential because cold stress increases oxygen demand, which in turn increases the demand on the heart.
+
+### Group 5: GI, Renal, and Fluid & Electrolytes (ADPIE, ABC, Safety)
+
+**59. A 6-month-old infant is admitted with severe gastroenteritis leading to dehydration. The physician orders an IV fluid bolus followed by maintenance IV fluids with potassium. The nurse recognizes that potassium should NOT be added to the IV fluid until which critical physiological finding is confirmed? (Implementation/Safety)**
+A. The diarrhea has stopped.
+B. The infant is voiding adequately.
+C. Capillary refill is less than two seconds.
+D. The infant’s blood pressure stabilizes.
+**Correct Answer: B.** Potassium must not be added to IV fluids until the child is voiding, as administering potassium to an anuric or oliguric patient can lead to hyperkalemia.
+
+**60. A child presents to the emergency department with a history of diarrhea and is lethargic, hypotensive, and has a capillary refill time of 5 seconds. The nurse suspects severe Hypertonic Dehydration. This type of dehydration is most dangerous because it causes fluid to shift in which direction? (Analysis/ABC/Safety)**
+A. Fluid shifts equally out of the vascular and interstitial spaces.
+B. Fluid shifts from the intracellular space (ICF) into the extracellular space (ECF).
+C. Fluid shifts from the vascular space into the interstitial space.
+D. Fluid shifts from the vascular space into the cells.
+**Correct Answer: B.** Hypertonic dehydration (water loss > electrolyte loss) results in higher blood vessel electrolytes, causing fluid to pull from inside the cell (ICF) to the extracellular space (ECF) to correct the osmolarity, leading to cellular damage.
+
+**61. A nurse is calculating the minimum acceptable urine output for a hospitalized 15 $\text{kg}$ pediatric patient. What is the standard minimum hourly urine output required for this child? (Assessment/Analysis)**
+A. $10 \text{ mL}/\text{hour}$
+B. $15 \text{ mL}/\text{hour}$
+C. $30 \text{ mL}/\text{hour}$
+D. $45 \text{ mL}/\text{hour}$
+**Correct Answer: B.** The standard minimum urine output for a pediatric patient is $1 \text{ cc}/\text{kg}/\text{hour}$, so $1 \times 15 \text{ kg} = 15 \text{ mL}/\text{hour}$.
+
+**62. A 4-month-old infant is diagnosed with Pyloric Stenosis. The nurse anticipates a priority finding during assessment is: (Assessment)**
+A. Bloody, mucousy diarrhea
+B. Non-bilious, projectile vomiting
+C. Sausage-shaped abdominal mass
+D. Bilious vomiting indicative of obstruction
+**Correct Answer: B.** Pyloric stenosis is characterized by non-bilious, projectile vomiting, often recognized between 3 weeks and 5 months.
+
+**63. A patient has been admitted with Hemolytic Uremic Syndrome (HUS), often caused by Shiga toxin-producing E. coli. The nurse recognizes the triad of manifestations that define this condition includes: (Assessment/Analysis)**
+A. Hematuria, hypertension, and fluid overload
+B. Acute renal failure, hemolytic anemia, and thrombocytopenia
+C. Hypotonia, lethargy, and cataracts
+D. Hyperglycemia, polyuria, and polydipsia
+**Correct Answer: B.** HUS is characterized by a triad of manifestations: acute renal failure, hemolytic anemia, and thrombocytopenia.
+
+**64. A nurse is planning dietary management for a child diagnosed with Phenylketonuria (PKU). The most critical, lifelong intervention for this child is: (Planning/Implementation)**
+A. Eliminating all milk products, including breast milk.
+B. Restricting dietary protein intake.
+C. Using a ketogenic diet (high fat, low carbohydrate).
+D. Ensuring fat-soluble vitamin supplementation.
+**Correct Answer: B.** PKU requires the lifelong restriction of dietary protein to manage phenylalanine levels.
+
+**65. A child is diagnosed with Nephrotic Syndrome and is in the edema phase. The nurse monitors for generalized edema (anasarca) resulting from which pathophysiological mechanism? (Analysis/C)**
+A. Increased hydrostatic pressure forcing fluid out of the vessels.
+B. Massive protein loss decreasing oncotic pressure.
+C. Renal failure leading to decreased Glomerular Filtration Rate (GFR).
+D. Increased sodium intake causing water retention.
+**Correct Answer: B.** In Nephrotic Syndrome, massive protein loss leads to decreased oncotic pressure, causing fluid to shift from the vascular space into the interstitial space and body cavities (edema/anasarca).
+
+**66. A child is diagnosed with Hirschsprung's Disease. A key diagnostic assessment tool used to confirm the absence of ganglion cells in the distal colon is the: (Assessment/Diagnosis)**
+A. Sweat Chloride test
+B. Barium Enema (Lower GI Series)
+C. Rectal biopsy
+D. Abdominal ultrasound/CT
+**Correct Answer: C.** The diagnostic tool used to confirm Hirschsprung’s disease is a rectal biopsy, which identifies the absence of ganglion cells.
+
+**67. A nurse is teaching parents about preventing urinary tract infections (UTIs) in their 5-year-old daughter. Which teaching point is the most important regarding hygiene? (Planning/Safety)**
+A. Encourage frequent bubble baths.
+B. Use perfumed soaps for cleansing the perineal area.
+C. Ensure she wipes from front to back after toileting.
+D. Encourage holding urine to stretch the bladder.
+**Correct Answer: C.** Teaching proper hygiene, specifically wiping front to back in girls, is crucial because the primary pathogen for UTIs is E. coli from the gut.
+
+**68. A 10-month-old infant is admitted with mild isotonic dehydration. The most appropriate initial treatment for this severity level is typically: (Implementation/C)**
+A. IV bolus of D5 ½ NS
+B. IV bolus of Normal Saline (NS)
+C. Oral rehydration solution (e.g., Pedialyte)
+D. Total Parenteral Nutrition (TPN)
+**Correct Answer: C.** For mild dehydration (3-5\% weight loss), oral rehydration solution (e.g., Pedialyte) is the initial treatment.
+
+### Group 6: Neurological and Developmental Safety (ADPIE, ABC, Safety)
+
+**69. A child with a history of epilepsy begins actively seizing in the hospital room. After noting the time and duration, what is the nurse's priority action regarding immediate safety and ABCs? (Implementation/ABC/Safety)**
+A. Gently insert a tongue depressor to prevent tongue biting.
+B. Administer a long-acting maintenance medication (e.g., Phenytoin).
+C. Ensure the side rails are padded and place the child on their side.
+D. Attempt to restrain the child's extremities to prevent injury.
+**Correct Answer: C.** Seizure precautions involve padding rails, ensuring oxygen/suction are available, and positioning the child on their side to manage secretions and prevent aspiration.
+
+**70. The nurse is caring for a 6-month-old infant with hydrocephalus who has an unclosed anterior fontanel. Which assessment finding is a critical sign of increased intracranial pressure (ICP)? (Assessment/ABC/Safety)**
+A. Sunken fontanel
+B. Head lag upon lifting
+C. Bulging fontanel
+D. Posterior fontanel pulsation
+**Correct Answer: C.** In infants whose fontanelles are not fused, increased ICP or hydrocephalus is evidenced by a bulging fontanel.
+
+**71. A nurse is reinforcing education regarding long-term home care for a toddler diagnosed with Spina Bifida and a neurogenic bladder. The priority instruction regarding urinary management is: (Planning/Implementation/Safety)**
+A. Encourage holding urine to stretch the bladder.
+B. Perform intermittent catheterization every four hours.
+C. Avoid all fluids to decrease urinary frequency.
+D. Administer daily antibiotics prophylactically for life.
+**Correct Answer: B.** Due to neurogenic bladder dysfunction common with Myelomeningocele, patients often require intermittent catheterization approximately every four hours while awake and once at night to manage incontinence and retention.
+
+**72. A child with Down Syndrome is scheduled to participate in the Special Olympics. Before participation, the nurse emphasizes the mandatory need for screening related to which specific orthopedic risk? (Planning/Safety)**
+A. Scoliosis
+B. Atlantoaxial Instability (AAI)
+C. Transverse palmar crease defects
+D. Hypotonicity of the extremities
+**Correct Answer: B.** Children with Down Syndrome are at risk for Atlantoaxial Instability (AAI), a type of spinal cord compression, and must be screened (usually by X-ray) before high-risk activities like the Special Olympics.
+
+**73. A toddler in the hospital is demonstrating severe separation anxiety and has entered the phase of Despair. The nurse observes which behavior characteristic of this phase? (Assessment/Analysis)**
+A. Screaming aggressively and resisting strangers
+B. Appearing happy and interacting freely with staff
+C. Becoming withdrawn, inactive, and possibly regressing (e.g., thumb sucking)
+D. Showing interest in surrounding toys and games
+**Correct Answer: C.** The despair phase of separation anxiety involves the child becoming inactive, withdrawn, not communicating, and possibly regressing.
+
+**74. The nurse is teaching the parent of a 9-year-old (school-age) about pain management after a minor surgical procedure. Which teaching point is most appropriate for this developmental stage? (Planning/Implementation)**
+A. They are literal thinkers, so avoid telling them a shot will hurt.
+B. Pain medication should be held until behavioral signs of pain are obvious.
+C. Allowing them to use the Numeric Pain Scale for self-reporting pain is most accurate.
+D. Distraction using toys is ineffective for this age group.
+**Correct Answer: C.** School-age children are generally capable of self-reporting pain using rating scales, and the numeric pain scale is typically used for children 8 years and older.
+
+**75. A 2-year-old child (toddler) is exhibiting negative and non-compliant behavior regarding treatments. To promote a sense of autonomy and cooperation, what is the best nursing approach? (Implementation)**
+A. Immediately perform the treatment using firm restraint to establish control.
+B. Offer a choice between performing the treatment now or after breakfast.
+C. Explain the full rationale for the treatment in complex scientific terms.
+D. Ignore the child's distress and focus only on the parent.
+**Correct Answer: B.** Offering choices, such as timing of a procedure, helps toddlers gain a sense of control (autonomy vs. shame and doubt) and often leads to compliance.
+
+**76. A child is admitted to the hospital after a near-drowning incident (submersion injury). The nurse understands that the most critical factor dictating the child’s prognosis and treatment plan is: (Analysis/ABC/Safety)**
+A. The amount and type of fluid aspirated.
+B. The progression of hypothermia.
+C. The length of submersion causing irreversible neurological damage.
+D. The progression to metabolic acidosis.
+**Correct Answer: C.** Irreversible neurological damage occurs within four to six minutes of submersion, making the length of submersion the critical factor dictating the treatment plan.
+
+**77. A nurse is planning safety measures for a child recently discharged home who has a history of seizures. What is the most critical instruction regarding bathing? (Planning/Safety)**
+A. They must take baths only, not showers.
+B. Showers are safe, but they must use a waterproof phone.
+C. They must shower instead of taking a bath to prevent drowning.
+D. They must only bathe when a family member is in the next room.
+**Correct Answer: C.** At home, children with seizures should shower and not bathe to prevent drowning if a seizure were to occur in the bathtub.
+
+**78. When assessing an infant for potential growth problems, the nurse compares the weight against the birth weight. The nurse expects a normal, healthy infant's birth weight to have achieved which milestone by 12 months of age? (Assessment/Analysis)**
+A. Doubled
+B. Tripled
+C. Quadrupled
+D. Remain unchanged
+**Correct Answer: B.** A normal, healthy infant's birth weight should have tripled by one year of age.
+
+**79. A nurse is educating the parents of a toddler about anticipatory guidance for toilet training. Which milestone is typically achieved first? (Planning/Analysis)**
+A. Day dryness
+B. Night dryness
+C. Bowel control
+D. Verbal communication of the need to go
+**Correct Answer: C.** Children are typically able to achieve bowel control before they achieve urine control (day or night dryness).
+
+**80. Which finding during a pediatric neuro assessment is considered a **normal** response in a 1-year-old child? (Assessment/Analysis)**
+A. Irregular abdominal breathing patterns
+B. Positive Babinski reflex
+C. Absence of the rooting reflex
+D. All of the above
+**Correct Answer: D.** Irregular abdominal breathing is normal in infants/toddlers up to age 4. The Babinski reflex is normally gone between age 1 and 2. The rooting reflex is normally gone between 3 and 4 months. Since the child is 1 year old, they could potentially display the first two normally, and the absence of the rooting reflex is also normal for this age. Therefore, *All of the above* is the most comprehensive correct answer demonstrating the understanding of normal findings for this age group.
+
+//MedSurg Begin
+
+### Group 1: Cardiovascular Disorders and Heart Failure (10 Questions)
+
+**1. A nurse is planning care for a client newly diagnosed with chronic heart failure (CHF). The nurse recognizes that the primary goal of pharmacological therapy is to decrease the workload on the heart by primarily targeting which physiological measurement? (Planning/Analysis/C)**
+A. Increasing contractility by raising the ejection fraction (EF) to $85\%$.
+B. Reducing preload and afterload.
+C. Stimulating the Sympathetic Nervous System (SNS).
+D. Increasing the venous return to the right side of the heart.
+**Correct Answer: B.** ACE inhibitors, the flagship agents for heart failure management, decrease both preload (by enhancing $\text{Na}^{+}$ and water excretion) and afterload (by dilating arteries).
+
+**2. A client with severe heart failure suddenly reports increased shortness of breath (SOB) and is visibly anxious. The nurse notes new crackles (rales) upon auscultation of the lung fields. These findings are characteristic of which type of heart failure? (Assessment/Analysis/B)**
+A. Systolic dysfunction with low ejection fraction (EF).
+B. Left-sided heart failure (backward failure),.
+C. Right-sided heart failure (systemic congestion),.
+D. Mixed cardiomyopathy with decreased contractility.
+**Correct Answer: B.** Left-sided heart failure causes blood to back up into the pulmonary circulation, forcing fluid into the lungs, leading to pulmonary congestion (crackles/rales) and dyspnea,.
+
+**3. The nurse is monitoring a client admitted with acute decompensated heart failure (ADHF). The client's lab results show a Brain Natriuretic Peptide (BNP) level of $850 \text{ pg}/\text{mL}$. The nurse understands that this value is significant for which reason? (Assessment/Analysis/C)**
+A. It indicates end-stage (Stage D) heart failure.
+B. It rules out a non-cardiac cause for the patient's dyspnea.
+C. It confirms increased ventricle filling and stretching, strongly suggesting heart failure.
+D. It is used to monitor potassium levels that could cause arrhythmias.
+**Correct Answer: C.** BNP is released from the ventricles when there is increased filling or stretching, making it a great lab tool to see if someone is in heart failure. A BNP above $500 \text{ pg}/\text{mL}$ is generally concerning.
+
+**4. A client with chronic heart failure is receiving Furosemide (Lasix) $40 \text{ mg}$ IV. The nurse understands that the primary physiological mechanism by which this diuretic improves heart failure symptoms is by: (Analysis/Implementation)**
+A. Blocking aldosterone in the renal tubules.
+B. Increasing afterload to improve systemic pressure.
+C. Decreasing preload by eliminating volume,.
+D. Stimulating the release of ADH to retain water.
+**Correct Answer: C.** Diuretics decrease preload by reducing volume, thus decreasing the work of the failing heart, which is the number one intervention for acutely ill heart failure patients,.
+
+**5. A nurse administers Digoxin ($0.25 \text{ mg}$ PO) to a client with systolic heart failure. Before administration, the nurse takes the apical pulse and finds it to be 58 beats/minute. What is the priority nursing action? (Implementation/Safety/C)**
+A. Administer the medication and document the heart rate.
+B. Administer the dose and anticipate giving an antidote.
+C. Hold the dose and notify the provider of potential bradycardia.
+D. Re-check the heart rate in 30 minutes to confirm the finding.
+**Correct Answer: C.** Digoxin can cause bradycardia. The nurse should check the apical pulse for a full minute before giving the medication and hold it if the heart rate is below 60 beats/minute, unless otherwise directed by the physician's parameters,.
+
+**6. A client taking an ACE inhibitor (Lisinopril) for heart failure reports a persistent, dry, hacking cough. The nurse anticipates the provider will likely switch the client to which medication class? (Planning/Analysis/Safety)**
+A. Beta blocker, such as Metoprolol.
+B. Calcium channel blocker, such as Diltiazem.
+C. Angiotensin II Receptor Blocker (ARB), such as Losartan,.
+D. Loop diuretic, such as Bumetanide (Bumex).
+**Correct Answer: C.** A persistent cough is a known adverse effect of ACE inhibitors. If the patient cannot tolerate the ACE inhibitor due to cough or angioedema, they are typically switched to an ARB,,.
+
+**7. A nurse is conducting discharge teaching for a client with heart failure. Which instruction regarding self-monitoring is the most critical indicator of fluid retention and requires immediate notification of the provider? (Planning/Safety)**
+A. Experiencing increased fatigue after walking 10 minutes.
+B. Gaining 3 pounds or more over a short period.
+C. Feeling anxious or restless upon waking.
+D. Reporting increased frequency of urination at night.
+**Correct Answer: B.** Daily weight monitoring is essential, and a weight gain of three pounds or more may indicate an exacerbation of heart failure due to fluid retention, requiring a call to the doctor,,.
+
+**8. A client is receiving a Beta Blocker for heart failure. The nurse should be most concerned if the client has a concurrent history of which condition? (Assessment/Safety/B)**
+A. History of smoking within the last year.
+B. Bronchospastic disease, such as asthma,.
+C. Hypernatremia.
+D. Systolic blood pressure of $110/70 \text{ mm Hg}$.
+**Correct Answer: B.** Beta blockers can cause bronchospasms and are thus contraindicated in patients with bronchospastic diseases like asthma,.
+
+**9. The nurse recognizes that the negative compensatory mechanism of the Renin-Angiotensin-Aldosterone System (RAAS) in heart failure ultimately leads to further decompensation because it causes: (Analysis/C)**
+A. Vasoconstriction and release of $\text{ADH}$, reducing preload.
+B. Release of catecholamines, decreasing myocardial oxygen demand.
+C. Retention of sodium and water, increasing volume load on a failing pump,.
+D. Inhibition of ACE, leading to decreased systemic vascular resistance.
+**Correct Answer: C.** RAAS causes the release of aldosterone, which causes the body to reabsorb $\text{Na}^{+}$ and water. This increased volume is sent to a pump that is already struggling, leading to further deterioration,.
+
+**10. When administering a calcium channel blocker to a client with diastolic heart failure, the nurse must prioritize continuous monitoring for which potential adverse effect, related to the drug's mechanism? (Implementation/Safety/C)**
+A. Hypokalemia.
+B. Bradycardia or hypotension,.
+C. Increased serum potassium (Hyperkalemia).
+D. Sudden onset of a dry, persistent cough.
+**Correct Answer: B.** Calcium channel blockers or vasodilators are used to treat diastolic failure. Nursing considerations for vasodilators include checking blood pressure and heart rate prior to administration due to the risk of hypotension and tachycardia,,.
+
+***
+
+### Group 2: Fluid and Electrolyte Imbalances and Safety (15 Questions)
+
+**11. A client is admitted with severe volume depletion. The nurse assesses the client and anticipates finding which cardiovascular sign indicating hypovolemia? (Assessment/ABC/C)**
+A. Hypertension and bounding pulses.
+B. Jugular venous pressure (JVP) elevation.
+C. Tachycardia and thready pulse.
+D. Clear lung sounds with orthopnea,.
+**Correct Answer: C.** Clinical manifestations of volume depletion include tachycardia, a thready pulse, and orthostatic hypotension,.
+
+**12. A client is diagnosed with hypernatremia ($\text{Na}^{+} > 145 \text{ mEq}/\text{L}$). The nurse understands that this electrolyte imbalance causes which dangerous fluid shift? (Analysis/Safety)**
+A. Water moves from the extracellular fluid (ECF) into the intracellular fluid (ICF), risking cerebral edema,.
+B. Water moves from the intracellular fluid (ICF) into the extracellular fluid (ECF), causing cells to shrink,.
+C. Fluid shifts from the plasma into the interstitial space due to low oncotic pressure.
+D. Fluid shifts into the third space (transcellular fluid),.
+**Correct Answer: B.** Hypernatremia pulls water from the ICF into the ECF, resulting in cellular shrinkage,.
+
+**13. The nurse is administering hypotonic intravenous fluids to a client with hypernatremia. Which safety measure must the nurse prioritize while infusing these fluids? (Implementation/Safety)**
+A. Monitoring for hyperreflexia and twitching,.
+B. Infusing the fluids slowly to prevent cellular rupture.
+C. Administering an osmotic diuretic to promote excretion.
+D. Placing the client in Trendelenburg position.
+**Correct Answer: B.** Hypotonic fluids (like $\text{D}5\text{W}$ or $\text{half } \text{NS}$) are used to treat hypernatremia. The nurse must infuse these fluids slowly to prevent the cells, particularly brain cells, from rupturing due to rapid fluid shifts.
+
+**14. A client diagnosed with Syndrome of Inappropriate Anti-diuretic Hormone (SIADH) is receiving $3\%$ hypertonic saline. The nurse should be highly concerned about which complication related to this treatment? (Assessment/Safety)**
+A. Hypotension and hypokalemia.
+B. Fluid volume deficit and orthostatic hypotension.
+C. Rapid shift correction leading to central pontine myelinolysis,.
+D. Increased urine output and decreased urine specific gravity.
+**Correct Answer: C.** Hypertonic saline (like $3\% \text{ or } 5\% \text{ sodium chloride}$) is used to treat severe hyponatremia associated with SIADH,,. However, it must be administered slowly (not to exceed $50 \text{ mL}/\text{hr}$) to avoid rapid sodium correction and potential damage,.
+
+**15. A client's lab results show a potassium level of $6.2 \text{ mEq}/\text{L}$. The nurse recognizes the client is hyperkalemic and anticipates administering which medication to stabilize the cardiac cell membranes immediately? (Implementation/Safety/C)**
+A. Kayexalate (sodium polystyrene sulfonate).
+B. IV Insulin followed by IV $\text{D}50$.
+C. Calcium Gluconate intravenously,.
+D. Loop diuretics like Furosemide.
+**Correct Answer: C.** For hyperkalemia, Calcium Gluconate is administered intravenously to stabilize the cardiac tissue and protect the heart from severe or sudden cardiac injury,.
+
+**16. A client receiving Digoxin is noted to have a serum potassium level of $3.0 \text{ mEq}/\text{L}$. The nurse understands this places the client at increased risk for which condition? (Analysis/Safety/C)**
+A. Hyperkalemia.
+B. Hyponatremia.
+C. Increased Digoxin toxicity,,.
+D. Respiratory acidosis.
+**Correct Answer: C.** Hypokalemia (low $\text{K}^{+}$) potentiates Digoxin toxicity, meaning it increases the risk of the client experiencing toxic effects from the drug,,.
+
+**17. The nurse is preparing to administer an intravenous potassium chloride ($\text{KCl}$) replacement. Which safety precaution is essential regarding the method of administration? (Implementation/Safety/C)**
+A. Administer the $\text{KCl}$ IV push to achieve rapid results.
+B. Administer $\text{KCl}$ replacement only through a central line, regardless of concentration,.
+C. Ensure the $\text{KCl}$ solution is highly diluted and infused slowly via pump,.
+D. Give the $\text{KCl}$ replacement concurrently with Normal Saline to increase fluid volume.
+**Correct Answer: C.** IV Potassium is a highly irritating substance. When administering, it must be diluted and given slowly. Replacement bags are typically diluted (e.g., $10 \text{ mEq}$ in $100 \text{ mL } \text{NS}$),.
+
+**18. A client is admitted with hypermagnesemia ($\text{Mg}^{++} > 2.6 \text{ mEq}/\text{L}$). The nurse's highest priority assessment focuses on monitoring the client for which sign of toxicity? (Assessment/ABC/B)**
+A. Increased deep tendon reflexes (DTRs).
+B. Respiratory depression,,.
+C. Hypotension and flushing,.
+D. Muscle cramps and tetany.
+**Correct Answer: B.** Magnesium has a sedating effect on the neuromuscular junction. Respiratory depression and eventual respiratory arrest are the most fatal complications of hypermagnesemia, occurring at serum levels greater than $10 \text{ mEq}/\text{L}$,.
+
+**19. A client has a serum magnesium level of $1.5 \text{ mEq}/\text{L}$ (Hypomagnesemia). Which neurological manifestation should the nurse anticipate assessing? (Assessment/Safety)**
+A. Hyporeflexia.
+B. Lethargy and coma.
+C. Hyperactive deep tendon reflexes (DTRs) and possible seizures,.
+D. Slurred speech and confusion (late signs).
+**Correct Answer: C.** Hypomagnesemia signs include over-excitable muscles, manifesting as hyperactive DTRs, muscle spasms, tetany, and potential seizures,,.
+
+**20. A patient with Nephrotic Syndrome is experiencing widespread edema (anasarca). The nurse understands this fluid shift is caused by: (Analysis/C)**
+A. Increased hydrostatic pressure in the venous system,.
+B. Decreased plasma oncotic pressure due to protein loss.
+C. Increased ADH release causing water retention.
+D. Fluid shifting from the plasma into the cells.
+**Correct Answer: B.** Decreased plasma oncotic pressure (pressure exerted by proteins) happens when plasma protein levels are low (e.g., excessive loss in the renal system), causing fluid to be trapped in the interstitium (edema).
+
+**21. A client with fluid volume excess is receiving a loop diuretic (Furosemide). Which laboratory value is the priority for the nurse to monitor closely? (Assessment/Safety)**
+A. Serum Sodium ($\text{Na}^{+}$).
+B. Serum Creatinine.
+C. Serum Potassium ($\text{K}^{+}$).
+D. Blood Urea Nitrogen (BUN).
+**Correct Answer: C.** Loop diuretics (e.g., Furosemide) are potassium-wasting medications, making the client susceptible to hypokalemia,.
+
+**22. A client requires IV infusion of Calcium Gluconate. The nurse reviews the provider's order for placement. Which intravenous access site is the most appropriate for administering this highly irritating substance? (Planning/Implementation/Safety)**
+A. A peripheral venous access catheter in the antecubital space.
+B. A $20 \text{ G}$ peripheral IV in the hand.
+C. A Central Venous Line (CVC),.
+D. A Peripherally Inserted Central Catheter (PICC) in the non-dominant arm.
+**Correct Answer: C.** IV calcium solutions, particularly Calcium Chloride, can be irritating to the veins and should primarily be given through a central line,.
+
+**23. The nurse is performing discharge teaching for a client taking an ACE inhibitor. The nurse advises the client to immediately report signs of which serious adverse effect? (Planning/Safety/A)**
+A. Swelling of the lips, face, or tongue (angioedema),.
+B. Increased urine output (polyuria).
+C. Lightheadedness upon standing (orthostatic hypotension).
+D. Persistent dry cough.
+**Correct Answer: A.** Angioedema is a serious, potentially life-threatening adverse effect of ACE inhibitors that involves swelling in the vessels and requires immediate attention due to airway compromise,.
+
+**24. A client reports symptoms consistent with hypercalcemia. When reviewing the patient’s medication history, the nurse recognizes that concurrent use of which medication increases the therapeutic effect of Digoxin and must be monitored closely? (Assessment/Safety/C)**
+A. Furosemide.
+B. Prednisone.
+C. Calcium-containing antacids,.
+D. Penicillin.
+**Correct Answer: C.** Hypercalcemia (e.g., from excessive antacid intake) increases the effect of Digoxin and can lead to toxicity, thus requiring close monitoring,,.
+
+**25. A client with severe volume depletion caused by acute diarrhea is ordered a large volume fluid bolus. Which crystalloid solution is most appropriate for initial fluid resuscitation in hypovolemic shock? (Implementation/ABC/C)**
+A. $\text{D}5\text{W}$.
+B. $\text{D}5 \text{ half } \text{NS}$.
+C. Lactated Ringer's (LR).
+D. $3\%$ Hypertonic Saline.
+**Correct Answer: C.** Lactated Ringer's (LR) is an isotonic crystalloid solution that contains electrolytes similar to plasma and is often given for dehydration and hypovolemic shock.
+
+***
+
+### Group 3: Acid-Base Balance (5 Questions)
+
+**26. A nurse analyzes an Arterial Blood Gas (ABG) showing: $\text{pH} = 7.30$, $\text{PaCO}_{2} = 55 \text{ mm Hg}$, $\text{HCO}_{3} = 24 \text{ mEq}/\text{L}$. The nurse correctly interprets this finding as: (Analysis/B)**
+A. Metabolic Acidosis, uncompensated.
+B. Respiratory Acidosis, uncompensated,.
+C. Respiratory Alkalosis, partially compensated.
+D. Normal acid-base balance,.
+**Correct Answer: B.** $\text{pH} < 7.35$ (Acidosis); $\text{PaCO}_{2} > 45$ (Acidic); $\text{HCO}_{3}$ is normal,. The primary problem is respiratory (high $\text{CO}_{2}$), and the kidneys have not yet compensated (normal $\text{HCO}_{3}$),,.
+
+**27. A client is hyperventilating due to a severe anxiety attack. The nurse anticipates the client's ABG will show findings consistent with which primary imbalance? (Assessment/Analysis/B)**
+A. Respiratory Acidosis.
+B. Respiratory Alkalosis,.
+C. Metabolic Acidosis.
+D. Metabolic Alkalosis.
+**Correct Answer: B.** Hyperventilation causes the lungs to blow off too much $\text{CO}_{2}$, leading to a deficit of carbonic acid and resulting in respiratory alkalosis,,.
+
+**28. A client is experiencing chronic obstructive pulmonary disease (COPD) exacerbation. The nurse recognizes the client is susceptible to respiratory acidosis due to which physiological factor? (Analysis/B)**
+A. Hyperventilation leading to excessive $\text{CO}_{2}$ excretion.
+B. Hypoventilation leading to $\text{CO}_{2}$ retention.
+C. Loss of bicarbonate ions through diarrhea.
+D. Increased excretion of acid through the kidneys.
+**Correct Answer: B.** Respiratory acidosis is characterized by an excess of carbonic acid, typically caused by hypoventilation, which causes the retention of $\text{CO}_{2}$ and decreases oxygen saturation,. Chronic emphysema/COPD is a common cause,.
+
+**29. The nurse recognizes that the renal system compensates for acid-base imbalances more effectively over the long term because it acts by: (Analysis)**
+A. Immediately releasing chemical buffers like bicarbonate,.
+B. Changing the respiratory rate within minutes,.
+C. Adjusting the re-absorption of bicarbonate and excretion of acids,.
+D. Stimulating the respiratory center in the brain to increase depth of breathing,,.
+**Correct Answer: C.** Renal regulation is the most powerful regulator and acts long-term (hours to days) by adjusting the re-absorption of bicarbonate and excreting hydrogen ions,.
+
+**30. A client with severe diarrhea is at high risk for developing metabolic acidosis. The underlying mechanism for this imbalance is the: (Analysis)**
+A. Overproduction of hydrogen ions due to excessive acids.
+B. Increased loss of base (bicarbonate) through the lower gastrointestinal tract,.
+C. Retention of $\text{CO}_{2}$ by slowing the respiratory rate,.
+D. Excessive intake of sodium bicarbonate (antacids).
+**Correct Answer: B.** Metabolic acidosis can be caused by the loss of bicarbonate, often through severe diarrhea or lower GI fistulas (loss of base),.
+
+***
+
+### Group 4: Neurological Disorders and Acute Management (15 Questions)
+
+**31. A client arrives in the Emergency Department (ED) exhibiting unilateral facial droop and slurred speech. Based on the mnemonic $\text{FAST}$, the nurse’s priority assessment action is to determine: (Assessment/Safety)**
+A. The client's Glasgow Coma Scale (GCS) score.
+B. The client's blood pressure (BP) and heart rate (HR).
+C. The time the symptoms were first noted.
+D. If the client can perform a finger-to-nose test.
+**Correct Answer: C.** The $\text{T}$ in $\text{FAST}$ stands for $\text{Time}$. The time of symptom onset is critical to determine eligibility for reperfusion therapy (tPA), which must be given within 180 minutes (3 hours) of onset.
+
+**32. A nurse is caring for a client who is actively receiving tissue plasminogen activator ($\text{tPA}$) for an ischemic stroke. The nurse should prioritize monitoring the client for which life-threatening complication? (Implementation/Safety/C)**
+A. Renal failure.
+B. Hemorrhage.
+C. Vasospasm.
+D. Seizures.
+**Correct Answer: B.** The greatest risk of $\text{tPA}$ (reperfusion therapy) is a bleed somewhere else, as it dissolves the blood clot causing the problem.
+
+**33. In the acute phase of an ischemic stroke, the healthcare team typically allows for permissive hypertension (HTN). The rationale for maintaining an elevated blood pressure is to: (Planning/Analysis/C)**
+A. Prevent further systemic emboli from forming.
+B. Ensure adequate cerebral perfusion pressure.
+C. Decrease the risk of re-bleeding in a hemorrhagic area.
+D. Promote hemodilution and reduce blood viscosity.
+**Correct Answer: B.** The healthcare team maintains a higher blood pressure (goal $< 220/120 \text{ mm Hg}$) during the first 24 to 48 hours to promote cerebral perfusion,.
+
+**34. A client who experienced a stroke is being screened for dysphagia. Which initial nursing intervention is critical for patient safety during this assessment? (Implementation/ABC/A)**
+A. Performing a quick swallow test using a small sip of water and observing for coughing.
+B. Elevating the head of the bed to $15^{\circ}$ to $30^{\circ}$ and maintaining the neck in flexion.
+C. Administering a liquid form of pain medication to assess swallowing ability.
+D. Ensuring the client is NPO until the speech language pathologist evaluates them.
+**Correct Answer: A.** The nurse must first perform a quick swallow test using a small amount of water to check for coughing or drooling. If this causes coughing or drooling, the patient must then be made NPO until a professional evaluation is performed.
+
+**35. A nurse assesses a client for receptive aphasia. The nurse expects the client to demonstrate which communication deficit? (Assessment/Analysis)**
+A. Difficulty articulating words, but understanding is intact.
+B. Inability to understand spoken language,.
+C. Slurred speech due to cranial nerve muscle impairment.
+D. Complete loss of both expression and understanding.
+**Correct Answer: B.** Receptive aphasia is characterized by difficulty understanding language,.
+
+**36. A client has sustained a stroke on the left side of the brain. The nurse anticipates assessing motor deficits (weakness or paralysis) on which side of the body? (Assessment/Analysis)**
+A. The right side (contralateral).
+B. The left side (ipsilateral).
+C. Both the arms and legs symmetrically.
+D. The deficits will only appear in the facial muscles.
+**Correct Answer: A.** Motor deficits caused by a stroke occur on the opposite (contralateral) side of the body from where the stroke is occurring in the brain.
+
+**37. The nurse is caring for a client post-brain tumor resection and is monitoring for increased intracranial pressure (ICP). If the client has unclosed fontanels, which finding is the most reliable sign of increased ICP? (Assessment/Safety)**
+A. Tachycardia.
+B. Decreased level of consciousness (LOC).
+C. Irregular respiratory pattern.
+D. Hypotension.
+**Correct Answer: B.** A change in mental status/LOC is one of the reasons for frequent neuro checks when monitoring ICP,.
+
+**38. Which assessment finding is characteristic of a client experiencing Guillain-Barré Syndrome (GBS)? (Assessment/Analysis/A)**
+A. Symmetrical, ascending paralysis starting in the lower extremities,.
+B. Loss of sensory function only, with intact motor function.
+C. Unilateral weakness that begins in the upper body and descends.
+D. Intact sensory and intellectual function.
+**Correct Answer: A.** GBS is characterized by symmetrical paralysis that starts in the lower extremities (LE) and ascends upward,. Recovery occurs in reverse, from top to bottom,.
+
+**39. A client admitted with suspected bacterial meningitis is exhibiting nuchal rigidity and high fever. Which priority nursing intervention is required to prevent the spread of the infection? (Implementation/Safety/A)**
+A. Initiating airborne isolation precautions with an N95 mask.
+B. Placing the client on droplet isolation precautions,.
+C. Initiating standard precautions only.
+D. Administering antibiotics before a lumbar puncture is performed.
+**Correct Answer: B.** Bacterial meningitis requires droplet isolation precautions,. (Airborne isolation is needed for TB),,.
+
+**40. A nurse is assessing the functional ability of a client diagnosed with Parkinson's Disease. Which finding is considered part of the classic triad of symptoms? (Assessment/Analysis)**
+A. Ataxia and loss of balance.
+B. Flaccid paralysis.
+C. Resting tremor (pill rolling),.
+D. Hyperreflexia.
+**Correct Answer: C.** The classic triad for Parkinson's is resting tremor (pill rolling), rigidity (cogwheeling), and bradykinesia,.
+
+**41. The nurse is assessing Cranial Nerve $\text{III}$ (Oculomotor) function. Which finding indicates that the nerve is intact? (Assessment)**
+A. The client can move their head side-to-side against resistance,.
+B. The client can identify the smell of coffee.
+C. The client demonstrates pupil constriction upon light exposure,.
+D. The client can stick out their tongue and move it side-to-side.
+**Correct Answer: C.** Cranial nerve $\text{III}$ (Oculomotor) is motor, controlling pupil constriction and eye movement,.
+
+**42. A client has been prescribed Mannitol for cerebral edema. The nurse recognizes that this medication works by which mechanism? (Analysis/Implementation)**
+A. Increasing venous dilation to decrease blood return to the brain.
+B. Acting as a hyperosmolar agent to pull fluid from the brain cells into the vessels,.
+C. Decreasing the production of acetylcholine to slow nerve impulses.
+D. Blocking alpha-1 receptors to cause peripheral vasodilation.
+**Correct Answer: B.** Mannitol is an osmotic diuretic used to decrease cerebral edema by acting as a hyperosmolar agent, pulling fluid from the brain into the circulation so it can be diuresed,.
+
+**43. A nurse is planning care for a client with Amyotrophic Lateral Sclerosis ($\text{ALS}$). The priority nursing diagnosis should focus on which outcome? (Planning/Safety/A)**
+A. Ineffective Airway Clearance related to progressive muscle weakness,.
+B. Risk for Falls related to sensory loss.
+C. Impaired Verbal Communication related to cognitive impairment.
+D. Acute Pain related to muscle spasms and rigidity.
+**Correct Answer: A.** $\text{ALS}$ is a fatal disease that affects voluntary motor control. The client will eventually succumb to respiratory failure as the cough weakens and respiration becomes shallow, making airway clearance the priority,,.
+
+**44. A client with Myasthenia Gravis (MG) reports worsening symptoms after taking their dose of Mestinon. The nurse recognizes that Mestinon (an anticholinesterase drug) may cause which serious side effect? (Assessment/Safety/B)**
+A. Severe hypotension.
+B. Bronchoconstriction and profound muscle weakness.
+C. Tachycardia and fever.
+D. Angioedema.
+**Correct Answer: B.** Anticholinesterase drugs used for MG, such as Mestinon, block the action of cholinesterase and increase acetylcholine. Side effects include bronchoconstriction and profound muscle weakness.
+
+**45. A client with Multiple Sclerosis ($\text{MS}$) is experiencing muscle spasticity. The nurse anticipates administering which medication prescribed to decrease impulses at the spinal cord level? (Implementation/Analysis)**
+A. TPA.
+B. Mannitol.
+C. Interferon.
+D. Baclofen,,.
+**Correct Answer: D.** Baclofen is a muscle relaxant prescribed to decrease impulses at the spinal cord level and reduce spasms in conditions like MS,,.
+
+***
+
+### Group 5: Respiratory Disorders and $\text{ABCs}$ (10 Questions)
+
+**46. A client presents with symptoms suggestive of active Tuberculosis (TB), including a morning cough with mucus production and night sweats. Which isolation precaution should the nurse immediately implement? (Implementation/Safety/A)**
+A. Airborne isolation with an $\text{N}95$ respirator mask,,.
+B. Droplet precautions.
+C. Contact precautions only.
+D. Standard precautions.
+**Correct Answer: A.** $\text{TB}$ is spread through the air via small droplets and requires airborne isolation, mandating the use of an $\text{N}95$ mask,,.
+
+**47. A client with chronic obstructive pulmonary disease ($\text{COPD}$) is receiving Albuterol treatments. The nurse should primarily monitor for which expected side effect of this $\text{beta}-2$ adrenergic agonist? (Assessment/Safety/C)**
+A. Hypokalemia.
+B. Bronchospasms.
+C. Rapid $\text{HR}$ and shakiness,.
+D. Respiratory acidosis.
+**Correct Answer: C.** Beta-adrenergic agonists (bronchodilators) like Albuterol are used to relax smooth muscle. Side effects include rapid $\text{HR}$ (tachycardia) and shakiness/nervousness,.
+
+**48. A nurse is educating a client with $\text{COPD}$ about breathing exercises. The client is taught pursed-lip breathing primarily to achieve which physiological outcome? (Planning/Implementation/B)**
+A. Increase the speed of inhalation for maximal oxygenation.
+B. Prolong the expiratory phase to increase $\text{CO}_{2}$ blow-off.
+C. Strengthen the diaphragm and accessory muscles.
+D. Decrease anxiety through rapid, shallow respirations.
+**Correct Answer: B.** Pursed-lip breathing helps $\text{COPD}$ patients increase their expiration length, allowing more retained $\text{CO}_{2}$ to be blown off.
+
+**49. A nurse monitors a client with severe asthma who initially had loud expiratory wheezing. Now, the client's breath sounds are severely diminished. The nurse recognizes this change indicates: (Assessment/ABC/B)**
+A. The treatment with bronchodilators has been fully effective.
+B. Severe airway obstruction and impending respiratory failure.
+C. Compensatory respiratory alkalosis,.
+D. Progression into restrictive lung disease.
+**Correct Answer: B.** Diminished or absent breath sounds in a client with asthma indicate worsening obstruction, often progressing to a prolonged attack that can lead to respiratory acidosis and failure,,.
+
+**50. A client is receiving corticosteroid therapy for a $\text{COPD}$ exacerbation. The nurse emphasizes the importance of continuing the medication until which instruction is received? (Planning/Safety)**
+A. Stopping the medication abruptly when symptoms resolve.
+B. Tapering the dose slowly as directed by the provider,.
+C. Switching immediately to an oral form if the intravenous form causes $\text{GI}$ upset.
+D. Monitoring for symptoms of hypokalemia.
+**Correct Answer: B.** Corticosteroids must be tapered slowly and not discontinued abruptly to prevent an Addison's crisis,.
+
+**51. When planning the diet for a client with end-stage $\text{COPD}$, the nurse should recommend a diet low in which nutrient to reduce the respiratory workload? (Planning/Analysis/B)**
+A. Protein.
+B. Carbohydrates,.
+C. Fat.
+D. Fiber.
+**Correct Answer: B.** A low-carbohydrate diet is preferred for patients with lung problems because carbohydrate metabolism produces less $\text{CO}_{2}$, thus decreasing respiratory workload,.
+
+**52. A nurse is collecting sputum samples for a client suspected of having active TB disease. The nurse understands that which two findings are necessary to officially confirm an active case of TB? (Assessment/Diagnosis)**
+A. A positive $\text{PPD}$ (skin test) and a positive chest $\text{X}$-ray.
+B. A positive Quantiferon test and a history of exposure,.
+C. A positive sputum culture for $\text{AFB}$ and the presence of clinical symptoms,,.
+D. Exposure to high-concentration organisms in a small space.
+**Correct Answer: C.** An active case is confirmed by a positive sputum culture (Acid-Fast Bacillus, $\text{AFB}$) along with the presence of symptoms,,.
+
+**53. The nurse is monitoring a client who recently had a Thoracentesis procedure. The priority post-procedure nursing assessment should focus on monitoring for signs of: (Assessment/ABC/B)**
+A. Excessive insertion site bleeding.
+B. Pneumo- or Hemothorax.
+C. Severe pain requiring IV opioids.
+D. Decreased gag reflex.
+**Correct Answer: B.** After a Thoracentesis, the nurse must monitor the lung sounds and watch for signs of a pneumo- or hemothorax, as the needle insertion can compromise the lung/pleural space.
+
+**54. A client taking Rifampin for active TB reports that their urine has turned a reddish-orange color. What is the nurse's priority action? (Implementation/Safety)**
+A. Hold the medication and notify the provider of possible hepatotoxicity.
+B. Assess the client for pain and signs of renal failure.
+C. Reassure the client that this is an expected side effect of the medication.
+D. Collect a urine sample to monitor for protein and casts.
+**Correct Answer: C.** Rifampin is known to cause the urine (as well as saliva and tears) to turn a reddish-orange color. This needs to be communicated to the patient as an expected side effect.
+
+**55. A client in the hospital has chronic bronchitis. The nurse anticipates finding which assessment characteristic? (Assessment/B)**
+A. Thin body habitus with diminished lung sounds.
+B. Chronic productive cough lasting 3 months for 2 consecutive years,.
+C. $\text{ABG}$ showing respiratory alkalosis,.
+D. Increased $\text{O}_{2}$ saturation $(> 95\%)$.
+**Correct Answer: B.** Chronic bronchitis is defined by the presence of a chronic productive cough lasting for three months in each of two consecutive years, often due to hypersecretion of mucus,.
+
+***
+
+### Group 6: Diabetes and Endocrine Emergencies (10 Questions)
+
+**56. A client with Type 1 Diabetes Mellitus (DM) presents to the $\text{ED}$ with a fruity odor on their breath, rapid breathing, and blood sugar of $450 \text{ mg}/\text{dL}$. The nurse recognizes these findings as the acute period of Diabetic Ketoacidosis ($\text{DKA}$). What is the priority nursing intervention? (Implementation/ABC/C)**
+A. Administering sodium bicarbonate IV push.
+B. Initiating $\text{IV}$ access, $\text{O}_{2}$, and fluid resuscitation with $0.9\% \text{ NaCl}$.
+C. Preparing for emergent dialysis for refractory hyperkalemia.
+D. Immediate oral administration of $15 \text{ to } 20 \text{ g}$ of simple carbohydrates.
+**Correct Answer: B.** Acute management of $\text{DKA}$ involves establishing $\text{IV}$ access, administering $\text{O}_{2}$, protecting the airway, and initiating fluid resuscitation with $0.9\% \text{ NaCl}$ until urine output is $> 30 \text{ mL}/\text{hour}$, followed by an insulin drip.
+
+**57. A client with Type 2 $\text{DM}$ is admitted with Hyperosmolar Hyperglycemic Syndrome ($\text{HHS}$). The nurse recognizes that a key difference between $\text{HHS}$ and $\text{DKA}$ is that the client with $\text{HHS}$: (Analysis)**
+A. Does not produce insulin.
+B. Does not produce ketones,.
+C. Is typically found in young, thin adults.
+D. Requires less aggressive fluid resuscitation,.
+**Correct Answer: B.** Clients with $\text{HHS}$ produce insulin but not enough to prevent severe hyperglycemia; however, they do not produce ketones, thus avoiding ketoacidosis,.
+
+**58. A client with diabetes has a fasting blood glucose ($\text{FBG}$) of $55 \text{ mg}/\text{dL}$. The client is conscious and able to swallow. What is the immediate priority nursing action for this hypoglycemic event? (Implementation/Safety)**
+A. Administering Glucagon intramuscularly.
+B. Administering $15 \text{ to } 20 \text{ grams}$ of simple carbohydrates immediately.
+C. Taking the client’s blood pressure and heart rate.
+D. Preparing for $\text{IV}$ insulin infusion.
+**Correct Answer: B.** For hypoglycemia, if the client is conscious, they should immediately take $15 \text{ to } 20 \text{ grams}$ of simple carbohydrates, and repeat the dose in 15 minutes if unresolved.
+
+**59. The nurse is teaching a client about the proper administration technique for insulin. The best injection site for the most rapid absorption of insulin is the: (Planning/Implementation)**
+A. Upper arm.
+B. Abdominal wall.
+C. Thigh.
+D. Buttocks.
+**Correct Answer: B.** The preferred adipose tissue sites for subcutaneous insulin injection are the abdominal wall, upper arms, thighs, and buttocks. The abdominal wall typically offers the quickest absorption.
+
+**60. The nurse is teaching a client about factors that increase insulin absorption. Which statement by the client indicates correct understanding? (Evaluation/Analysis)**
+A. "I should massage the injection site lightly after I give my dose.".
+B. "My insulin will absorb faster if I take a cold shower after my injection.".
+C. "Smoking immediately after giving insulin will increase its absorption rate.".
+D. "I should administer my insulin in a low blood flow area for steady absorption.".
+**Correct Answer: A.** Insulin absorption is increased with higher skin temperatures, local massage, and exercise.
+
+**61. A client with Type 2 DM who is managed with insulin reports experiencing night sweats, nightmares, and a headache upon rising. The nurse suspects Somogyi Syndrome. Which intervention is indicated to resolve this phenomenon? (Planning/Analysis/Safety)**
+A. Increasing the evening insulin dose.
+B. Decreasing the evening insulin dose.
+C. Monitoring the patient's blood glucose at dinner time.
+D. Increasing morning exercise to burn off excess glucose.
+**Correct Answer: B.** Somogyi Syndrome involves nighttime hypoglycemia followed by a rebound hyperglycemia. Treatment involves decreasing the evening insulin dose to prevent the initial hypoglycemic event.
+
+**62. A client is receiving Total Parenteral Nutrition ($\text{TPN}$). The nurse must be aware that suddenly discontinuing $\text{TPN}$ can lead to which acute metabolic complication? (Implementation/Safety)**
+A. Fluid overload.
+B. Hyperglycemia.
+C. Metabolic acidosis.
+D. Hypoglycemia (Rebound).
+**Correct Answer: D.** $\text{TPN}$ must never be discontinued abruptly; it must be tapered to prevent rebound hypoglycemia.
+
+**63. When caring for a client with a nasogastric tube ($\text{NGT}$) set to low wall suction ($\text{LWS}$), the nurse understands that the tube is double-lumened to serve which purpose? (Analysis/Implementation/Safety)**
+A. One lumen is for medication administration and one is for irrigation.
+B. One lumen is for suction and the other is a vent for air to prevent reflux,.
+C. Both lumens are used for continuous feeding infusion.
+D. One lumen is for $\text{LWS}$ and the other is for high intermittent suction.
+**Correct Answer: B.** The Salem Sump ($\text{NGT}$) is double-lumened; one lumen is used for suction, and the other is an air vent/antireflux valve to prevent reflux,.
+
+**64. A client is receiving continuous enteral tube feeding ($\text{TF}$). The nurse must elevate the head of the bed to $35^{\circ}$ to $45^{\circ}$ primarily to prevent which potentially life-threatening mechanical complication? (Implementation/ABC/A)**
+A. $\text{GI}$ bloating and nausea.
+B. Dumping syndrome.
+C. Aspiration pneumonia,.
+D. Tube obstruction.
+**Correct Answer: C.** Proper patient positioning (head of bed elevated $35^{\circ}$ to $45^{\circ}$) is required to prevent aspiration pneumonia, which can occur from the inhalation of gastric contents into the respiratory tract,.
+
+**65. A nurse is providing education to a client with a new Ileostomy. The nurse includes teaching that the expected output consistency will be: (Planning/Analysis)**
+A. Formed stool,.
+B. Semiformed stool.
+C. Liquid to semiliquid stool,.
+D. Scant, dry pellets.
+**Correct Answer: C.** Output from an Ileostomy is located high in the $\text{GI}$ tract, resulting in loose, liquid to semiliquid stool because water has not yet been reabsorbed,.
+
+***
+
+### Group 7: Hematology, Oncology, and Antibiotic Safety (10 Questions)
+
+**66. A client receiving chemotherapy is diagnosed with neutropenia. Which nursing action is the most critical to implement to ensure patient safety? (Implementation/Safety)**
+A. Encouraging a high-fiber diet.
+B. Strict handwashing and isolating the patient.
+C. Administering prophylactic oral antibiotics.
+D. Limiting invasive procedures and avoiding all $\text{IM}$ injections.
+**Correct Answer: B.** For neutropenic patients, the plan of care prioritizes strict handwashing and isolation to prevent exposure to microbes and monitor for infection.
+
+**67. A client receiving high-dose chemotherapy has a platelet count of $45,000/\text{mm}^3$ (Thrombocytopenia). Which nursing intervention should the nurse prioritize? (Implementation/Safety/C)**
+A. Encouraging mobility and exercise to promote circulation.
+B. Monitoring for fever and signs of infection.
+C. Implementing safety measures to prevent injury and bleeding,.
+D. Providing a regular diet rich in iron.
+**Correct Answer: C.** Thrombocytopenia (low platelets) increases the risk of spontaneous bleeding and injury. The nurse must implement safety measures and limit invasive procedures,.
+
+**68. A client is diagnosed with Hemolytic Anemia. The nurse understands that when red blood cells are prematurely destroyed, which substance is released and filtered by the kidney, potentially leading to renal failure? (Analysis/Safety)**
+A. Bilirubin.
+B. Potassium ($\text{K}^{+}$).
+C. Hemoglobin molecules.
+D. Erythropoietin.
+**Correct Answer: C.** When red blood cells are destroyed (hemolysis), the hemoglobin molecule is released and filtered by the kidney. This process can lead to tubular necrosis or renal failure.
+
+**69. A client is receiving an intravenous infusion of Vancomycin. The nurse observes flushing and itching of the client’s face, neck, and upper trunk. The nurse’s priority action is to: (Implementation/Safety)**
+A. Administer the remaining dose slowly over 90 minutes.
+B. Obtain peak and trough levels immediately.
+C. Stop the infusion and assess the client for instability,.
+D. Administer an antidote like Calcium Gluconate.
+**Correct Answer: C.** Flushing/itching of the face/neck (Redman syndrome) may occur during Vancomycin infusion. The nurse must stop the infusion and assess the patient. If the patient is stable, antihistamines may be given, and the infusion can continue more slowly,.
+
+**70. A client with a suspected severe infection is prescribed Gentamicin (an aminoglycoside). The nurse prioritizes monitoring which laboratory results for signs of serious toxicity? (Assessment/Safety/D)**
+A. Serum Potassium and Magnesium.
+B. Liver Function Tests (LFTs).
+C. $\text{WBC}$ count and differential.
+D. $\text{BUN}$ and serum Creatinine,.
+**Correct Answer: D.** Aminoglycosides (ending in "-mycin," such as Gentamicin) have two serious adverse effects: ototoxicity and nephrotoxicity. Nephrotoxicity is monitored by checking the $\text{BUN}$ and serum creatinine levels,,.
+
+**71. A client is being discharged with a prescription for a Quinolone antibiotic (Ciprofloxacin). The nurse provides safety teaching about a serious black box warning associated with this medication class: (Planning/Safety)**
+A. Risk for fatal heart arrhythmias.
+B. Increased risk of spontaneous tendon rupture,.
+C. Discoloration of teeth in children under age eight.
+D. Increased risk of bleeding if taken with Warfarin.
+**Correct Answer: B.** Quinolones carry a black box warning due to reported incidents of spontaneous tendon ruptures, especially problematic for the elderly,.
+
+**72. A nurse is preparing to give an antibiotic to a client who has a known allergy to Penicillin. The nurse should notify the provider if the client is prescribed which other class of antimicrobials due to potential cross-reactivity? (Planning/Safety)**
+A. Macrolides.
+B. Tetracyclines.
+C. Sulfonamides.
+D. Cephalosporins,.
+**Correct Answer: D.** Cephalosporins are structurally and pharmacologically similar to penicillins. Clients allergic to penicillin may have a cross-reactivity and allergy to cephalosporins, requiring the nurse to consider another antibiotic class,,.
+
+**73. A client with Iron Deficiency Anemia is taking oral iron supplements. The nurse advises the client to take the iron with which beverage to maximize absorption? (Planning/Implementation)**
+A. Milk or a dairy product,.
+B. Orange juice.
+C. Black tea.
+D. A calcium-containing antacid.
+**Correct Answer: B.** Absorption of oral iron is enhanced when taken with orange juice or one hour before meals,.
+
+**74. A nurse is monitoring a client's central venous catheter ($\text{CVC}$) to prevent a Central Line-Associated Bloodstream Infection ($\text{CLABSI}$). The most critical safety measure when accessing the port is known as the: (Implementation/Safety)**
+A. Tapering Protocol.
+B. Door-to-Needle protocol.
+C. Scrub the Hub protocol.
+D. $\text{DOT}$ therapy.
+**Correct Answer: C.** To prevent $\text{CLABSI}$, access ports must be sanitized with alcohol or chlorhexidine/alcohol before and after each use, a method known as the "Scrub the Hub" protocol.
+
+**75. A client is receiving a Macrolide antibiotic (Erythromycin). The nurse includes patient education about a black box warning related to which cardiovascular concern? (Planning/Safety/C)**
+A. Orthostatic hypotension.
+B. Potentiation of Digoxin toxicity.
+C. Fatal heart arrhythmias.
+D. Hypokalemia.
+**Correct Answer: C.** Erythromycin and Azithromycin carry black box warnings because they have been implicated in fatal heart arrhythmias.
+
+***
+
+### Group 8: GI/Nutrition, Female Reproductive, and Safety (5 Questions)
+
+**76. A client has a surgically placed PEG-tube. When administering medications through the tube, the nurse must ensure that which primary safety intervention is performed between administering each medication? (Implementation/Safety)**
+A. Checking the gastric residual volume.
+B. Maintaining the head of the bed in a flat position.
+C. Flushing the line to maintain patency.
+D. Administering a pancreatic enzyme (Creon).
+**Correct Answer: C.** To ensure the tube does not clog, the lines must be flushed before, in between, and after administering dissolved medications.
+
+**77. The nurse is caring for a client with a newly placed colostomy. Which assessment finding related to the stoma requires immediate notification of the healthcare provider? (Assessment/Safety/C)**
+A. Slight bleeding around the stoma edge,.
+B. The stoma appears raised and pink,.
+C. The stoma appears pale or dusky,.
+D. The client reports the stoma is painless,.
+**Correct Answer: C.** An abnormal stoma appears pale, dusky, retracted, painful, hemorrhaging, or separated, requiring immediate notification of the provider,.
+
+**78. A client being treated for Vulvovaginal Candidiasis should receive which priority education regarding hygiene and prevention? (Planning/Safety)**
+A. Use feminine deodorants to mask discharge odor,.
+B. Maintain the acidic environment by avoiding douching,.
+C. Wear scented pads to absorb discharge,.
+D. Use broad-spectrum antibiotics to eliminate the fungus.
+**Correct Answer: B.** Education for candidiasis involves maintaining the acidic environment by avoiding douching, feminine deodorants, or scented products,.
+
+**79. A nurse is counseling a client who has a history of uterine prolapse about therapeutic management. Which non-surgical intervention should the nurse recommend to improve the structure and strength of the pelvic ligaments and muscles? (Planning/Implementation)**
+A. Increased fluid intake to prevent $\text{UTIs}$.
+B. Estrogen therapy to restore muscle tone.
+C. Performing Kegel exercises,.
+D. Using a pessary device for cervical support,.
+**Correct Answer: C.** Nursing care focuses on teaching Kegel exercises to improve the structure and strength of the ligaments and muscles in the pelvic area,.
+
+**80. A client with a new colostomy appliance is recovering in the hospital. The nurse provides discharge instructions that the appliance should be emptied when it reaches which fullness level? (Planning/Implementation)**
+A. When it is completely full to ensure maximum capacity.
+B. When it is one-third to one-half full,.
+C. Only when the client feels discomfort or cramping.
+D. Every 24 hours regardless of output volume.
+**Correct Answer: B.** The colostomy bag should be emptied when it is about one-third to one-half full, rinsed, and secured to prevent leakage and maceration,.`;
+
+      // ==========================================
+      // ICONS DATA (Embedded to prevent loading errors)
+      // ==========================================
+
+      const ICONS = {
+        FileText: (
+          <g
+            stroke="currentColor"
+            strokeWidth="2"
+            fill="none"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+          >
+            <path d="M14.5 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7.5L14.5 2z" />
+            <polyline points="14 2 14 8 20 8" />
+            <line x1="16" y1="13" x2="8" y2="13" />
+            <line x1="16" y1="17" x2="8" y2="17" />
+            <polyline points="10 9 9 9 8 9" />
+          </g>
+        ),
+        Stethoscope: (
+          <g
+            stroke="currentColor"
+            strokeWidth="2"
+            fill="none"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+          >
+            <path d="M4.8 2.3A.3.3 0 1 0 5 2H4a2 2 0 0 0-2 2v5a6 6 0 0 0 6 6v0a6 6 0 0 0 6-6V4a2 2 0 0 0-2-2h-1a.2.2 0 1 0 .3.3" />
+            <path d="M8 15v1a6 6 0 0 0 6 6v0a6 6 0 0 0 6-6v-4" />
+            <circle cx="20" cy="10" r="2" />
+          </g>
+        ),
+        X: (
+          <g
+            stroke="currentColor"
+            strokeWidth="2"
+            fill="none"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+          >
+            <path d="M18 6 6 18" />
+            <path d="m6 6 12 12" />
+          </g>
+        ),
+        CheckCircle: (
+          <g
+            stroke="currentColor"
+            strokeWidth="2"
+            fill="none"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+          >
+            <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14" />
+            <polyline points="22 4 12 14.01 9 11.01" />
+          </g>
+        ),
+        ArrowRight: (
+          <g
+            stroke="currentColor"
+            strokeWidth="2"
+            fill="none"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+          >
+            <line x1="5" y1="12" x2="19" y2="12" />
+            <polyline points="12 5 19 12 12 19" />
+          </g>
+        ),
+      };
+
+      // ==========================================
+      // APP LOGIC
+      // ==========================================
+
+      const { useState, useEffect, useMemo } = React;
+
+      // Helper to clean LaTeX-like formatting for better readability
+      const cleanText = (text) => {
+        if (!text) return "";
+        let cleaned = text;
+
+        // 1. Handle explicit symbol replacements first
+        cleaned = cleaned
+          .replace(/\\geq/g, "≥")
+          .replace(/\\leq/g, "≤")
+          .replace(/\\cong/g, "≅")
+          .replace(/\\circ/g, "°")
+          .replace(/\\Delta/g, "Δ")
+          .replace(/\\downarrow/g, "↓")
+          .replace(/\\uparrow/g, "↑")
+          .replace(/\\pm/g, "±")
+          .replace(/\\times/g, "×")
+          .replace(/\\approx/g, "≈")
+          .replace(/\\neq/g, "≠");
+
+        // 2. Remove \text{...} wrappers.
+        // We do this loop to catch nested braces if simple regex fails,
+        // though your text bank seems simple: \text{Content}
+        cleaned = cleaned.replace(/\\text\s*\{([^}]+)\}/g, "$1");
+
+        // 3. Remove dollar signs used for math mode
+        cleaned = cleaned.replace(/\$([^$]+)\$/g, "$1");
+
+        // 4. Cleanup remaining artifacts
+        cleaned = cleaned
+          // Remove subscripts/superscripts indicators
+          .replace(/[_^]/g, "")
+          // Remove lingering curly braces
+          .replace(/[{}]/g, "")
+          // Remove any leftover backslashes
+          .replace(/\\/g, "")
+          // Normalize spaces
+          .replace(/\s+/g, " ")
+          .trim();
+
+        return cleaned;
+      };
+
+      const QuestionParser = (raw) => {
+        if (!raw || raw.length < 100) return [];
+
+        const sections = [
+          { id: "OB", name: "OB/L&D", start: 0, end: raw.length },
+          {
+            id: "PEDS",
+            name: "Pediatrics",
+            start: raw.length,
+            end: raw.length,
+          },
+          {
+            id: "MEDSURG",
+            name: "Med/Surg",
+            start: raw.length,
+            end: raw.length,
+          },
+        ];
+
+        // Find delimiters
+        const pedsIndex = raw.indexOf("//Pediatrics begin");
+        const medSurgIndex = raw.indexOf("//MedSurg Begin");
+
+        if (pedsIndex !== -1) {
+          sections[0].end = pedsIndex;
+          sections[1].start = pedsIndex;
+          if (medSurgIndex !== -1) {
+            sections[1].end = medSurgIndex;
+            sections[2].start = medSurgIndex;
+          }
+        } else if (medSurgIndex !== -1) {
+          // If peds missing for some reason
+          sections[0].end = medSurgIndex;
+          sections[2].start = medSurgIndex;
+        }
+
+        let allQuestions = [];
+
+        sections.forEach((section) => {
+          const sectionText = raw.substring(section.start, section.end);
+          const lines = sectionText.split("\n");
+          let currentQ = null;
+
+          lines.forEach((line) => {
+            line = line.trim();
+            if (!line) return;
+
+            // Detect Start of Question: "**1. " or "** 1. "
+            const qStartMatch = line.match(/^\*\*(\d+)\.\s+(.*)/);
+            if (qStartMatch) {
+              // Save previous if exists
+              if (currentQ) allQuestions.push(currentQ);
+
+              // Start new
+              currentQ = {
+                id: parseInt(qStartMatch[1]),
+                category: section.id,
+                text: cleanText(qStartMatch[2].replace(/\*\*$/, "")), // Remove trailing ** if present
+                options: {},
+                answer: null,
+                rationale: "",
+              };
+              return;
+            }
+
+            if (!currentQ) return;
+
+            // Detect Options: "A. ", "B. ", etc.
+            const optMatch = line.match(/^([A-D])\.\s+(.*)/);
+            if (optMatch) {
+              currentQ.options[optMatch[1]] = cleanText(optMatch[2]);
+              return;
+            }
+
+            // Detect Answer: "**Correct Answer: C.**"
+            const ansMatch = line.match(
+              /\*\*Correct Answer:\s*([A-D])\.?\*\*(.*)/
+            );
+            if (ansMatch) {
+              currentQ.answer = ansMatch[1];
+              currentQ.rationale = cleanText(ansMatch[2]);
+              return;
+            }
+
+            // If it's a continuation of rationale
+            if (
+              currentQ.answer &&
+              !line.startsWith("***") &&
+              !line.startsWith("###")
+            ) {
+              currentQ.rationale += " " + cleanText(line);
+            }
+            // If it's a continuation of question text (before options)
+            else if (
+              !Object.keys(currentQ.options).length &&
+              !line.startsWith("***") &&
+              !line.startsWith("###")
+            ) {
+              currentQ.text += " " + cleanText(line);
+            }
+          });
+          // Push last question
+          if (currentQ) allQuestions.push(currentQ);
+        });
+
+        return allQuestions.filter(
+          (q) => q.answer && Object.keys(q.options).length >= 2
+        );
+      };
+
+      const App = () => {
+        const [questions, setQuestions] = useState([]);
+        const [mode, setMode] = useState("START"); // START, QUIZ, RESULTS
+        const [currentCategory, setCurrentCategory] = useState("ALL");
+        const [quizQuestions, setQuizQuestions] = useState([]);
+        const [currentIndex, setCurrentIndex] = useState(0);
+        const [score, setScore] = useState(0);
+        const [selectedOption, setSelectedOption] = useState(null);
+        const [showRationale, setShowRationale] = useState(false);
+        const [hasLoadedData, setHasLoadedData] = useState(false);
+
+        useEffect(() => {
+          // Try to load from hardcoded variable first
+          if (RAW_TEXT_DATA && RAW_TEXT_DATA.length > 100) {
+            const parsed = QuestionParser(RAW_TEXT_DATA);
+            setQuestions(parsed);
+            setHasLoadedData(true);
+          }
+        }, []);
+
+        const handleFileUpload = (e) => {
+          const file = e.target.files[0];
+          if (!file) return;
+
+          const reader = new FileReader();
+          reader.onload = (event) => {
+            const parsed = QuestionParser(event.target.result);
+            setQuestions(parsed);
+            setHasLoadedData(true);
+          };
+          reader.readAsText(file);
+        };
+
+        const startQuiz = (category) => {
+          setCurrentCategory(category);
+          let filtered = [];
+          if (category === "ALL") {
+            filtered = [...questions];
+          } else {
+            filtered = questions.filter((q) => q.category === category);
+          }
+
+          // Shuffle questions
+          filtered.sort(() => Math.random() - 0.5);
+
+          setQuizQuestions(filtered);
+          setCurrentIndex(0);
+          setScore(0);
+          setMode("QUIZ");
+          setSelectedOption(null);
+          setShowRationale(false);
+        };
+
+        const handleAnswer = (optionKey) => {
+          if (selectedOption) return; // Prevent changing answer
+          setSelectedOption(optionKey);
+          setShowRationale(true);
+
+          if (optionKey === quizQuestions[currentIndex].answer) {
+            setScore((s) => s + 1);
+          }
+        };
+
+        const nextQuestion = () => {
+          if (currentIndex < quizQuestions.length - 1) {
+            setCurrentIndex((prev) => prev + 1);
+            setSelectedOption(null);
+            setShowRationale(false);
+          } else {
+            setMode("RESULTS");
+          }
+        };
+
+        const restart = () => {
+          setMode("START");
+          setSelectedOption(null);
+          setShowRationale(false);
+        };
+
+        const Icon = ({ name, size = 24, className }) => {
+          const iconSvg = ICONS[name];
+          if (!iconSvg) return null;
+
+          return (
+            <svg
+              width={size}
+              height={size}
+              viewBox="0 0 24 24"
+              className={className}
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              {iconSvg}
+            </svg>
+          );
+        };
+
+        // ---- RENDERERS ----
+
+        if (!hasLoadedData) {
+          return (
+            <div className="min-h-screen flex flex-col items-center justify-center p-6 text-center max-w-md mx-auto">
+              <div className="bg-white p-8 rounded-2xl shadow-xl w-full">
+                <div className="text-blue-600 mb-4 flex justify-center">
+                  <Icon name="FileText" size={48} />
+                </div>
+                <h1 className="text-2xl font-bold text-gray-800 mb-2">
+                  Load Question Bank
+                </h1>
+                <p className="text-gray-600 mb-6">
+                  The applet needs the question data to start. Please upload the{" "}
+                  <b>Final-exam-test-question-bank.txt</b> file.
+                </p>
+
+                <label className="block w-full">
+                  <span className="sr-only">Choose file</span>
+                  <input
+                    type="file"
+                    onChange={handleFileUpload}
+                    accept=".txt"
+                    className="block w-full text-sm text-gray-500
+                                    file:mr-4 file:py-3 file:px-6
+                                    file:rounded-full file:border-0
+                                    file:text-sm file:font-semibold
+                                    file:bg-blue-50 file:text-blue-700
+                                    hover:file:bg-blue-100
+                                    cursor-pointer border border-gray-200 rounded-lg
+                                "
+                  />
+                </label>
+
+                <div className="mt-6 text-xs text-gray-400">
+                  Tip: Paste the text into the code to skip this step next time.
+                </div>
+              </div>
+            </div>
+          );
+        }
+
+        if (mode === "START") {
+          return (
+            <div className="min-h-screen bg-gradient-to-br from-blue-50 to-indigo-100 flex flex-col items-center justify-center p-4">
+              <div className="bg-white p-6 sm:p-10 rounded-3xl shadow-2xl w-full max-w-lg text-center">
+                <div className="flex justify-center mb-6 text-indigo-600">
+                  <Icon name="Stethoscope" size={64} />
+                </div>
+                <h1 className="text-3xl font-extrabold text-gray-900 mb-2">
+                  Nursing Finals Review
+                </h1>
+                <p className="text-gray-500 mb-8">
+                  Select a category to begin your practice session.
+                </p>
+
+                <div className="grid gap-4">
+                  <button
+                    onClick={() => startQuiz("OB")}
+                    className="btn-tap bg-pink-100 hover:bg-pink-200 text-pink-700 py-4 px-6 rounded-xl font-bold text-lg flex items-center justify-between transition-colors"
+                  >
+                    <span>OB / L&D</span>
+                    <span className="bg-white/50 px-2 py-1 rounded text-sm">
+                      {questions.filter((q) => q.category === "OB").length} Qs
+                    </span>
+                  </button>
+                  <button
+                    onClick={() => startQuiz("PEDS")}
+                    className="btn-tap bg-orange-100 hover:bg-orange-200 text-orange-700 py-4 px-6 rounded-xl font-bold text-lg flex items-center justify-between transition-colors"
+                  >
+                    <span>Pediatrics</span>
+                    <span className="bg-white/50 px-2 py-1 rounded text-sm">
+                      {questions.filter((q) => q.category === "PEDS").length} Qs
+                    </span>
+                  </button>
+                  <button
+                    onClick={() => startQuiz("MEDSURG")}
+                    className="btn-tap bg-blue-100 hover:bg-blue-200 text-blue-700 py-4 px-6 rounded-xl font-bold text-lg flex items-center justify-between transition-colors"
+                  >
+                    <span>Med / Surg</span>
+                    <span className="bg-white/50 px-2 py-1 rounded text-sm">
+                      {questions.filter((q) => q.category === "MEDSURG").length}{" "}
+                      Qs
+                    </span>
+                  </button>
+                  <button
+                    onClick={() => startQuiz("ALL")}
+                    className="btn-tap bg-gray-800 hover:bg-gray-900 text-white py-4 px-6 rounded-xl font-bold text-lg flex items-center justify-center shadow-lg transition-colors mt-2"
+                  >
+                    Comprehensive Review (All)
+                  </button>
+                </div>
+
+                <p className="mt-8 text-xs text-gray-400">
+                  Total Questions Loaded: {questions.length}
+                </p>
+              </div>
+            </div>
+          );
+        }
+
+        if (mode === "RESULTS") {
+          const percentage = Math.round((score / quizQuestions.length) * 100);
+          let message = "Good effort!";
+          if (percentage >= 80) message = "Excellent work, Nurse!";
+          else if (percentage >= 60) message = "You're getting there!";
+          else message = "Keep studying, you can do it!";
+
+          return (
+            <div className="min-h-screen bg-indigo-50 flex items-center justify-center p-4">
+              <div className="bg-white p-8 rounded-3xl shadow-xl w-full max-w-md text-center">
+                <h2 className="text-2xl font-bold text-gray-800 mb-4">
+                  Session Complete
+                </h2>
+
+                <div className="relative w-40 h-40 mx-auto mb-6 flex items-center justify-center">
+                  <div className="absolute inset-0 rounded-full border-8 border-gray-100"></div>
+                  <div
+                    className="absolute inset-0 rounded-full border-8 border-indigo-500"
+                    style={{
+                      clipPath: `inset(${100 - percentage}% 0 0 0)`,
+                    }}
+                  ></div>
+                  <div className="text-4xl font-bold text-indigo-600">
+                    {percentage}%
+                  </div>
+                </div>
+
+                <p className="text-gray-600 text-lg mb-2">{message}</p>
+                <p className="text-gray-400 mb-8">
+                  {score} correct out of {quizQuestions.length}
+                </p>
+
+                <button
+                  onClick={restart}
+                  className="w-full bg-indigo-600 text-white py-3 rounded-xl font-semibold hover:bg-indigo-700 transition-colors"
+                >
+                  Return to Menu
+                </button>
+              </div>
+            </div>
+          );
+        }
+
+        // QUIZ MODE
+        const currentQ = quizQuestions[currentIndex];
+        const progress = (currentIndex / quizQuestions.length) * 100;
+
+        return (
+          <div className="min-h-screen bg-gray-50 flex flex-col md:items-center p-4 md:pt-10">
+            <div className="w-full max-w-2xl">
+              {/* Header */}
+              <div className="flex justify-between items-center mb-4 px-2">
+                <button
+                  onClick={restart}
+                  className="text-gray-400 hover:text-gray-600"
+                >
+                  <Icon name="X" size={24} />
+                </button>
+                <div className="text-sm font-semibold text-gray-500">
+                  {currentCategory === "ALL" ? "Comprehensive" : currentQ.name}
+                </div>
+                <div className="text-sm font-semibold text-indigo-600">
+                  {currentIndex + 1} / {quizQuestions.length}
+                </div>
+              </div>
+
+              {/* Progress Bar */}
+              <div className="w-full bg-gray-200 h-2 rounded-full mb-6 overflow-hidden">
+                <div
+                  className="bg-indigo-500 h-full transition-all duration-300"
+                  style={{ width: `${progress}%` }}
+                ></div>
+              </div>
+
+              {/* Question Card */}
+              <div className="bg-white rounded-2xl shadow-sm border border-gray-100 p-6 mb-6">
+                <h3 className="text-lg md:text-xl font-medium text-gray-800 leading-relaxed">
+                  {currentQ.text}
+                </h3>
+              </div>
+
+              {/* Options */}
+              <div className="space-y-3 mb-20">
+                {["A", "B", "C", "D"].map((opt) => {
+                  const isSelected = selectedOption === opt;
+                  const isCorrect = currentQ.answer === opt;
+                  const showCorrectness = showRationale;
+
+                  let btnClass =
+                    "w-full p-4 rounded-xl text-left border-2 transition-all relative ";
+
+                  if (showCorrectness) {
+                    if (isCorrect) {
+                      btnClass += "bg-green-50 border-green-500 text-green-800";
+                    } else if (isSelected && !isCorrect) {
+                      btnClass += "bg-red-50 border-red-500 text-red-800";
+                    } else {
+                      btnClass +=
+                        "bg-gray-50 border-transparent text-gray-400 opacity-70";
+                    }
+                  } else {
+                    if (isSelected) {
+                      btnClass +=
+                        "bg-indigo-50 border-indigo-500 text-indigo-900";
+                    } else {
+                      btnClass +=
+                        "bg-white border-transparent shadow-sm hover:bg-gray-50 text-gray-700";
+                    }
+                  }
+
+                  return (
+                    <button
+                      key={opt}
+                      onClick={() => handleAnswer(opt)}
+                      disabled={showRationale}
+                      className={btnClass}
+                    >
+                      <div className="flex items-start">
+                        <span
+                          className={`flex-shrink-0 w-8 h-8 rounded-full flex items-center justify-center text-sm font-bold mr-3 ${
+                            showCorrectness && isCorrect
+                              ? "bg-green-200 text-green-700"
+                              : showCorrectness && isSelected
+                              ? "bg-red-200 text-red-700"
+                              : "bg-gray-100 text-gray-500"
+                          }`}
+                        >
+                          {opt}
+                        </span>
+                        <span className="mt-1">{currentQ.options[opt]}</span>
+
+                        {showCorrectness && isCorrect && (
+                          <div className="absolute right-4 top-4 text-green-600">
+                            <Icon name="CheckCircle" size={24} />
+                          </div>
+                        )}
+                      </div>
+                    </button>
+                  );
+                })}
+              </div>
+
+              {/* Rationale / Next Button Area */}
+              {showRationale && (
+                <div className="fixed bottom-0 left-0 right-0 bg-white border-t shadow-[0_-4px_6px_-1px_rgba(0,0,0,0.1)] p-4 z-50 animate-in slide-in-from-bottom duration-300">
+                  <div className="max-w-2xl mx-auto">
+                    <div className="mb-4 max-h-40 overflow-y-auto custom-scroll pr-2">
+                      <h4 className="text-sm font-bold text-gray-500 uppercase tracking-wider mb-1">
+                        Rationale
+                      </h4>
+                      <p className="text-gray-800 leading-relaxed">
+                        <span className="font-bold mr-2">
+                          {currentQ.answer} is correct.
+                        </span>
+                        {currentQ.rationale}
+                      </p>
+                    </div>
+                    <button
+                      onClick={nextQuestion}
+                      className="w-full bg-indigo-600 text-white py-3.5 rounded-xl font-bold text-lg hover:bg-indigo-700 active:scale-[0.99] transition-all shadow-md flex items-center justify-center gap-2"
+                    >
+                      <span>Next Question</span>
+                      <Icon name="ArrowRight" size={20} />
+                    </button>
+                  </div>
+                </div>
+              )}
+            </div>
+          </div>
+        );
+      };
+
+      const root = ReactDOM.createRoot(document.getElementById("root"));
+      root.render(<App />);
+    </script>
+  </body>
+</html>
