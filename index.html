@@ -35,46 +35,504 @@
         animation: fadeIn 0.3s ease-in;
       }
       @keyframes fadeIn {
-        from {
-          opacity: 0;
-          transform: translateY(10px);
-        }
-        to {
-          opacity: 1;
-          transform: translateY(0);
-        }
+        from { opacity: 0; transform: translateY(10px); }
+        to { opacity: 1; transform: translateY(0); }
       }
-      /* Custom scrollbar for rationale if it gets long */
-      .custom-scroll::-webkit-scrollbar {
-        width: 6px;
-      }
-      .custom-scroll::-webkit-scrollbar-track {
-        background: #f1f1f1;
-      }
-      .custom-scroll::-webkit-scrollbar-thumb {
-        background: #cbd5e1;
-        border-radius: 3px;
-      }
-      .btn-tap {
-        transition: transform 0.1s;
-      }
-      .btn-tap:active {
-        transform: scale(0.98);
-      }
+      .custom-scroll::-webkit-scrollbar { width: 6px; }
+      .custom-scroll::-webkit-scrollbar-track { background: #f1f1f1; }
+      .custom-scroll::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 3px; }
+      .btn-tap { transition: transform 0.1s; }
+      .btn-tap:active { transform: scale(0.98); }
+      
+      /* Markdown-ish styling for Study Guide */
+      .study-content h3 { font-weight: 800; color: #1e3a8a; margin-top: 1.5rem; margin-bottom: 0.5rem; font-size: 1.1rem; }
+      .study-content p { margin-bottom: 0.75rem; color: #4b5563; line-height: 1.6; }
+      .study-content strong { color: #111827; font-weight: 700; }
+      .study-content ul { list-style-type: disc; padding-left: 1.25rem; margin-bottom: 1rem; color: #4b5563; }
+      .study-content li { margin-bottom: 0.25rem; }
     </style>
   </head>
   <body>
     <div id="root"></div>
 
     <script type="text/babel">
+      
       // ==========================================
-      // STEP 1: PASTE YOUR DATA BELOW
+      // ICONS
+      // ==========================================
+      const ICONS = {
+        FileText: <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M14.5 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7.5L14.5 2z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10 9 9 9 8 9"/></svg>,
+        Stethoscope: <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M4.8 2.3A.3.3 0 1 0 5 2H4a2 2 0 0 0-2 2v5a6 6 0 0 0 6 6v0a6 6 0 0 0 6-6V4a2 2 0 0 0-2-2h-1a.2.2 0 1 0 .3.3"/><path d="M8 15v1a6 6 0 0 0 6 6v0a6 6 0 0 0 6-6v-4"/><circle cx="20" cy="10" r="2"/></svg>,
+        X: <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg>,
+        CheckCircle: <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>,
+        ArrowRight: <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>,
+        BookOpen: <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg>,
+        ChevronDown: <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+      };
+
+      // ==========================================
+      // LOGIC
+      // ==========================================
+      const { useState, useEffect } = React;
+
+      // 1. Text Cleaner
+      const cleanText = (text) => {
+        if (!text) return "";
+        return text
+          .replace(/\\geq/g, "≥").replace(/\\leq/g, "≤").replace(/\\cong/g, "≅")
+          .replace(/\\circ/g, "°").replace(/\\Delta/g, "Δ").replace(/\\downarrow/g, "↓")
+          .replace(/\\uparrow/g, "↑").replace(/\\pm/g, "±").replace(/\\times/g, "×")
+          .replace(/\\approx/g, "≈").replace(/\\neq/g, "≠")
+          .replace(/\\text\s*\{([^}]+)\}/g, "$1").replace(/\$([^$]+)\$/g, "$1")
+          .replace(/[_^]/g, "").replace(/[{}]/g, "").replace(/\\/g, "")
+          .replace(/\s+/g, " ").trim();
+      };
+
+      // 2. Question Parser
+      const parseQuestions = (raw) => {
+        if (!raw || raw.length < 50) return [];
+        const sections = [
+          { id: "OB", start: 0, end: raw.length },
+          { id: "PEDS", start: raw.length, end: raw.length },
+          { id: "MEDSURG", start: raw.length, end: raw.length },
+        ];
+        const pedsIdx = raw.indexOf("//Pediatrics begin");
+        const medIdx = raw.indexOf("//MedSurg Begin");
+
+        if (pedsIdx !== -1) {
+          sections[0].end = pedsIdx;
+          sections[1].start = pedsIdx;
+          if (medIdx !== -1) {
+            sections[1].end = medIdx;
+            sections[2].start = medIdx;
+          }
+        } else if (medIdx !== -1) {
+          sections[0].end = medIdx;
+          sections[2].start = medIdx;
+        }
+
+        let allQs = [];
+        sections.forEach(sec => {
+          const lines = raw.substring(sec.start, sec.end).split('\n');
+          let current = null;
+          lines.forEach(line => {
+            line = line.trim();
+            if (!line) return;
+            // New Question Match
+            const qMatch = line.match(/^\*\*(\d+)\.\s+(.*)/);
+            if (qMatch) {
+              if (current) allQs.push(current);
+              current = { id: parseInt(qMatch[1]), category: sec.id, text: cleanText(qMatch[2].replace(/\*\*$/, "")), options: {}, answer: null, rationale: "" };
+              return;
+            }
+            if (!current) return;
+            // Option Match
+            const optMatch = line.match(/^([A-D])\.\s+(.*)/);
+            if (optMatch) { current.options[optMatch[1]] = cleanText(optMatch[2]); return; }
+            // Answer Match
+            const ansMatch = line.match(/\*\*Correct Answer:\s*([A-D])\.?\*\*(.*)/);
+            if (ansMatch) { current.answer = ansMatch[1]; current.rationale = cleanText(ansMatch[2]); return; }
+            // Append Text
+            if (current.answer && !line.startsWith("***") && !line.startsWith("###")) current.rationale += " " + cleanText(line);
+            else if (Object.keys(current.options).length === 0 && !line.startsWith("***") && !line.startsWith("###")) current.text += " " + cleanText(line);
+          });
+          if (current) allQs.push(current);
+        });
+        return allQs.filter(q => q.answer && Object.keys(q.options).length >= 2);
+      };
+
+      // 3. Study Guide Parser (New!)
+      // Splits the raw copy-pasted text into readable sections based on formatting
+      const parseStudyGuide = (raw) => {
+        if (!raw || raw.length < 50) return [];
+        
+        // We will try to identify the 3 main sections based on Keywords in your document
+        const sections = [
+          { title: "Obstetrical Nursing (OB)", keywords: ["Obstetrical", "Labor and Delivery", "Newborn"] },
+          { title: "Med-Surg Priorities", keywords: ["Med-Surg", "Neurological", "Cardiovascular"] },
+          { title: "Pediatrics Priorities", keywords: ["Pediatric", "Growth", "Development"] }
+        ];
+
+        // Since copying text is messy, we'll just treat it as one big block and use headers to chunk it
+        // We will format lines that look like headers (short, no period at end, or bold in markdown)
+        const lines = raw.split('\n');
+        let parsedSections = [];
+        let currentSection = { title: "Study Guide", content: [] };
+        let currentBuffer = "";
+
+        lines.forEach(line => {
+            line = line.trim();
+            if (!line) return;
+
+            // Detect Major Headers (User mentioned OB, MedSurg, Peds)
+            // If line contains "Priorities" and is short, it's likely a main section
+            if ((line.includes("Priorities") || line.includes("Questions)")) && line.length < 60) {
+                // Save previous content
+                if (currentBuffer) {
+                    currentSection.content.push({ text: currentBuffer });
+                    currentBuffer = "";
+                }
+                // Save previous section if it has content
+                if (currentSection.content.length > 0) {
+                    parsedSections.push(currentSection);
+                }
+                // Start new section
+                currentSection = { title: cleanText(line), content: [] };
+            } 
+            // Detect Sub-headers (short lines, ends in colon, or all caps)
+            else if (line.endsWith(":") || (line.length < 50 && !line.endsWith("."))) {
+                 if (currentBuffer) {
+                    currentSection.content.push({ text: currentBuffer });
+                    currentBuffer = "";
+                }
+                // Add this line as a bold header
+                currentBuffer += `### ${cleanText(line)}\n`;
+            }
+            // Regular text
+            else {
+                // Add bullet point if it looks like one
+                if (line.startsWith("•") || line.startsWith("-")) {
+                    currentBuffer += `\n* ${cleanText(line.substring(1))}`;
+                } else {
+                    currentBuffer += `\n${cleanText(line)}`;
+                }
+            }
+        });
+        
+        // Push final bits
+        if (currentBuffer) currentSection.content.push({ text: currentBuffer });
+        if (currentSection.content.length > 0) parsedSections.push(currentSection);
+
+        return parsedSections.length > 0 ? parsedSections : [{ title: "Study Guide", content: [{ text: raw }] }];
+      };
+
+      // ---- COMPONENTS ----
+
+      const StudyGuideView = ({ data, onBack }) => {
+        const [activeIdx, setActiveIdx] = useState(0);
+
+        // Render text with simple markdown-like processing
+        const renderContent = (text) => {
+            return text.split('\n').map((line, i) => {
+                if (line.startsWith("###")) return <h3 key={i} className="text-indigo-700 font-bold text-lg mt-4 mb-2">{line.replace("###", "")}</h3>;
+                if (line.startsWith("*")) return <li key={i} className="ml-4 list-disc text-gray-700 mb-1">{line.replace("*", "")}</li>;
+                return <p key={i} className="mb-2 text-gray-600 leading-relaxed">{line}</p>;
+            });
+        };
+
+        return (
+          <div className="min-h-screen bg-white pb-12">
+            <div className="sticky top-0 bg-white border-b z-20 px-4 py-3 flex items-center shadow-sm">
+              <button onClick={onBack} className="mr-4 text-gray-500 hover:text-gray-800 p-1">
+                {ICONS.ArrowRight} {/* Rotated via CSS usually, or just use back logic */}
+                <span className="ml-2 text-sm font-bold">Back</span>
+              </button>
+              <h2 className="text-lg font-bold text-gray-800">Study Guide</h2>
+            </div>
+            
+            <div className="max-w-3xl mx-auto p-4">
+              {data.map((section, idx) => (
+                <div key={idx} className="mb-4 border rounded-xl overflow-hidden shadow-sm">
+                  <button 
+                    onClick={() => setActiveIdx(activeIdx === idx ? null : idx)}
+                    className="w-full bg-gray-50 p-4 flex justify-between items-center text-left hover:bg-gray-100 transition-colors"
+                  >
+                    <span className="font-bold text-gray-800">{section.title}</span>
+                    <span className={`transform transition ${activeIdx === idx ? 'rotate-180' : ''}`}>{ICONS.ChevronDown}</span>
+                  </button>
+                  
+                  {activeIdx === idx && (
+                    <div className="p-5 bg-white study-content">
+                      {section.content.map((block, bIdx) => (
+                        <div key={bIdx}>{renderContent(block.text)}</div>
+                      ))}
+                    </div>
+                  )}
+                </div>
+              ))}
+            </div>
+          </div>
+        );
+      };
+
+      const App = () => {
+        const [questions, setQuestions] = useState([]);
+        const [guideData, setGuideData] = useState([]);
+        const [mode, setMode] = useState("START");
+        const [currentCategory, setCurrentCategory] = useState("ALL");
+        const [quizQuestions, setQuizQuestions] = useState([]);
+        const [currentIndex, setCurrentIndex] = useState(0);
+        const [score, setScore] = useState(0);
+        const [selectedOption, setSelectedOption] = useState(null);
+        const [showRationale, setShowRationale] = useState(false);
+        const [loaded, setLoaded] = useState(false);
+
+        useEffect(() => {
+          // Parse Questions
+          if (RAW_QUESTION_DATA && RAW_QUESTION_DATA.length > 50) {
+            setQuestions(parseQuestions(RAW_QUESTION_DATA));
+            setLoaded(true);
+          }
+          // Parse Study Guide
+          if (RAW_STUDY_GUIDE_DATA && RAW_STUDY_GUIDE_DATA.length > 50) {
+            setGuideData(parseStudyGuide(RAW_STUDY_GUIDE_DATA));
+          }
+        }, []);
+
+        const startQuiz = (cat) => {
+          let filtered = cat === "ALL" ? [...questions] : questions.filter(q => q.category === cat);
+          filtered.sort(() => Math.random() - 0.5);
+          setQuizQuestions(filtered);
+          setCurrentIndex(0); setScore(0); setSelectedOption(null); setShowRationale(false);
+          setMode("QUIZ");
+        };
+
+        const handleAnswer = (opt) => {
+          if (selectedOption) return;
+          setSelectedOption(opt);
+          setShowRationale(true);
+          if (opt === quizQuestions[currentIndex].answer) setScore(s => s + 1);
+        };
+
+        const nextQ = () => {
+          if (currentIndex < quizQuestions.length - 1) {
+            setCurrentIndex(prev => prev + 1); setSelectedOption(null); setShowRationale(false);
+          } else { setMode("RESULTS"); }
+        };
+
+        // Renderers
+        if (!loaded) return (
+          <div className="min-h-screen flex items-center justify-center p-6 text-center">
+            <div className="bg-white p-8 rounded-2xl shadow-xl max-w-md">
+              <div className="text-blue-500 mb-4 flex justify-center">{ICONS.FileText}</div>
+              <h2 className="text-xl font-bold mb-2">No Data Found</h2>
+              <p className="text-gray-500 text-sm">Please paste the text into the <code>RAW_QUESTION_DATA</code> variable in the code.</p>
+            </div>
+          </div>
+        );
+
+        if (mode === "GUIDE") return <StudyGuideView data={guideData} onBack={() => setMode("START")} />;
+
+        if (mode === "START") return (
+          <div className="min-h-screen bg-blue-50 flex flex-col items-center justify-center p-4">
+            <div className="bg-white p-8 rounded-3xl shadow-xl w-full max-w-lg text-center">
+              <div className="flex justify-center mb-4 text-indigo-600">{ICONS.Stethoscope}</div>
+              <h1 className="text-3xl font-extrabold text-gray-900 mb-2">Nursing Finals</h1>
+              <p className="text-gray-500 mb-6">Select a mode to begin.</p>
+              
+              <div className="space-y-3">
+                <button onClick={() => startQuiz("ALL")} className="w-full bg-gray-900 text-white py-4 rounded-xl font-bold hover:bg-gray-800 transition">Start Full Quiz</button>
+                <div className="grid grid-cols-3 gap-2">
+                  <button onClick={() => startQuiz("OB")} className="bg-pink-100 text-pink-700 py-3 rounded-xl font-bold text-sm hover:bg-pink-200">OB ({questions.filter(q=>q.category==="OB").length})</button>
+                  <button onClick={() => startQuiz("PEDS")} className="bg-orange-100 text-orange-700 py-3 rounded-xl font-bold text-sm hover:bg-orange-200">Peds ({questions.filter(q=>q.category==="PEDS").length})</button>
+                  <button onClick={() => startQuiz("MEDSURG")} className="bg-blue-100 text-blue-700 py-3 rounded-xl font-bold text-sm hover:bg-blue-200">MedSurg ({questions.filter(q=>q.category==="MEDSURG").length})</button>
+                </div>
+                {guideData.length > 0 && (
+                  <button onClick={() => setMode("GUIDE")} className="w-full border-2 border-indigo-100 text-indigo-700 py-4 rounded-xl font-bold hover:bg-indigo-50 flex items-center justify-center gap-2">
+                    {ICONS.BookOpen} Review Study Guide
+                  </button>
+                )}
+              </div>
+            </div>
+          </div>
+        );
+
+        if (mode === "RESULTS") {
+            const pct = Math.round((score/quizQuestions.length)*100);
+            return (
+                <div className="min-h-screen bg-indigo-50 flex items-center justify-center p-4">
+                    <div className="bg-white p-8 rounded-3xl shadow-xl w-full max-w-md text-center">
+                        <h2 className="text-2xl font-bold text-gray-800 mb-4">Complete!</h2>
+                        <div className="text-5xl font-bold text-indigo-600 mb-2">{pct}%</div>
+                        <p className="text-gray-500 mb-6">{score} out of {quizQuestions.length} correct</p>
+                        <button onClick={() => setMode("START")} className="w-full bg-indigo-600 text-white py-3 rounded-xl font-bold">Menu</button>
+                    </div>
+                </div>
+            )
+        }
+
+        // Quiz View
+        const q = quizQuestions[currentIndex];
+        return (
+            <div className="min-h-screen bg-gray-50 flex flex-col md:items-center p-4 pt-8">
+                <div className="w-full max-w-2xl">
+                    <div className="flex justify-between items-center mb-4 px-1">
+                        <button onClick={() => setMode("START")} className="text-gray-400 hover:text-gray-600">{ICONS.X}</button>
+                        <span className="font-bold text-gray-400 text-sm">{currentIndex + 1} / {quizQuestions.length}</span>
+                    </div>
+                    <div className="w-full bg-gray-200 h-2 rounded-full mb-6 overflow-hidden">
+                        <div className="bg-indigo-500 h-full transition-all" style={{width: `${((currentIndex)/quizQuestions.length)*100}%`}}></div>
+                    </div>
+                    <div className="bg-white p-6 rounded-2xl shadow-sm border border-gray-100 mb-4">
+                        <h3 className="text-lg font-medium text-gray-800">{q.text}</h3>
+                    </div>
+                    <div className="space-y-3 pb-24">
+                        {['A','B','C','D'].map(opt => {
+                            const isSel = selectedOption === opt;
+                            const isCor = q.answer === opt;
+                            let style = "bg-white border-transparent text-gray-700";
+                            if (showRationale) {
+                                if (isCor) style = "bg-green-50 border-green-500 text-green-800";
+                                else if (isSel) style = "bg-red-50 border-red-500 text-red-800";
+                                else style = "bg-gray-50 opacity-50";
+                            } else if (isSel) style = "bg-indigo-50 border-indigo-500 text-indigo-900";
+                            
+                            return (
+                                <button key={opt} onClick={() => handleAnswer(opt)} disabled={showRationale} 
+                                    className={`w-full p-4 rounded-xl text-left border-2 transition-all relative ${style} shadow-sm`}
+                                >
+                                    <span className="font-bold mr-3">{opt}</span>
+                                    {q.options[opt]}
+                                    {showRationale && isCor && <div className="absolute right-4 top-4 text-green-600">{ICONS.CheckCircle}</div>}
+                                </button>
+                            )
+                        })}
+                    </div>
+                    {showRationale && (
+                        <div className="fixed bottom-0 left-0 right-0 bg-white border-t p-4 shadow-lg animate-in slide-in-from-bottom">
+                            <div className="max-w-2xl mx-auto">
+                                <div className="max-h-32 overflow-y-auto mb-3 pr-2">
+                                    <p className="text-sm text-gray-600 leading-relaxed"><span className="font-bold text-gray-800">Rationale: </span>{q.rationale}</p>
+                                </div>
+                                <button onClick={nextQ} className="w-full bg-indigo-600 text-white py-3 rounded-xl font-bold flex justify-center items-center gap-2">Next {ICONS.ArrowRight}</button>
+                            </div>
+                        </div>
+                    )}
+                </div>
+            </div>
+        );
+      };
+
+      const root = ReactDOM.createRoot(document.getElementById("root"));
+      root.render(<App />);
+    </script>
+
+    <!-- ANALYTICS -->
+    <script src="https://cdn.counter.dev/script.js" data-id="522f691d-7d55-46c5-b114-518017ffa2f7" data-utcoffset="-8"></script>
+
+    <script>
+      // ==========================================
+      // PASTE ZONE - PASTE YOUR DATA BELOW
       // ==========================================
 
-      // IMPORTANT: Paste your text inside the backticks of String.raw``
-      // This prevents the code from confusing '\text' with a 'Tab' character.
+      // 1. Paste the FULL Study Guide Text inside the backticks below:
+      const RAW_STUDY_GUIDE_DATA = String.raw`The distillation of the most important topics covered across all lectures videos, powerpoint slides and documents found on canvas prioritized according to the "F25 Final Exam Question Breakdown" document, focuses heavily on Labor and Delivery, high-risk Obstetrics, Cardiopulmonary disorders, Fluid & Electrolyte balance, and Neurological subjects.
+Obstetrical Nursing (OB) Priorities (26 Questions)
+The highest priorities in the OB section are Labor and Delivery (L&D) and the Compromised Newborn, followed by Gestational Hypertension (GH)/Preeclampsia and Maternal Cardiac conditions.
+Labor and Delivery (L&D) (7 Questions)
+L&D focuses on the processes of labor and fetal well-being, specifically through electronic fetal monitoring (EFM).
+•	Fetal Monitoring (EFM): This involves evaluating the fetal hemodynamic and oxygen status in response to uterine activity. A reassuring pattern includes a baseline FHR of 120–160 beats/min, average/moderate variability, accelerations with fetal movement, and the absence of non-reassuring periodic changes.
+o	Baseline FHR typically ranges from 120–160 beats/min. Tachycardia is defined as >160 beats/min, often due to maternal fever or early fetal hypoxia. Bradycardia is <120 beats/min and is generally considered worse, potentially indicating late fetal hypoxemia.
+o	Variability reflects the interplay between the sympathetic (cardio-acceleration) and parasympathetic (cardio-deceleration) nervous systems. Moderate variability (6–25 bpm) is desirable, indicating an intact central nervous system (CNS). Minimal variability (<5 bpm) or absent variability signals potential fetal compromise or hypoxia/acidosis.
+o	Periodic Changes: These include accelerations and decelerations. 
+	Accelerations (+15 beats/min x 15 seconds) are normal and confirm fetal well-being and an intact CNS.
+	Early Decelerations are a reassuring pattern, uniform in shape, mirroring the contraction, and caused by head compression.
+	Variable Decelerations are abrupt, variable in shape ("U," "V," "W"), and caused by cord compression. They are often transient and correctable.
+	Late Decelerations are the most critical, beginning late in the contraction and recovering well after it ends. They signify uteroplacental insufficiency (UPI) and are a non-reassuring sign often associated with fetal hypoxia and acidemia.
+•	Mechanisms and Stages of Labor: Labor is categorized by the 5 P's (Passageway, Passenger, Powers, Position, and Psychological response). True labor involves regular, strengthening contractions leading to cervical changes. The first stage includes the latent (0–3 cm), active (4–7 cm), and transitional (8–10 cm) phases.
+Compromised Newborn (6 Questions)
+Priority care for the compromised newborn centers on respiratory support, thermoregulation, and nutrition in that specific order.
+•	Respiratory Compromise: Signs of distress include tachypnea (>60/min), nasal flaring, grunting, and retractions (subcostal, substernal, clavicular). Respiratory Distress Syndrome (RDS), common in preterm infants, results from insufficient surfactant production. Management includes oxygen, ventilation (CPAP, mechanical ventilation), and often the administration of exogenous surfactant.
+•	Thermoregulation: Premature infants are vulnerable to cold stress due to low brown adipose tissue (BAT) and high surface area. Cold stress increases the basal metabolic rate and oxygen consumption (three times more O2 is consumed trying to burn BAT), potentially leading to acidosis and exhaustion. Maintaining a neutral thermal environment (NTE) using radiant warmers or incubators is critical.
+•	Complications: Necrotizing Enterocolitis (NEC) is an acute inflammatory disease of the GI mucosa often associated with oxygen compromise. Periventricular-Intraventricular Hemorrhage (PV-IVH) results from changes in cerebral blood flow in the premature infant.
+Maternal High-Risk Conditions (14 Questions Total across 7 categories)
+•	Gestational Hypertension (GH)/Preeclampsia (2 questions): GH is defined as BP ≥ 140/90 after 20 weeks gestation. Preeclampsia is diagnosed by the classic dyad of hypertension and proteinuria. Severe complications include HELLP syndrome (Hemolytic anemia, Elevated Liver enzymes, Low Platelets) and Eclampsia (seizures). 
+o	The drug of choice (DOC) for preventing seizures in preeclamptic patients is Magnesium Sulfate (MgSO4), which works by depressing the CNS and blocking acetylcholine. The therapeutic Mg level is 4–7 mg/dL. The antidote for MgSO4 toxicity is Calcium Gluconate.
+o	The only definitive cure for PIH is delivery of the fetus/placenta.
+•	Maternal Cardiac Conditions (2 questions): Pregnancy increases intravascular volume, heart rate, and cardiac output, peaking at 28–32 weeks, placing maximum hemodynamic stress on the heart. Symptoms of cardiac decompensation include increased fatigue, dyspnea on exertion (DOE), palpitations, swelling, heart rate 100 beats/min, and crackles in the lungs.
+•	Complications of L&D (2 questions): This includes conditions like Placenta Previa (placenta covering the cervical os, resulting in painless bleeding) and Abruptio Placentae (premature placental detachment, often associated with painful uterine tetany or concealed hemorrhage).
+•	Postpartum Hemorrhage (PPH) (1 question): PPH is defined as blood loss >1000 mL, regardless of delivery mode. The most common cause is uterine atony (hypotonia of the uterus), which is managed primarily by massaging the fundus and administering uterotonics (e.g., Pitocin, Methergine).
+•	GDM (2 questions): Gestational Diabetes Mellitus is glucose intolerance recognized during pregnancy. The placenta produces insulin antagonists (like hPL), leading to insulin resistance in the mother, creating a "diabetogenic state" to ensure adequate glucose supply to the fetus. Maternal needs often increase, resulting in hyperglycemia. After delivery, insulin needs decrease dramatically as the placenta is removed.
+________________________________________
+Med-Surg Priorities (27 Questions)
+The highest priorities in the Med-Surg section are Neurology, Cardiac, and Fluid & Electrolyte/ABGs (4 questions each).
+Med-Surg Neurological Disorders (4 Questions)
+•	Neuro Assessment: Initial assessment relies heavily on the Mental Status Exam (MSE) and Glasgow Coma Scale (GCS). Only the extraocular movement (EOM) is typically assessed as a cranial nerve function in pediatric patients.
+•	Cranial Nerves (CNs): There are 12 pairs of CNs, categorized as sensory (S), motor (M), or mixed (B). Knowledge includes their number, name, and primary function. 
+o	CN III (Oculomotor): Pupil constriction and eye movement.
+o	CN V (Trigeminal): Face sensation, chewing, biting.
+o	CN IX (Glossopharyngeal) and CN X (Vagus): Gag reflex, swallowing, voice quality.
+•	Stroke (CVA): Strokes are categorized as ischemic (87%, due to clot/obstruction) or hemorrhagic (13%, due to bleeding/extravasation). A TIA (Transient ischemic Attack) is a transient episode of neurological dysfunction that resolves but is a major risk factor for future stroke. 
+o	Signs and symptoms include Aphasia (receptive, expressive, or global), Dysphagia (difficulty swallowing), Paresis/Paralysis, and Sensory Loss. A quick bedside swallow test is crucial before administering anything orally.
+o	Acute Management: For ischemic stroke, the definitive reperfusion therapy is tissue plasminogen activator (tPA). tPA must be administered within 180 minutes (3 hours) of symptom onset, and the CT scan must be negative for hemorrhage. Permissive Hypertension is often maintained during the acute phase (first 24-48 hours) to ensure cerebral perfusion.
+•	Neurodegenerative/Inflammatory Disorders: 
+o	Meningitis/Encephalitis: Acute inflammation of the meninges/brain. Key signs include severe headache and nuchal rigidity (stiff neck). Diagnosis relies on a lumbar puncture (LP). Bacterial meningitis requires IV antibiotics and droplet isolation.
+o	Parkinson's Disease (PD): Progressive motor dysfunction caused by the degeneration of dopamine-producing neurons, creating an imbalance with acetylcholine. The classic triad of PD includes tremor (pill rolling), rigidity (cogwheeling), and bradykinesia (slow movement).
+o	Multiple Sclerosis (MS): A chronic autoimmune disorder characterized by inflammation, demyelination of axons, and scar tissue formation in the CNS. Symptoms are highly variable (remissions/exacerbations), including fatigue, spasticity, vision changes, and bladder/bowel dysfunction.
+o	Amyotrophic Lateral Sclerosis (ALS): Fatal disease affecting upper and lower motor neurons, leading to progressive muscle weakness and paralysis. Crucially, sensory and intellect remain intact. Death usually results from respiratory failure.
+o	Myasthenia Gravis (MG): Autoimmune disease where acetylcholine receptor sites are destroyed, causing muscle weakness, especially noticeable in eye and facial movements. Weakening of the intercostals and diaphragm is a critical concern due to respiratory risk.
+Med-Surg Cardiovascular Disorders (4 Questions)
+•	Heart Failure (HF): Characterized by the heart's inability to pump adequate blood to meet metabolic demands. 
+o	Right-sided failure leads to systemic venous congestion, signs include JVD, ascites, peripheral edema, and hepatomegaly.
+o	Left-sided failure causes blood backup into the pulmonary circuit, leading to pulmonary edema, crackles/rales, and dyspnea.
+o	Pathophysiology: Compensatory mechanisms (SNS activation releasing catecholamines; RAAS activation leading to aldosterone release) initially help but eventually cause further deterioration by increasing preload, afterload, and cardiac workload.
+•	HF Management: Goals are to decrease cardiac demands and counteract negative compensatory spirals. 
+o	Diuretics (e.g., Furosemide/Lasix) decrease preload by reducing fluid volume.
+o	ACE inhibitors (ending in -pril) are cornerstones of therapy, reducing both preload (by blocking aldosterone) and afterload (by dilating arteries). A known side effect is a persistent cough.
+o	Digoxin is a positive inotrope, increasing the force of myocardial contraction and improving stroke volume. It has a narrow therapeutic window. Toxicity signs include bradycardia and GI symptoms (anorexia, nausea, vomiting). Hypokalemia potentiates Digoxin toxicity.
+•	Core Measures: Hospitals must ensure documented left ventricular Ejection Fraction (EF) assessment, prescribed medications (ACE inhibitor/ARB, diuretic, beta blocker for systolic HF), written discharge instructions (meds, diet, activity, daily weights), and smoking cessation counseling.
+Med-Surg Fluid, Electrolytes, and ABGs (4 Questions)
+•	Fluid Regulation: Fluid movement is controlled by hydrostatic pressure (driving fluid out) and oncotic pressure (pulling fluid in, exerted by proteins like albumin). 
+o	RAAS is activated by low cardiac output, leading to the release of renin → Angiotensin II → Aldosterone, which causes Na and H2O retention, increasing volume.
+o	ADH is released in response to fluid volume deficit or increased osmolality, acting on renal tubules to conserve water.
+•	Electrolyte Imbalances: 
+o	Hyperkalemia (K+ > 5.0mEq/L): Causes include tissue destruction, renal disease, or ACE inhibitors/Spironolactone use. Signs include severe arrhythmias/cardiac arrest, muscle weakness, and diarrhea. Treatment includes IV Calcium gluconate (to stabilize cardiac tissue), Kayexalate, or Insulin/D50.
+o	Hyponatremia (Na+ < 135mEq/L): Often due to dilution or diuretic overuse. Risk for cerebral edema. Treatment requires fluid restriction and careful administration of hypertonic saline (e.g., 3%).
+o	Hypermagnesemia (Mg > 2.6 mEq/L): Most concerning signs are respiratory depression and loss of deep tendon reflexes (DTRs). The treatment is IV Calcium Chloride or Calcium Gluconate.
+o	Potassium and Renal Function: When administering IV fluids with potassium, ensure the patient is voiding first, as the kidneys must be functional to excrete K+.
+•	Acid-Base Balance (ABGs): Analysis relies on interpreting pH (7.35–7.45), PaCO2 (35–45, respiratory component), and HCO3- (22–26, metabolic/renal component). 
+o	Respiratory Acidosis (pH < 7.35, PaCO2 > 45): Caused by hypoventilation (e.g., COPD, narcotic overdose) leading to CO2 retention.
+o	Metabolic Acidosis (pH < 7.35, HCO3- < 22): Caused by acid excess (e.g., DKA, lactic acidosis) or loss of base (e.g., severe diarrhea).
+o	Compensation: The un-affected system compensates (lungs compensate quickly by changing rate; kidneys compensate slowly by excreting/retaining H+ + HCO3-)
+Med-Surg Respiratory Disorders (3 Questions)
+•	COPD: A chronic, generally irreversible airflow limitation (including chronic bronchitis and emphysema). These patients are often $\text{CO}_2$ retainers. Symptoms include chronic cough, barrel chest, increased work of breathing, and exertional dyspnea. 
+o	Nursing Care: Prioritizes improving airflow and decreasing cardiac demand. Techniques include teaching pursed-lip breathing (to prolong expiration) and administering supplemental O2 as needed for cell life, regardless of fears regarding CO2 retention.
+o	Medications: Include bronchodilators (e.g., Albuterol, Atrovent), and corticosteroids (e.g., Solu-Medrol, Prednisone) for acute exacerbations. Corticosteroids must be tapered slowly to avoid Addison's crisis.
+•	Tuberculosis (TB): A preventable and curable infectious disease spread via airborne droplets. 
+o	Diagnosis: Requires a positive sputum culture for Acid Fast Bacillus (AFB) and active symptoms.
+o	Management: Active TB patients are placed in a negative airflow room and staff must wear N95 masks. Treatment is prolonged, typically using a combination of drugs (e.g., RIPE regimen: Rifampin, Isoniazid, Pyrazinamide, Ethambutol). Compliance is vital, often monitored via Directly Observed Therapy (DOT) due to the risk of multi-drug resistant TB (MDR-TB). Rifampin can cause body fluids (urine, tears) to turn reddish-orange.
+________________________________________
+Pediatrics Priorities
+The final exam breakdown indicates that 27 questions are dedicated to the care of the pediatric patient, with significant weight placed on Assessment, Cardiac, Neuro, GI, and Hematology/Immunology topics. Key points to focus on for potential exam questions within these high-yield areas include:
+1. Pediatric Assessment (5 questions)
+The assessment section emphasizes fundamental nursing knowledge and age-appropriate care specific to the pediatric population:
+•	Physical Exam Approach and Environment: Utilize a developmental approach, employing patience and distraction, as nothing happens quickly with pediatric patients. The sequence of the physical exam should prioritize less traumatic assessments first, reserving the mouth, ears, eyes, blood pressure, and temperature checks for last. If a procedure is painful, it should be done in a treatment room rather than the child's bed, which is considered a safe place.
+•	Vital Signs and Physical Cues: The expected urine output is 1 cc/kg/hour, a calculation critical for monitoring fluid status in children. Capillary refill time should be less than two seconds in pediatric patients to indicate adequate cardiac output. For infants, apical pulse must be checked for one full minute. Feeds should be held if an infant’s respiratory rate is greater than 60 breaths per minute due to aspiration risk. Recognize that while irregular abdominal breathing is normal up to age four, absent or diminished breath sounds are always an abnormal and dangerous finding in pediatric patients.
+•	Pain and Development: Use the appropriate pain assessment tools: FLACC for non-verbal or cognitive impairment (ages 2 months–7 years), and Wong-Baker Faces scale or Numeric scale for older children. Preparation for painful procedures should be age-appropriate and honest, stating what will hurt, where, and for how long. Offering choices gives the child a sense of locus of control.
+2. Cardiovascular Disorders (4 questions)
+Focus areas include the pathophysiology, compensatory mechanisms, signs, symptoms, and nursing management of heart failure (HF) and specific congenital defects:
+•	Heart Failure Pathophysiology: Understand the core concepts of Preload (volume returning to the heart, affecting the right side) and Afterload (resistance the heart pumps against, affecting the left side). Right-sided failure leads to systemic venous congestion (e.g., hepatomegaly, edema), while left-sided failure causes pulmonary edema (crackles/rales). Compensatory mechanisms, such as sympathetic nervous system stimulation, cause early signs like tachycardia and sweating (especially on the head in infants).
+•	HF Management: The overall goal is to improve cardiac function, remove excess fluid, and decrease cardiac demands. 
+o	Digoxin improves contractility but has a narrow therapeutic window; signs of toxicity include nausea, vomiting, and bradycardia. The apical pulse must be checked prior to administration.
+o	ACE Inhibitors reduce afterload (systemic vascular resistance) by causing vasodilation.
+o	Diuretics like Furosemide (Lasix) remove fluid; strict monitoring of intake and output (I&O) is essential, and fluids may be restricted to meet the 1 cc/kg/hr minimum urine output goal.
+o	Nutritional management often involves high caloric density formula (24 to 30 kcal/ounce) to meet the high metabolic demands of growing infants with HF.
+•	Congenital Defects: Ventricular Septal Defect (VSD) is the most common cardiac defect. For Coarctation of the Aorta, characteristic findings include higher blood pressure in the arms (proximal to the defect) and decreased femoral pulses/lower BP in the legs (distal to the defect).
+•	Tetralogy of Fallot ("Tet Spell"): This defect is a right-to-left shunt, meaning deoxygenated blood bypasses the lungs. During a hypercyanotic spell ("Tet spell"), the priority intervention is placing the child in the knee-to-chest position, which increases systemic vascular resistance and promotes blood flow into the pulmonary artery for oxygenation.
+3. Neurologic Disorders (3 questions)
+The focus here is on assessing neurological compromise, managing increased intracranial pressure (ICP), and treating acute and chronic disorders:
+•	Increased Intracranial Pressure (ICP): A key principle is to limit IV fluids to maintain the patient slightly dry and prevent cerebral edema. Nursing management involves positioning the head midline with the head of the bed elevated 15 degrees to avoid venous compression. Avoid activities that raise ICP, such as suctioning, vomiting, or stress.
+•	Hydrocephalus and Shunts: Hydrocephalus is often treated by placing a Ventriculoperitoneal (VP) shunt. The greatest post-operative risk is infection, primarily occurring within the first six months.
+•	Seizures: Status epilepticus (a seizure lasting longer than five minutes or recurrent seizures without recovery) is a medical emergency requiring immediate management of the airway/breathing (ABC) and administration of rescue medications like IV lorazepam or rectal diazepam. Seizure precautions include padding rails, having oxygen and suction available, and avoiding placing anything orally during a seizure.
+•	Spina Bifida: Myelomeningocele results in neurological deficits in the lower extremities (flaccidity/paralysis). Patients with spina bifida are at high risk for developing a latex allergy due to repeated exposure during medical procedures. Management includes ensuring adequate bowel/bladder function (often intermittent catheterization) and orthopedic interventions.
+4. Gastrointestinal Disorders (3 questions)
+Key points center on fluid balance, dehydration types, and distinguishing characteristics of structural GI defects:
+•	Fluid & Electrolytes (F&E): Infants have a higher proportion of extracellular fluid (ECF) and a higher Basal Metabolic Rate (BMR), making them susceptible to rapid and critical fluid shifts. When rehydrating a pediatric patient who is losing F&E (e.g., diarrhea/vomiting), IV fluids containing potassium should be withheld until the patient confirms they are voiding. Hypertonic dehydration (water loss greater than electrolyte loss) is the most dangerous type because it pulls fluid from the intracellular space, leading to cell damage.
+•	Pyloric Stenosis: The classic presentation includes projectile, non-bilious vomiting (often between 3 weeks and 5 months of age) and the palpation of a characteristic olive-like mass near the right side of the umbilicus.
+•	Hirschsprung’s Disease: This motility disorder results from the absence of ganglionic cells in the distal colon/rectum, causing retained stool. Key symptoms in newborns include failure to pass meconium within 48 hours.
+•	Appendicitis: If abdominal pain suddenly resolves during suspected appendicitis, it is a serious warning sign that the appendix may have perforated (ruptured), potentially leading to peritonitis and sepsis.
+•	Failure to Thrive (FTT): Diagnosed when growth patterns fall off the growth curve. Etiology is multifactorial, including inadequate calorie intake, malabsorption (e.g., cystic fibrosis), increased metabolism (e.g., congenital heart disease), or defective utilization (e.g., Trisomy 21). Management focuses on catch-up growth using calorie-dense foods.
+5. Hematology and Immunology (3 questions)
+The focus is largely on oncologic emergencies, chemotherapy side effects, and sickle cell crisis management:
+•	Oncology/Chemotherapy: For blood cancers (like ALL), primary diagnostic procedures include bone marrow aspiration, lumbar puncture (to check for CNS involvement), and placement of a Broviac line (central line for chemo administration). Chemotherapy causes myelosuppression (suppression of bone marrow function), leading to neutropenia, thrombocytopenia, and anemia.
+•	Neutropenia Management: The patient is at highest risk for infection during the Nadir, the period of lowest blood cell count, often around Day 14 post-chemo. A Fever and Neutropenia event (ANC < 500) requires immediate septic workup and prompt IV antibiotics. Crucial nursing interventions include strict handwashing and avoiding invasive procedures or rectal temperatures.
+•	Sickle Cell Anemia (SCA): Sickling is triggered by hypoxia, acidosis, hyperthermia, or dehydration. Management priorities during a vaso-occlusive crisis (pain crisis) include aggressive hydration and effective pain control (often opiates/PCA). Oxygen is only administered if the patient is hypoxic.
+•	HIV Care: Children with HIV may receive immunizations if their CD4 count is above 200, but they must never receive live vaccines.
 
-      const RAW_TEXT_DATA = String.raw`### Group 1: Gestational Hypertension, Preeclampsia, and HELLP Syndrome (ADPIE, ABC, Safety)
+`;
+
+      // 2. Paste the FULL Question Bank Text inside the backticks below:
+      const RAW_QUESTION_DATA = String.raw`### Group 1: Gestational Hypertension, Preeclampsia, and HELLP Syndrome (ADPIE, ABC, Safety)
 
 **1. A pregnant client at 34 weeks gestation presents to the clinic with a BP of 145/95 mm Hg and 2+ proteinuria. The nurse recognizes these findings as the classic diagnostic dyad for which condition? (Assessment/Analysis)**
 A. Eclampsia
@@ -1825,609 +2283,7 @@ B. When it is one-third to one-half full,.
 C. Only when the client feels discomfort or cramping.
 D. Every 24 hours regardless of output volume.
 **Correct Answer: B.** The colostomy bag should be emptied when it is about one-third to one-half full, rinsed, and secured to prevent leakage and maceration,.`;
-
-      // ==========================================
-      // ICONS DATA (Embedded to prevent loading errors)
-      // ==========================================
-
-      const ICONS = {
-        FileText: (
-          <g
-            stroke="currentColor"
-            strokeWidth="2"
-            fill="none"
-            strokeLinecap="round"
-            strokeLinejoin="round"
-          >
-            <path d="M14.5 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7.5L14.5 2z" />
-            <polyline points="14 2 14 8 20 8" />
-            <line x1="16" y1="13" x2="8" y2="13" />
-            <line x1="16" y1="17" x2="8" y2="17" />
-            <polyline points="10 9 9 9 8 9" />
-          </g>
-        ),
-        Stethoscope: (
-          <g
-            stroke="currentColor"
-            strokeWidth="2"
-            fill="none"
-            strokeLinecap="round"
-            strokeLinejoin="round"
-          >
-            <path d="M4.8 2.3A.3.3 0 1 0 5 2H4a2 2 0 0 0-2 2v5a6 6 0 0 0 6 6v0a6 6 0 0 0 6-6V4a2 2 0 0 0-2-2h-1a.2.2 0 1 0 .3.3" />
-            <path d="M8 15v1a6 6 0 0 0 6 6v0a6 6 0 0 0 6-6v-4" />
-            <circle cx="20" cy="10" r="2" />
-          </g>
-        ),
-        X: (
-          <g
-            stroke="currentColor"
-            strokeWidth="2"
-            fill="none"
-            strokeLinecap="round"
-            strokeLinejoin="round"
-          >
-            <path d="M18 6 6 18" />
-            <path d="m6 6 12 12" />
-          </g>
-        ),
-        CheckCircle: (
-          <g
-            stroke="currentColor"
-            strokeWidth="2"
-            fill="none"
-            strokeLinecap="round"
-            strokeLinejoin="round"
-          >
-            <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14" />
-            <polyline points="22 4 12 14.01 9 11.01" />
-          </g>
-        ),
-        ArrowRight: (
-          <g
-            stroke="currentColor"
-            strokeWidth="2"
-            fill="none"
-            strokeLinecap="round"
-            strokeLinejoin="round"
-          >
-            <line x1="5" y1="12" x2="19" y2="12" />
-            <polyline points="12 5 19 12 12 19" />
-          </g>
-        ),
-      };
-
-      // ==========================================
-      // APP LOGIC
-      // ==========================================
-
-      const { useState, useEffect, useMemo } = React;
-
-      // Helper to clean LaTeX-like formatting for better readability
-      const cleanText = (text) => {
-        if (!text) return "";
-        let cleaned = text;
-
-        // 1. Handle explicit symbol replacements first
-        cleaned = cleaned
-          .replace(/\\geq/g, "≥")
-          .replace(/\\leq/g, "≤")
-          .replace(/\\cong/g, "≅")
-          .replace(/\\circ/g, "°")
-          .replace(/\\Delta/g, "Δ")
-          .replace(/\\downarrow/g, "↓")
-          .replace(/\\uparrow/g, "↑")
-          .replace(/\\pm/g, "±")
-          .replace(/\\times/g, "×")
-          .replace(/\\approx/g, "≈")
-          .replace(/\\neq/g, "≠");
-
-        // 2. Remove \text{...} wrappers.
-        // We do this loop to catch nested braces if simple regex fails,
-        // though your text bank seems simple: \text{Content}
-        cleaned = cleaned.replace(/\\text\s*\{([^}]+)\}/g, "$1");
-
-        // 3. Remove dollar signs used for math mode
-        cleaned = cleaned.replace(/\$([^$]+)\$/g, "$1");
-
-        // 4. Cleanup remaining artifacts
-        cleaned = cleaned
-          // Remove subscripts/superscripts indicators
-          .replace(/[_^]/g, "")
-          // Remove lingering curly braces
-          .replace(/[{}]/g, "")
-          // Remove any leftover backslashes
-          .replace(/\\/g, "")
-          // Normalize spaces
-          .replace(/\s+/g, " ")
-          .trim();
-
-        return cleaned;
-      };
-
-      const QuestionParser = (raw) => {
-        if (!raw || raw.length < 100) return [];
-
-        const sections = [
-          { id: "OB", name: "OB/L&D", start: 0, end: raw.length },
-          {
-            id: "PEDS",
-            name: "Pediatrics",
-            start: raw.length,
-            end: raw.length,
-          },
-          {
-            id: "MEDSURG",
-            name: "Med/Surg",
-            start: raw.length,
-            end: raw.length,
-          },
-        ];
-
-        // Find delimiters
-        const pedsIndex = raw.indexOf("//Pediatrics begin");
-        const medSurgIndex = raw.indexOf("//MedSurg Begin");
-
-        if (pedsIndex !== -1) {
-          sections[0].end = pedsIndex;
-          sections[1].start = pedsIndex;
-          if (medSurgIndex !== -1) {
-            sections[1].end = medSurgIndex;
-            sections[2].start = medSurgIndex;
-          }
-        } else if (medSurgIndex !== -1) {
-          // If peds missing for some reason
-          sections[0].end = medSurgIndex;
-          sections[2].start = medSurgIndex;
-        }
-
-        let allQuestions = [];
-
-        sections.forEach((section) => {
-          const sectionText = raw.substring(section.start, section.end);
-          const lines = sectionText.split("\n");
-          let currentQ = null;
-
-          lines.forEach((line) => {
-            line = line.trim();
-            if (!line) return;
-
-            // Detect Start of Question: "**1. " or "** 1. "
-            const qStartMatch = line.match(/^\*\*(\d+)\.\s+(.*)/);
-            if (qStartMatch) {
-              // Save previous if exists
-              if (currentQ) allQuestions.push(currentQ);
-
-              // Start new
-              currentQ = {
-                id: parseInt(qStartMatch[1]),
-                category: section.id,
-                text: cleanText(qStartMatch[2].replace(/\*\*$/, "")), // Remove trailing ** if present
-                options: {},
-                answer: null,
-                rationale: "",
-              };
-              return;
-            }
-
-            if (!currentQ) return;
-
-            // Detect Options: "A. ", "B. ", etc.
-            const optMatch = line.match(/^([A-D])\.\s+(.*)/);
-            if (optMatch) {
-              currentQ.options[optMatch[1]] = cleanText(optMatch[2]);
-              return;
-            }
-
-            // Detect Answer: "**Correct Answer: C.**"
-            const ansMatch = line.match(
-              /\*\*Correct Answer:\s*([A-D])\.?\*\*(.*)/
-            );
-            if (ansMatch) {
-              currentQ.answer = ansMatch[1];
-              currentQ.rationale = cleanText(ansMatch[2]);
-              return;
-            }
-
-            // If it's a continuation of rationale
-            if (
-              currentQ.answer &&
-              !line.startsWith("***") &&
-              !line.startsWith("###")
-            ) {
-              currentQ.rationale += " " + cleanText(line);
-            }
-            // If it's a continuation of question text (before options)
-            else if (
-              !Object.keys(currentQ.options).length &&
-              !line.startsWith("***") &&
-              !line.startsWith("###")
-            ) {
-              currentQ.text += " " + cleanText(line);
-            }
-          });
-          // Push last question
-          if (currentQ) allQuestions.push(currentQ);
-        });
-
-        return allQuestions.filter(
-          (q) => q.answer && Object.keys(q.options).length >= 2
-        );
-      };
-
-      const App = () => {
-        const [questions, setQuestions] = useState([]);
-        const [mode, setMode] = useState("START"); // START, QUIZ, RESULTS
-        const [currentCategory, setCurrentCategory] = useState("ALL");
-        const [quizQuestions, setQuizQuestions] = useState([]);
-        const [currentIndex, setCurrentIndex] = useState(0);
-        const [score, setScore] = useState(0);
-        const [selectedOption, setSelectedOption] = useState(null);
-        const [showRationale, setShowRationale] = useState(false);
-        const [hasLoadedData, setHasLoadedData] = useState(false);
-
-        useEffect(() => {
-          // Try to load from hardcoded variable first
-          if (RAW_TEXT_DATA && RAW_TEXT_DATA.length > 100) {
-            const parsed = QuestionParser(RAW_TEXT_DATA);
-            setQuestions(parsed);
-            setHasLoadedData(true);
-          }
-        }, []);
-
-        const handleFileUpload = (e) => {
-          const file = e.target.files[0];
-          if (!file) return;
-
-          const reader = new FileReader();
-          reader.onload = (event) => {
-            const parsed = QuestionParser(event.target.result);
-            setQuestions(parsed);
-            setHasLoadedData(true);
-          };
-          reader.readAsText(file);
-        };
-
-        const startQuiz = (category) => {
-          setCurrentCategory(category);
-          let filtered = [];
-          if (category === "ALL") {
-            filtered = [...questions];
-          } else {
-            filtered = questions.filter((q) => q.category === category);
-          }
-
-          // Shuffle questions
-          filtered.sort(() => Math.random() - 0.5);
-
-          setQuizQuestions(filtered);
-          setCurrentIndex(0);
-          setScore(0);
-          setMode("QUIZ");
-          setSelectedOption(null);
-          setShowRationale(false);
-        };
-
-        const handleAnswer = (optionKey) => {
-          if (selectedOption) return; // Prevent changing answer
-          setSelectedOption(optionKey);
-          setShowRationale(true);
-
-          if (optionKey === quizQuestions[currentIndex].answer) {
-            setScore((s) => s + 1);
-          }
-        };
-
-        const nextQuestion = () => {
-          if (currentIndex < quizQuestions.length - 1) {
-            setCurrentIndex((prev) => prev + 1);
-            setSelectedOption(null);
-            setShowRationale(false);
-          } else {
-            setMode("RESULTS");
-          }
-        };
-
-        const restart = () => {
-          setMode("START");
-          setSelectedOption(null);
-          setShowRationale(false);
-        };
-
-        const Icon = ({ name, size = 24, className }) => {
-          const iconSvg = ICONS[name];
-          if (!iconSvg) return null;
-
-          return (
-            <svg
-              width={size}
-              height={size}
-              viewBox="0 0 24 24"
-              className={className}
-              xmlns="http://www.w3.org/2000/svg"
-            >
-              {iconSvg}
-            </svg>
-          );
-        };
-
-        // ---- RENDERERS ----
-
-        if (!hasLoadedData) {
-          return (
-            <div className="min-h-screen flex flex-col items-center justify-center p-6 text-center max-w-md mx-auto">
-              <div className="bg-white p-8 rounded-2xl shadow-xl w-full">
-                <div className="text-blue-600 mb-4 flex justify-center">
-                  <Icon name="FileText" size={48} />
-                </div>
-                <h1 className="text-2xl font-bold text-gray-800 mb-2">
-                  Load Question Bank
-                </h1>
-                <p className="text-gray-600 mb-6">
-                  The applet needs the question data to start. Please upload the{" "}
-                  <b>Final-exam-test-question-bank.txt</b> file.
-                </p>
-
-                <label className="block w-full">
-                  <span className="sr-only">Choose file</span>
-                  <input
-                    type="file"
-                    onChange={handleFileUpload}
-                    accept=".txt"
-                    className="block w-full text-sm text-gray-500
-                                    file:mr-4 file:py-3 file:px-6
-                                    file:rounded-full file:border-0
-                                    file:text-sm file:font-semibold
-                                    file:bg-blue-50 file:text-blue-700
-                                    hover:file:bg-blue-100
-                                    cursor-pointer border border-gray-200 rounded-lg
-                                "
-                  />
-                </label>
-
-                <div className="mt-6 text-xs text-gray-400">
-                  Tip: Paste the text into the code to skip this step next time.
-                </div>
-              </div>
-            </div>
-          );
-        }
-
-        if (mode === "START") {
-          return (
-            <div className="min-h-screen bg-gradient-to-br from-blue-50 to-indigo-100 flex flex-col items-center justify-center p-4">
-              <div className="bg-white p-6 sm:p-10 rounded-3xl shadow-2xl w-full max-w-lg text-center">
-                <div className="flex justify-center mb-6 text-indigo-600">
-                  <Icon name="Stethoscope" size={64} />
-                </div>
-                <h1 className="text-3xl font-extrabold text-gray-900 mb-2">
-                  Nursing Finals Review
-                </h1>
-                <p className="text-gray-500 mb-8">
-                  Select a category to begin your practice session.
-                </p>
-
-                <div className="grid gap-4">
-                  <button
-                    onClick={() => startQuiz("OB")}
-                    className="btn-tap bg-pink-100 hover:bg-pink-200 text-pink-700 py-4 px-6 rounded-xl font-bold text-lg flex items-center justify-between transition-colors"
-                  >
-                    <span>OB / L&D</span>
-                    <span className="bg-white/50 px-2 py-1 rounded text-sm">
-                      {questions.filter((q) => q.category === "OB").length} Qs
-                    </span>
-                  </button>
-                  <button
-                    onClick={() => startQuiz("PEDS")}
-                    className="btn-tap bg-orange-100 hover:bg-orange-200 text-orange-700 py-4 px-6 rounded-xl font-bold text-lg flex items-center justify-between transition-colors"
-                  >
-                    <span>Pediatrics</span>
-                    <span className="bg-white/50 px-2 py-1 rounded text-sm">
-                      {questions.filter((q) => q.category === "PEDS").length} Qs
-                    </span>
-                  </button>
-                  <button
-                    onClick={() => startQuiz("MEDSURG")}
-                    className="btn-tap bg-blue-100 hover:bg-blue-200 text-blue-700 py-4 px-6 rounded-xl font-bold text-lg flex items-center justify-between transition-colors"
-                  >
-                    <span>Med / Surg</span>
-                    <span className="bg-white/50 px-2 py-1 rounded text-sm">
-                      {questions.filter((q) => q.category === "MEDSURG").length}{" "}
-                      Qs
-                    </span>
-                  </button>
-                  <button
-                    onClick={() => startQuiz("ALL")}
-                    className="btn-tap bg-gray-800 hover:bg-gray-900 text-white py-4 px-6 rounded-xl font-bold text-lg flex items-center justify-center shadow-lg transition-colors mt-2"
-                  >
-                    Comprehensive Review (All)
-                  </button>
-                </div>
-
-                <p className="mt-8 text-xs text-gray-400">
-                  Total Questions Loaded: {questions.length}
-                </p>
-              </div>
-            </div>
-          );
-        }
-
-        if (mode === "RESULTS") {
-          const percentage = Math.round((score / quizQuestions.length) * 100);
-          let message = "Good effort!";
-          if (percentage >= 80) message = "Excellent work, Nurse!";
-          else if (percentage >= 60) message = "You're getting there!";
-          else message = "Keep studying, you can do it!";
-
-          return (
-            <div className="min-h-screen bg-indigo-50 flex items-center justify-center p-4">
-              <div className="bg-white p-8 rounded-3xl shadow-xl w-full max-w-md text-center">
-                <h2 className="text-2xl font-bold text-gray-800 mb-4">
-                  Session Complete
-                </h2>
-
-                <div className="relative w-40 h-40 mx-auto mb-6 flex items-center justify-center">
-                  <div className="absolute inset-0 rounded-full border-8 border-gray-100"></div>
-                  <div
-                    className="absolute inset-0 rounded-full border-8 border-indigo-500"
-                    style={{
-                      clipPath: `inset(${100 - percentage}% 0 0 0)`,
-                    }}
-                  ></div>
-                  <div className="text-4xl font-bold text-indigo-600">
-                    {percentage}%
-                  </div>
-                </div>
-
-                <p className="text-gray-600 text-lg mb-2">{message}</p>
-                <p className="text-gray-400 mb-8">
-                  {score} correct out of {quizQuestions.length}
-                </p>
-
-                <button
-                  onClick={restart}
-                  className="w-full bg-indigo-600 text-white py-3 rounded-xl font-semibold hover:bg-indigo-700 transition-colors"
-                >
-                  Return to Menu
-                </button>
-              </div>
-            </div>
-          );
-        }
-
-        // QUIZ MODE
-        const currentQ = quizQuestions[currentIndex];
-        const progress = (currentIndex / quizQuestions.length) * 100;
-
-        return (
-          <div className="min-h-screen bg-gray-50 flex flex-col md:items-center p-4 md:pt-10">
-            <div className="w-full max-w-2xl">
-              {/* Header */}
-              <div className="flex justify-between items-center mb-4 px-2">
-                <button
-                  onClick={restart}
-                  className="text-gray-400 hover:text-gray-600"
-                >
-                  <Icon name="X" size={24} />
-                </button>
-                <div className="text-sm font-semibold text-gray-500">
-                  {currentCategory === "ALL" ? "Comprehensive" : currentQ.name}
-                </div>
-                <div className="text-sm font-semibold text-indigo-600">
-                  {currentIndex + 1} / {quizQuestions.length}
-                </div>
-              </div>
-
-              {/* Progress Bar */}
-              <div className="w-full bg-gray-200 h-2 rounded-full mb-6 overflow-hidden">
-                <div
-                  className="bg-indigo-500 h-full transition-all duration-300"
-                  style={{ width: `${progress}%` }}
-                ></div>
-              </div>
-
-              {/* Question Card */}
-              <div className="bg-white rounded-2xl shadow-sm border border-gray-100 p-6 mb-6">
-                <h3 className="text-lg md:text-xl font-medium text-gray-800 leading-relaxed">
-                  {currentQ.text}
-                </h3>
-              </div>
-
-              {/* Options */}
-              <div className="space-y-3 mb-20">
-                {["A", "B", "C", "D"].map((opt) => {
-                  const isSelected = selectedOption === opt;
-                  const isCorrect = currentQ.answer === opt;
-                  const showCorrectness = showRationale;
-
-                  let btnClass =
-                    "w-full p-4 rounded-xl text-left border-2 transition-all relative ";
-
-                  if (showCorrectness) {
-                    if (isCorrect) {
-                      btnClass += "bg-green-50 border-green-500 text-green-800";
-                    } else if (isSelected && !isCorrect) {
-                      btnClass += "bg-red-50 border-red-500 text-red-800";
-                    } else {
-                      btnClass +=
-                        "bg-gray-50 border-transparent text-gray-400 opacity-70";
-                    }
-                  } else {
-                    if (isSelected) {
-                      btnClass +=
-                        "bg-indigo-50 border-indigo-500 text-indigo-900";
-                    } else {
-                      btnClass +=
-                        "bg-white border-transparent shadow-sm hover:bg-gray-50 text-gray-700";
-                    }
-                  }
-
-                  return (
-                    <button
-                      key={opt}
-                      onClick={() => handleAnswer(opt)}
-                      disabled={showRationale}
-                      className={btnClass}
-                    >
-                      <div className="flex items-start">
-                        <span
-                          className={`flex-shrink-0 w-8 h-8 rounded-full flex items-center justify-center text-sm font-bold mr-3 ${
-                            showCorrectness && isCorrect
-                              ? "bg-green-200 text-green-700"
-                              : showCorrectness && isSelected
-                              ? "bg-red-200 text-red-700"
-                              : "bg-gray-100 text-gray-500"
-                          }`}
-                        >
-                          {opt}
-                        </span>
-                        <span className="mt-1">{currentQ.options[opt]}</span>
-
-                        {showCorrectness && isCorrect && (
-                          <div className="absolute right-4 top-4 text-green-600">
-                            <Icon name="CheckCircle" size={24} />
-                          </div>
-                        )}
-                      </div>
-                    </button>
-                  );
-                })}
-              </div>
-
-              {/* Rationale / Next Button Area */}
-              {showRationale && (
-                <div className="fixed bottom-0 left-0 right-0 bg-white border-t shadow-[0_-4px_6px_-1px_rgba(0,0,0,0.1)] p-4 z-50 animate-in slide-in-from-bottom duration-300">
-                  <div className="max-w-2xl mx-auto">
-                    <div className="mb-4 max-h-40 overflow-y-auto custom-scroll pr-2">
-                      <h4 className="text-sm font-bold text-gray-500 uppercase tracking-wider mb-1">
-                        Rationale
-                      </h4>
-                      <p className="text-gray-800 leading-relaxed">
-                        <span className="font-bold mr-2">
-                          {currentQ.answer} is correct.
-                        </span>
-                        {currentQ.rationale}
-                      </p>
-                    </div>
-                    <button
-                      onClick={nextQuestion}
-                      className="w-full bg-indigo-600 text-white py-3.5 rounded-xl font-bold text-lg hover:bg-indigo-700 active:scale-[0.99] transition-all shadow-md flex items-center justify-center gap-2"
-                    >
-                      <span>Next Question</span>
-                      <Icon name="ArrowRight" size={20} />
-                    </button>
-                  </div>
-                </div>
-              )}
-            </div>
-          </div>
-        );
-      };
-
-      const root = ReactDOM.createRoot(document.getElementById("root"));
-      root.render(<App />);
+      
     </script>
-    <script src="https://cdn.counter.dev/script.js" data-id="522f691d-7d55-46c5-b114-518017ffa2f7" data-utcoffset="-8"></script>
   </body>
 </html>
-
